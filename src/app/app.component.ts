@@ -10,7 +10,7 @@ import {JwtToken} from './core/models/jwt.model';
     <router-outlet></router-outlet>`
 })
 export class AppComponent implements OnInit {
-  title = 'booking-tool';
+  title = 'POS';
 
   constructor(
     private authCookies: AuthCookieService,

@@ -9,10 +9,10 @@ export class LayoutService {
   drawerToggle$ = this.drawerToggle.asObservable();
   navItems = [
     {
-      label: 'Dashboard',
-      path: 'dashboard',
-      icon: 'graph',
-      roles: ['admin', 'user', 'adminuser']
+      label: 'Products',
+      path: 'products',
+      icon: 'category',
+      roles: ['admin', 'adminuser']
     },
     {
       label: 'Manage Users',

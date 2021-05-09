@@ -22,6 +22,12 @@ const routes: Routes = [
   {
     path: 'dashboard', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
       {
+        path: 'products',
+        canActivate: [RoleGuard],
+        data: {roles: ['admin', 'adminuser']},
+        loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule)
+      },
+      {
         path: 'manage-users',
         canActivate: [RoleGuard],
         data: {roles: ['admin']},
