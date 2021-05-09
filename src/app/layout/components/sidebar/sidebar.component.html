@@ -1,0 +1,19 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav class="sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [(opened)]="isOpen">
+      <mat-nav-list>
+        <div *ngFor="let nav of navItems">
+          <a (click)="toggle()" mat-list-item *appHasRole="nav.roles" [routerLink]="[nav.path]">
+            <span class="material-icons mr-3">{{nav.icon}}</span>{{nav.label}} </a>
+          <a (click)="logoutEvent.emit()" mat-list-item style="position: absolute; bottom: 0; left: 0">
+            <span class="material-icons mr-3">logout</span> Logout</a>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

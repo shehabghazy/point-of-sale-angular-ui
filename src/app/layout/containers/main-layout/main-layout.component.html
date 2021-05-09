@@ -1,0 +1,4 @@
+<app-navbar [username]="username" (logoutEvent)="logout()"></app-navbar>
+<app-sidebar (logoutEvent)="logout()">
+  <router-outlet></router-outlet>
+</app-sidebar>
