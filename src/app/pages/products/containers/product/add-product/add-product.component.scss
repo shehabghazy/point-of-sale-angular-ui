@@ -17,6 +17,11 @@ display: flex;
  justify-content: flex-end;
 }
 
+.button-container{
+  display: flex;
+  justify-content: space-between;
+}
+
 .main-div {
   width: 100%;
 }

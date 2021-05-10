@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
@@ -14,24 +14,27 @@ export class AddProductComponent implements OnInit {
               private router: Router) {
     this.formGroup = this.fb.group({
       description: [''],
-      name: [''],
-      price: [0],
+      name: ['', Validators.required],
+      price: [null, Validators.required],
       barcode: [''],
-      lowStock: [0],
-      optimalStock: [0],
-      stock: [0],
+      lowStock: [null, Validators.required],
+      optimalStock: [null, Validators.required],
+      stock: [null, Validators.required],
       stock_type: ['']
     });
   }
 
   ngOnInit(): void {
   }
+
   createItem(): void {
     console.log('create');
   }
+
   resetForm(): void {
     this.formGroup.reset();
   }
+
   back(): void {
     this.router.navigateByUrl('home/products').then();
   }

@@ -1,10 +1,27 @@
-<div class = "main-div">
-
-<div class="header-buttons">
-  <button mat-raised-button  class =" mx-1" (click)="back()">Back</button>
-  <button mat-raised-button color="warn" class =" mx-1" (click)="resetForm()">Cancel</button>
-  <button mat-raised-button color="primary" class =" mx-1" (click)="createItem()">Save</button>
-</div>
+<div class="main-div">
+  <div class="button-container">
+    <button type="button" mat-raised-button class="back-button mx-1" (click)="back()"><span
+      class="material-icons">
+      undo
+      </span>
+      Back
+    </button>
+    <div class="header-buttons">
+      <button type="button" mat-raised-button color="warn" class=" mx-1" (click)="resetForm()">
+        <span class="material-icons">
+        restart_alt
+            </span>
+        Reset
+      </button>
+      <button type="submit" mat-raised-button color="primary" class=" mx-1" [disabled]="formGroup.invalid"
+              (click)="createItem()">
+        <span class="material-icons">
+          save
+        </span>
+        Save
+      </button>
+    </div>
+  </div>
 </div>
 <mat-card class="card-container p-5">
 
@@ -12,31 +29,32 @@
     <div class="row">
       <div class="col md-6">
         <mat-form-field class="example-full-width">
-          <mat-label>Description</mat-label>
-          <input matInput placeholder="" formControlName="description">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput placeholder="Ex. Pizza" formControlName="name">
         </mat-form-field>
 
       </div>
       <div class="col md-6">
         <mat-form-field class="example-full-width">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Ex. Pizza" formControlName="name">
+          <mat-label>Description</mat-label>
+          <input type="text" matInput placeholder="" formControlName="description">
         </mat-form-field>
 
       </div>
+
     </div>
     <div class="row">
       <div class="col md-6">
         <mat-form-field class="example-full-width">
           <mat-label>Price</mat-label>
-          <input matInput placeholder="Ex. 23 ALL" formControlName="price">
+          <input type="number" matInput placeholder="Ex. 23 ALL" formControlName="price">
         </mat-form-field>
 
       </div>
       <div class="col md-6">
         <mat-form-field class="example-full-width">
           <mat-label>Barcode</mat-label>
-          <input matInput placeholder="Ex. 324521213" formControlName="barcode">
+          <input type="text" matInput placeholder="Ex. 324521213" formControlName="barcode">
         </mat-form-field>
 
       </div>
@@ -45,14 +63,14 @@
       <div class="col md-6">
         <mat-form-field class="example-full-width">
           <mat-label>Low stock</mat-label>
-          <input matInput placeholder="Ex. 15" formControlName="lowStock">
+          <input type="number" matInput placeholder="Ex. 15" formControlName="lowStock">
         </mat-form-field>
 
       </div>
       <div class="col md-6">
         <mat-form-field class="example-full-width">
           <mat-label>Optimal stock</mat-label>
-          <input matInput placeholder="Ex. 40" formControlName="optimalStock">
+          <input type="number" matInput placeholder="Ex. 40" formControlName="optimalStock">
         </mat-form-field>
 
       </div>
@@ -61,14 +79,14 @@
       <div class="col md-6">
         <mat-form-field class="example-full-width">
           <mat-label>Stock</mat-label>
-          <input matInput placeholder="Ex. 23" formControlName="stock">
+          <input type="number" matInput placeholder="Ex. 23" formControlName="stock">
         </mat-form-field>
 
       </div>
       <div class="col md-6">
         <mat-form-field class="example-full-width">
           <mat-label>Stock Type</mat-label>
-          <input matInput placeholder="Ex. cope" formControlName="stock_type">
+          <input type="text" matInput placeholder="Ex. cope" formControlName="stock_type">
         </mat-form-field>
 
       </div>
