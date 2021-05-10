@@ -22,6 +22,11 @@ const routes: Routes = [
   {
     path: 'dashboard', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
       {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full'
+      },
+      {
         path: 'products',
         canActivate: [RoleGuard],
         data: {roles: ['admin', 'adminuser']},
