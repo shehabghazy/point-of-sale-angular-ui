@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from './layout/layout.module';
 import {CookieModule} from 'ngx-cookie';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {CookieModule} from 'ngx-cookie';
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
+    HttpClientModule,
     CookieModule.forRoot()
   ],
   providers: [],

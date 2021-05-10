@@ -28,6 +28,13 @@ const routes: Routes = [
         loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule)
       },
       {
+        path: 'products/add',
+        loadChildren: () => import('./pages/products/containers/product/add-product/add-product.module')
+          .then( m => m.AddProductModule),
+        data: {roles: ['admin', 'adminuser']},
+
+      },
+      {
         path: 'manage-users',
         canActivate: [RoleGuard],
         data: {roles: ['admin']},
