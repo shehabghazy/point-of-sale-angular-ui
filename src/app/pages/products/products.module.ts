@@ -6,6 +6,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
 import {AddProductComponent} from './containers/product/add-product/add-product.component';
+import {MatCardModule} from '@angular/material/card';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 const routes: Routes = [{
   path: '', component: ProductsComponent}];
@@ -21,6 +25,10 @@ const routes: Routes = [{
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
 
   ]
 })

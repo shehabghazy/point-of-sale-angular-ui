@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         this.authCookie.setAuth(res.token);
         this.authCookie.setRemember(this.form.get('remember')?.value + '');
         this.openSnackBar('Logged in successfully.', 'success-snackbar');
-        this.router.navigate(['home']).then();
+        this.router.navigate(['/home']).then();
       }
     });
   }
