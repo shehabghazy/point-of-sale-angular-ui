@@ -3,8 +3,10 @@ import {Product} from '../models/product.model';
 import {Pagination} from '../models/pagination.model';
 import {ProductsFilter} from '../models/products-filter.model';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {distinctUntilChanged} from 'rxjs/operators';
+import {catchError, distinctUntilChanged, map, tap} from 'rxjs/operators';
 import {createParamsFromObject} from '../utils/create-params-from-object';
+import {environment} from '../../../environments/environment';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 
 export const products: Product[] = [
   {
@@ -38,7 +40,7 @@ export const products: Product[] = [
     lowStock: 10,
     optimalStock: 23,
     stock: 14,
-    stock_type: 'kile'
+    stock_type: 'kg'
   }
 ];
 
@@ -73,42 +75,53 @@ export class ProductService {
     return this.state.getValue();
   }
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  getProducts(filters: Partial<ProductsFilter> = {},
-              pagination: Pagination): Observable<{ data: Product[], pagination: Pagination }> {
 
-    // const params = createParamsFromObject(filters)
-    //   .append('_page', pagination.pageIndex + '')
-    //   .append('_limit', pagination.pageSize + '');
+  // getProducts(filters: Partial<ProductsFilter> = {},
+  //             pagination: Pagination): Observable<{ data: Product[], pagination: Pagination }> {
+  //
+  //   const path = `${environment.apiUrl}/products`;
+  //   const params = createParamsFromObject(filters)
+  //     .append('_page', pagination.pageIndex + '')
+  //     .append('_limit', pagination.pageSize + '');
+  //
+  //   return this.http.get<Product[]>(path, {params});
+  // }
 
-    return of({data: products, pagination});
-  }
-
-  loadProducts(filters?: ProductsFilter, pagination?: Partial<Pagination>): Observable<Product[]> {
-    const currentPagination = this.currentState.pagination;
-    const newPagination = pagination ? {...currentPagination, ...pagination} : currentPagination;
-    const newFilters = filters ?? this.currentState.filters;
-
-    this.state.next({
-      ...this.currentState,
-      filters: newFilters,
-      pagination: newPagination,
-      loading: true, error: null, loaded: false
+  private setData(data: Product[], pagination: Pagination): void {
+    this.state.next({ ...this.currentState, data, pagination,
+      loading: false, loaded: true, error: null,
     });
-
-
-    return of(products);
-
-    // const { pageSize, pageIndex } = this.currentState.pagination;
-    // return this.getEmployees(this.currentState.filters ?? {}, { pageSize, pageIndex }).pipe(
-    //   tap((res) => this.setData(res.data, res.pagination)),
-    //   catchError(error => {
-    //     // this.setError(error);
-    //     this.setError('An error has occurred. Please try again later!');
-    //     return of(error);
-    //   })
-    // );
   }
+  private setError(error: string): void {
+    this.state.next({ ...this.currentState, error,
+      loading: false, loaded: true, data: []
+    });
+  }
+
+  // loadProducts(filters?: ProductsFilter, pagination?: Partial<Pagination>): Observable<Product[]> {
+  //   const currentPagination = this.currentState.pagination;
+  //   const newPagination = pagination ? {...currentPagination, ...pagination} : currentPagination;
+  //   const newFilters = filters ?? this.currentState.filters;
+  //
+  //   this.state.next({
+  //     ...this.currentState,
+  //     filters: newFilters,
+  //     pagination: newPagination,
+  //     loading: true, error: null, loaded: false
+  //   });
+  //
+  //   const { pageSize, pageIndex } = this.currentState.pagination;
+  //   return this.getProducts(this.currentState.filters ?? {}, { pageSize, pageIndex }).pipe(
+  //     tap((res) => this.setData(res.data, res.pagination)),
+  //     catchError(error => {
+  //       // this.setError(error);
+  //       this.setError('An error has occurred. Please try again later!');
+  //       return of(error);
+  //     })
+  //   );
+  // }
+
 }
