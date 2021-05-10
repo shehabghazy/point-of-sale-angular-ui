@@ -26,6 +26,6 @@ export class ProductsComponent implements OnInit {
     console.log('hello');
   }
   addItem(): void {
-    this.router.navigateByUrl('dashboard/products/add');
+    this.router.navigateByUrl('home/products/add');
   }
 }
