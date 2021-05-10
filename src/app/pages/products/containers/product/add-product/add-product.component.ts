@@ -33,7 +33,7 @@ export class AddProductComponent implements OnInit {
     this.formGroup.reset();
   }
   back(): void {
-    this.router.navigateByUrl('dashboard/products').then();
+    this.router.navigateByUrl('home/products').then();
   }
 
 }
