@@ -20,7 +20,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'dashboard', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
+    path: 'home', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
       {
         path: '',
         redirectTo: 'products',
