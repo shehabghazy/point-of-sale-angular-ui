@@ -1,3 +1,6 @@
+<mat-card class="form-wrapper">
+  <div class="py-5 px-4">
+    <h1>Login</h1>
 <form [formGroup]="form">
   <div class="d-inline-flex flex-column">
     <mat-form-field appearance="outline">
@@ -14,7 +17,8 @@
       </button>
     </mat-form-field>
     <mat-checkbox formControlName="remember" color="primary" class="mb-3">Remember me</mat-checkbox>
-    <button type="button" (click)="submit()" mat-raised-button color="primary">Login</button>
+    <button type="button" (click)="submit()" mat-raised-button color="primary">Submit</button>
   </div>
 </form>
-
+  </div>
+</mat-card>
