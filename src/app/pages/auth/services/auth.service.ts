@@ -4,6 +4,8 @@ import {Observable, of, throwError} from 'rxjs';
 import {Roles} from '../../../core/models/user.model';
 import {guid} from '../../../../assets/utils';
 import {AuthCookieService} from '../../../core/services/auth-cookie.service';
+import {environment} from "../../../../environments/environment";
+import {HttpClient} from "@angular/common/http";
 
 export const adminUserToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXX0sImlhdCI6MTYxNzQ3ODkzOCwiZXhwIjoxNjE3NTY1MzM4fQ.s9AhD5ivjECu-b8YAlmK3qK3nKHZr4mUvprs8N9JZn8';
 export const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6WyJhZG1pbiJdfSwiaWF0IjoxNjE3NDc4OTM4LCJleHAiOjE2MTc1NjUzMzh9.VKDjHHBQ2taFK4x5rFiX_HEj4FbNtAwhuzRo691Zkms';
@@ -30,8 +32,8 @@ export const users = [
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor() {
+  url = `${environment.apiUrl}`;
+  constructor(private http: HttpClient) {
   }
 
   login(credentials: Credentials): Observable<any> {
