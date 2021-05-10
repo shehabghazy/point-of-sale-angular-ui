@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -9,7 +10,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class AddProductComponent implements OnInit {
   formGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private router: Router) {
     this.formGroup = this.fb.group({
       description: [''],
       name: [''],
@@ -23,6 +25,15 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+  createItem(): void {
+    console.log('create');
+  }
+  resetForm(): void {
+    this.formGroup.reset();
+  }
+  back(): void {
+    this.router.navigateByUrl('dashboard/products').then();
   }
 
 }
