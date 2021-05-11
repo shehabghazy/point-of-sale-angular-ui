@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthStore} from '../../../store/auth.store';
 import {Router} from '@angular/router';
-import {AuthCookieService} from '../../../core/services/auth-cookie.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -13,16 +12,14 @@ export class MainLayoutComponent implements OnInit {
 
   constructor(
     private authStore: AuthStore,
-    private router: Router,
-    private authCookie: AuthCookieService) {
-  }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
   }
 
   logout(): void {
     this.authStore.logout();
-    this.authCookie.deleteAuth();
     this.router.navigate(['auth/login']).then();
   }
 

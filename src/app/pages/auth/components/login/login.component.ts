@@ -6,7 +6,7 @@ import {AuthStore} from '../../../../store/auth.store';
 import {Observable, throwError} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
-import {AuthCookieService} from '../../../../core/services/auth-cookie.service';
+import {Roles} from '../../../../core/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +15,13 @@ import {AuthCookieService} from '../../../../core/services/auth-cookie.service';
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
+
   form = this.fb.group({
-    username: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
     remember: [false]
   });
+
   hide = true;
 
   constructor(
@@ -28,7 +30,6 @@ export class LoginComponent implements OnInit {
     private authStore: AuthStore,
     private snackBar: MatSnackBar,
     private router: Router,
-    private authCookie: AuthCookieService
   ) {
   }
 
@@ -36,17 +37,21 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    this.authService.login(this.form.value).pipe(take(1), catchError(err => this.errorHandler(err))).subscribe(res => {
-      if (res) {
-        this.authStore.setUserState(res.user, res.token);
-        this.authCookie.setAuth(res.token);
-        this.authCookie.setRemember(this.form.get('remember')?.value + '');
-        this.openSnackBar('Logged in successfully.', 'success-snackbar');
-        this.router.navigate(['/home']).then();
-      }
-    });
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.authService.login(this.form.value).pipe(
+      take(1),
+      catchError(err => this.errorHandler(err)))
+      .subscribe(res => {
+        if (res) {
+          this.authStore.setUserState({username: '', roles: [Roles.User, Roles.Admin]}, res.access_token);
+          this.openSnackBar('Logged in successfully.', 'success-snackbar');
+          this.router.navigate(['/home']).then();
+        }
+      });
   }
-
 
 
   // error: any will be  HttpErrorResponse when connected with backend

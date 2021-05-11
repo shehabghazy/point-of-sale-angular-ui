@@ -4,7 +4,6 @@ import {RouterModule} from '@angular/router';
 import {EmptyLayoutComponent} from './containers/empty-layout/empty-layout.component';
 import {MainLayoutComponent} from './containers/main-layout/main-layout.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
-import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -19,7 +18,6 @@ import {MatMenuModule} from '@angular/material/menu';
     EmptyLayoutComponent,
     MainLayoutComponent,
     NavbarComponent,
-    SidebarComponent
   ],
   imports: [
     CommonModule,
@@ -33,4 +31,5 @@ import {MatMenuModule} from '@angular/material/menu';
     MatMenuModule
   ]
 })
-export class LayoutModule { }
+export class LayoutModule {
+}
