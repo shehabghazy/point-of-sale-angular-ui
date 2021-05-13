@@ -1,57 +1,60 @@
-import {Injectable} from '@angular/core';
-import {Credentials} from '../../../core/models/credentials.model';
-import {Observable, of, throwError} from 'rxjs';
-import {Roles} from '../../../core/models/user.model';
-import {guid} from '../../../../assets/utils';
-import {AuthCookieService} from '../../../core/services/auth-cookie.service';
-import {environment} from "../../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {Inject, Injectable} from '@angular/core';
+import {Credentials} from '@core/models/credentials.model';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {API_URL} from '@core/api.token';
+import {distinctUntilChanged, tap} from 'rxjs/operators';
+import {LoginResponse} from '@core/models/LoginResponse';
+import {Router} from '@angular/router';
 
-export const adminUserToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXX0sImlhdCI6MTYxNzQ3ODkzOCwiZXhwIjoxNjE3NTY1MzM4fQ.s9AhD5ivjECu-b8YAlmK3qK3nKHZr4mUvprs8N9JZn8';
-export const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6WyJhZG1pbiJdfSwiaWF0IjoxNjE3NDc4OTM4LCJleHAiOjE2MTc1NjUzMzh9.VKDjHHBQ2taFK4x5rFiX_HEj4FbNtAwhuzRo691Zkms';
-export const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlcyI6WyJ1c2VyIl19LCJpYXQiOjE2MTc0Nzg5MzgsImV4cCI6MTYxNzU2NTMzOH0.dYPLYX5oWx8WhI12xrW72sHNBq8Or_Fw540SMWyEp_Q';
-export const users = [
-  {
-    username: 'admin',
-    password: 'admin',
-    roles: [Roles.Admin]
-  },
-  {
-    username: 'user',
-    password: 'user',
-    roles: [Roles.User]
-  },
-  {
-    username: 'adminuser',
-    password: 'adminuser',
-    roles: [Roles.Admin, Roles.User]
-  }
-];
+export interface AuthState {
+  userId: number | null;
+  access_token: string | null;
+  token_type: string | null;
+  expires_at: string | null;
+  name: string | null;
+  role: string | null; // admin, manager, economist, user
+}
 
-@Injectable({
-  providedIn: 'root'
-})
+export const initialState: AuthState = {
+  userId: null,
+  access_token: null,
+  token_type: null,
+  expires_at: null,
+  name: null,
+  role: null
+};
+
+@Injectable({providedIn: 'root' })
 export class AuthService {
-  url = `${environment.apiUrl}`;
-  constructor(private http: HttpClient) {
+
+  constructor(@Inject(API_URL) private api: string, private http: HttpClient, private router: Router) {}
+
+  private auth = new BehaviorSubject<AuthState>(this.getLocalState());
+  auth$ = this.auth.asObservable().pipe(distinctUntilChanged(), tap(x => console.log('auth', x)));
+
+  private getLocalState(): AuthState {
+    const localState = localStorage.getItem('auth');
+    if (localState) {
+      return JSON.parse(localState) as AuthState;
+    }
+    return initialState;
   }
 
-  login(credentials: Credentials): Observable<any> {
-    const user = users.filter(u => u.username === credentials.username && u.password === credentials.password);
-    if (user.length) {
-      let tempUser = {};
-      if (user[0].username === 'user') {
-        tempUser = {user: {username: user[0].username, roles: user[0].roles}, token: userToken};
-      }
-      if (user[0].username === 'admin') {
-        tempUser = {user: {username: user[0].username, roles: user[0].roles}, token: adminToken};
-      }
-      if (user[0].username === 'adminuser') {
-        tempUser = {user: {username: user[0].username, roles: user[0].roles}, token: adminUserToken};
-      }
-      return of(tempUser);
-    } else {
-      return throwError('Username and password does not exist');
-    }
+  login(credentials: Credentials): Observable<LoginResponse> {
+    const path = `${this.api}/login`;
+    return this.http.post<LoginResponse>(path, credentials).pipe(
+      tap(data => {
+        this.auth.next(data);
+        localStorage.setItem('auth', JSON.stringify(data));
+        this.router.navigateByUrl('/home').then();
+      })
+    );
   }
+  logout(): void {
+    localStorage.clear();
+    this.auth.next(this.getLocalState());
+    this.router.navigateByUrl('auth/login').then();
+  }
+
 }

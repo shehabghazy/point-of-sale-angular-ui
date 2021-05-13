@@ -1,25 +1,35 @@
 <mat-toolbar color="primary" class="d-flex justify-content-between align-items-center">
-    <div class="d-flex align-items-center">
-      <button (click)="toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
+  <div class="d-flex align-items-center">
+    <div>Amigos - POS</div>
+    <div class="ml-5">
+      <button *ngFor="let item of navItems"
+              [routerLink]="[ item.path ]" mat-button>
+        <mat-icon class="mr-2">{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
       </button>
-      <span>POS</span>
+      <button mat-button>Users</button>
     </div>
-    <div>
-      <button mat-button [matMenuTriggerFor]="menu"> {{username}} <span class="material-icons ml-1">expand_more</span></button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <div [routerLink]="['profile']" class="d-flex align-items-center">
+  </div>
+  <div>
+<!--    *ngIf="name$ | async as name"-->
+
+    <button  *ngIf="name$ | async as name" mat-button [matMenuTriggerFor]="menu">
+      {{ name }}
+      <span class="material-icons ml-1">expand_more</span>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+          <span routerLink="profile" class="d-flex align-items-center">
             <span class="material-icons mr-1">person_outline</span>
             <span>Profile</span>
-          </div>
-        </button>
-        <button mat-menu-item (click)="logoutEvent.emit()">
-          <div class="d-flex align-items-center">
+          </span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+          <span class="d-flex align-items-center">
             <span class="material-icons mr-1">logout</span>
             <span>Logout</span>
-          </div>
-        </button>
-      </mat-menu>
-    </div>
+          </span>
+      </button>
+    </mat-menu>
+  </div>
 </mat-toolbar>

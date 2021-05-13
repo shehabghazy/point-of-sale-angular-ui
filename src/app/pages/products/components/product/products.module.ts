@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ProductsComponent} from './containers/product/products.component';
+import {ProductsComponent} from './products.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
-import {AddProductComponent} from './containers/product/add-product/add-product.component';
+import {AddProductComponent} from '../../containers/add-product/add-product.component';
 import {MatCardModule} from '@angular/material/card';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';

@@ -5,14 +5,12 @@ import {BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class LayoutService {
-  drawerToggle = new BehaviorSubject<boolean>(false);
-  drawerToggle$ = this.drawerToggle.asObservable();
   navItems = [
     {
       label: 'Products',
       path: 'products',
       icon: 'category',
-      roles: ['admin', 'adminuser']
+      roles: ['admin', 'manager']
     },
     {
       label: 'Manage Users',
@@ -27,11 +25,4 @@ export class LayoutService {
       roles: ['user']
     }
   ];
-
-  constructor() {
-  }
-
-  toggle(): void {
-    this.drawerToggle.next(!this.drawerToggle.value);
-  }
 }

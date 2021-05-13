@@ -22,8 +22,8 @@ export class ProductsComponent implements OnInit {
     // this.productsService.getProducts();
   }
 
-  onClickedRow(): void {
-    console.log('hello');
+  onClickedRow(row: any): void {
+    console.log(row);
   }
   addItem(): void {
     this.router.navigateByUrl('home/products/add');
