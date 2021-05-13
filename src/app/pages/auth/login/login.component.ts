@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-
     this.auth.login(this.form.value)
       .pipe(take(1)).subscribe(
       value => {

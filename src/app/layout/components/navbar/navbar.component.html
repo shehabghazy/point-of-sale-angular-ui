@@ -11,19 +11,20 @@
     </div>
   </div>
   <div>
+<!--    *ngIf="name$ | async as name"-->
 
-    <button *ngIf="name$ | async as name" mat-button [matMenuTriggerFor]="menu">
+    <button  *ngIf="name$ | async as name" mat-button [matMenuTriggerFor]="menu">
       {{ name }}
       <span class="material-icons ml-1">expand_more</span>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item>
-          <span routerLink="/profile" class="d-flex align-items-center">
+          <span routerLink="profile" class="d-flex align-items-center">
             <span class="material-icons mr-1">person_outline</span>
             <span>Profile</span>
           </span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="logout()">
           <span class="d-flex align-items-center">
             <span class="material-icons mr-1">logout</span>
             <span>Logout</span>
