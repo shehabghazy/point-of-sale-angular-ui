@@ -1,5 +1,8 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {LayoutService} from '../../services/layout.service';
+import {Observable} from 'rxjs';
+import {AuthService} from '@app/pages/auth/services/auth.service';
+import {pluck} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +13,13 @@ import {LayoutService} from '../../services/layout.service';
 export class NavbarComponent {
 
   navItems = this.layoutService.navItems;
+  name$: Observable<string | null> = this.auth.auth$.pipe(pluck('name'));
 
-  constructor(private layoutService: LayoutService) {}
-
-  toggle(): void {
-    this.layoutService.toggle();
+  constructor(
+    private layoutService: LayoutService,
+    private auth: AuthService
+  ) {
   }
+
 
 }

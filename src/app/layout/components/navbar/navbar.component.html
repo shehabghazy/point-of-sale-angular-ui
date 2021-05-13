@@ -12,9 +12,8 @@
   </div>
   <div>
 
-    <button mat-button [matMenuTriggerFor]="menu">
-      <!--        {{username}}-->
-      Test
+    <button *ngIf="name$ | async as name" mat-button [matMenuTriggerFor]="menu">
+      {{ name }}
       <span class="material-icons ml-1">expand_more</span>
     </button>
     <mat-menu #menu="matMenu">
