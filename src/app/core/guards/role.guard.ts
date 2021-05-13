@@ -16,43 +16,18 @@ export class RoleGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // debugger;
-    // // return this.checkRolePermission(route);
-    // let role: string | null;
-    // const response = this.auth.auth$.pipe(pluck('role')).subscribe(
-    //   value => {
-    //     role = value;
-    //     if (role !== null) {
-    //       this.layoutService.navItems.map(navItem => {
-    //         if (navItem.roles.includes(role as string)) {
-    //           return true;
-    //         } else {
-    //           return;
-    //         }
-    //       });
-    //     }
-    //     return false;
-    //   }
-    // );
-    // return response;
+    let response = false;
     this.layoutService.navItems.map(navItem => {
-      if (navItem.roles.includes(this.auth.getLocalState().role as string)) {
-        return true;
-      } else {
-        return ;
+      if (navItem.path === route.url[0].path) {
+        if (navItem.roles.includes(this.auth.getLocalState().role as string)) {
+          response = true;
+          return;
+        } else {
+          return;
+        }
       }
     });
-    return false;
-
-    // return true;
-
-
+    return response;
   }
-
-  // checkRolePermission(route: ActivatedRouteSnapshot): boolean {
-  //
-  //   this.router.navigate(['/dashboard']).then();
-  //   return false;
-  // }
 
 }

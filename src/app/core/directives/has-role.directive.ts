@@ -41,21 +41,21 @@ export class HasRoleDirective implements OnInit, OnDestroy {
     //   }
     // });
 
-      if (!this.auth.getLocalState().role) {
-        this.viewContainerRef.clear();
-      }
-      if (this.appHasRole.includes((this.auth.getLocalState().role as string))) {
-        if (!this.isVisible) {
-          this.isVisible = true;
-          this.viewContainerRef.createEmbeddedView(this.templateRef);
-        }
-      } else if (this.appHasRole.length === 0) {
-        this.isVisible = true;
-        this.viewContainerRef.createEmbeddedView(this.templateRef);
-      } else {
-        this.isVisible = false;
-        this.viewContainerRef.clear();
-      }
+      // if (!this.auth.getLocalState().role) {
+      //   this.viewContainerRef.clear();
+      // }
+      // if (this.appHasRole.includes((this.auth.getLocalState().role as string))) {
+      //   if (!this.isVisible) {
+      //     this.isVisible = true;
+      //     this.viewContainerRef.createEmbeddedView(this.templateRef);
+      //   }
+      // } else if (this.appHasRole.length === 0) {
+      //   this.isVisible = true;
+      //   this.viewContainerRef.createEmbeddedView(this.templateRef);
+      // } else {
+      //   this.isVisible = false;
+      //   this.viewContainerRef.clear();
+      // }
   }
 
   ngOnDestroy(): void {
