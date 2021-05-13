@@ -35,8 +35,16 @@ export class RoleGuard implements CanActivate {
     //   }
     // );
     // return response;
-    return true;
+    this.layoutService.navItems.map(navItem => {
+      if (navItem.roles.includes(this.auth.getLocalState().role as string)) {
+        return true;
+      } else {
+        return ;
+      }
+    });
+    return false;
 
+    // return true;
 
 
   }

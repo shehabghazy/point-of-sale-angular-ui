@@ -1,5 +1,6 @@
 import {Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
 import {Subject} from 'rxjs';
+import {AuthService} from '@app/pages/auth/services/auth.service';
 
 @Directive({
   selector: '[appHasRole]'
@@ -15,6 +16,7 @@ export class HasRoleDirective implements OnInit, OnDestroy {
   constructor(
     private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<any>,
+    private auth: AuthService
   ) {
   }
 
@@ -38,6 +40,22 @@ export class HasRoleDirective implements OnInit, OnDestroy {
     //     this.viewContainerRef.clear();
     //   }
     // });
+
+      if (!this.auth.getLocalState().role) {
+        this.viewContainerRef.clear();
+      }
+      if (this.appHasRole.includes((this.auth.getLocalState().role as string))) {
+        if (!this.isVisible) {
+          this.isVisible = true;
+          this.viewContainerRef.createEmbeddedView(this.templateRef);
+        }
+      } else if (this.appHasRole.length === 0) {
+        this.isVisible = true;
+        this.viewContainerRef.createEmbeddedView(this.templateRef);
+      } else {
+        this.isVisible = false;
+        this.viewContainerRef.clear();
+      }
   }
 
   ngOnDestroy(): void {

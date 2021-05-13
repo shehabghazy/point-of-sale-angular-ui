@@ -33,7 +33,7 @@ export class AuthService {
   private auth = new BehaviorSubject<AuthState>(this.getLocalState());
   auth$ = this.auth.asObservable().pipe(distinctUntilChanged(), tap(x => console.log('auth', x)));
 
-  private getLocalState(): AuthState {
+  public getLocalState(): AuthState {
     const localState = localStorage.getItem('auth');
     if (localState) {
       return JSON.parse(localState) as AuthState;
