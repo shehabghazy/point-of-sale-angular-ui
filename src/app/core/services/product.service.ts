@@ -2,11 +2,9 @@ import {Injectable} from '@angular/core';
 import {Product} from '../models/product.model';
 import {Pagination} from '../models/pagination.model';
 import {ProductsFilter} from '../models/products-filter.model';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {catchError, distinctUntilChanged, map, tap} from 'rxjs/operators';
-import {createParamsFromObject} from '../utils/create-params-from-object';
-import {environment} from '../../../environments/environment';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {BehaviorSubject} from 'rxjs';
+import {distinctUntilChanged} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 export const products: Product[] = [
   {
