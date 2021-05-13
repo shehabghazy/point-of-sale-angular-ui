@@ -1,25 +1,21 @@
 import {Injectable} from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild} from '@angular/router';
+import {CanActivate} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthStore} from '../../store/auth.store';
+import {AuthService} from '@app/pages/auth/services/auth.service';
+import {map, pluck} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NonAuthGuard implements CanActivate {
-  constructor(private authStore: AuthStore, private router: Router) {
-  }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authStore.token) {
-      this.router.navigate(['home']).then();
-      return false;
-    } else {
-      return true;
-    }
-  }
+  constructor(private auth: AuthService) {}
 
+  canActivate(): Observable<boolean> {
+    return this.auth.auth$.pipe(
+      pluck('access_token'),
+      map(token => !token)
+    );
+  }
 
 }

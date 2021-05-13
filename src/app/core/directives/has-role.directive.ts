@@ -1,8 +1,5 @@
 import {Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
 import {Subject} from 'rxjs';
-import {AuthStore} from '../../store/auth.store';
-import {takeUntil} from 'rxjs/operators';
-
 
 @Directive({
   selector: '[appHasRole]'
@@ -18,30 +15,29 @@ export class HasRoleDirective implements OnInit, OnDestroy {
   constructor(
     private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<any>,
-    private authStore: AuthStore
   ) {
   }
 
   ngOnInit(): void {
-    this.authStore.roles$.pipe(
-      takeUntil(this.stop$)
-    ).subscribe(roles => {
-      if (!roles) {
-        this.viewContainerRef.clear();
-      }
-      if (roles.some(val => this.appHasRole.includes(val))) {
-        if (!this.isVisible) {
-          this.isVisible = true;
-          this.viewContainerRef.createEmbeddedView(this.templateRef);
-        }
-      } else if (this.appHasRole.length === 0) {
-        this.isVisible = true;
-        this.viewContainerRef.createEmbeddedView(this.templateRef);
-      } else {
-        this.isVisible = false;
-        this.viewContainerRef.clear();
-      }
-    });
+    // this.authStore.roles$.pipe(
+    //   takeUntil(this.stop$)
+    // ).subscribe(roles => {
+    //   if (!roles) {
+    //     this.viewContainerRef.clear();
+    //   }
+    //   if (roles.some(val => this.appHasRole.includes(val))) {
+    //     if (!this.isVisible) {
+    //       this.isVisible = true;
+    //       this.viewContainerRef.createEmbeddedView(this.templateRef);
+    //     }
+    //   } else if (this.appHasRole.length === 0) {
+    //     this.isVisible = true;
+    //     this.viewContainerRef.createEmbeddedView(this.templateRef);
+    //   } else {
+    //     this.isVisible = false;
+    //     this.viewContainerRef.clear();
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {
