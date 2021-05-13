@@ -51,5 +51,10 @@ export class AuthService {
       })
     );
   }
+  logout(): void {
+    localStorage.clear();
+    this.auth.next(this.getLocalState());
+    this.router.navigateByUrl('auth/login').then();
+  }
 
 }

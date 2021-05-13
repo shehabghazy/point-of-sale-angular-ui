@@ -19,7 +19,11 @@ export class NavbarComponent {
     private layoutService: LayoutService,
     private auth: AuthService
   ) {
+    this.name$.subscribe(console.log);
   }
 
+  logout(): void {
+    this.auth.logout();
+  }
 
 }
