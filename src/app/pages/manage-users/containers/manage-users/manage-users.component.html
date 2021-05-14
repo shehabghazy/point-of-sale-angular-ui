@@ -1,1 +1,18 @@
-<p>manage-users works!</p>
+<ng-container *ngIf="users$ | async as data; else loading">
+  <div class="container">
+  <h1>Users</h1>
+  <div class="d-flex justify-content-between align-items-center">
+  <mat-form-field appearance="outline" class="example-full-width">
+    <mat-label>Search</mat-label>
+    <input matInput  placeholder="ex. John Doe" (keydown)="filterUsers($any($event.target).value)">
+  </mat-form-field>
+    <button routerLink="add" mat-raised-button color="primary">Add</button>
+  </div>
+<app-users-table [data]="data"></app-users-table>
+  </div>
+</ng-container>
+<ng-template  #loading>
+  <div class="center">
+  <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

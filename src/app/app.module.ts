@@ -6,6 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from './layout/layout.module';
 import {CookieModule} from 'ngx-cookie';
 import { HttpClientModule } from '@angular/common/http';
+import {AuthInterceptorProvider} from '@core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     CookieModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    AuthInterceptorProvider
+  ],
   exports: [],
   bootstrap: [AppComponent]
 })

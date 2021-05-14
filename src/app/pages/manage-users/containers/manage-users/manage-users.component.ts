@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import {UsersService} from "@core/services/users.service";
+import {Component} from '@angular/core';
+import {UsersService} from '@core/services/users.service';
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-manage-users',
   templateUrl: './manage-users.component.html',
   styleUrls: ['./manage-users.component.scss']
 })
-export class ManageUsersComponent implements OnInit {
+export class ManageUsersComponent {
 
-  constructor(private users: UsersService) { }
+  users$ = this.users.all$;
 
-  ngOnInit(): void {
+  constructor(private users: UsersService) {
+  }
+
+  filterUsers(name: string): void {
+    this.users$ = this.users.all$.pipe(map(users => users.filter(u => u.name.toLowerCase().includes(name.toLowerCase()))));
   }
 
 }
