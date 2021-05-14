@@ -36,7 +36,7 @@ const routes: Routes = [
         path: 'products/add',
         loadChildren: () => import('./pages/products/containers/add-product/add-product.module')
           .then( m => m.AddProductModule),
-        data: {roles: ['admin', 'adminuser'], animation: 'AddProducts'},
+        data: {roles: ['admin', 'adminuser'], animation: 'Add'},
 
       },
       {

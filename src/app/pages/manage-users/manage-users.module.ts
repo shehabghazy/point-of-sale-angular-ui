@@ -25,17 +25,17 @@ const routes: Routes = [
   {
     path: 'add',
     component: AddUserComponent,
-    data: {animation: 'AddUser'}
+    data: {animation: 'Add'}
   },
   {
     path: 'edit/:id',
     component: EditUserComponent,
-    data: {animation: 'EditUser'}
+    data: {animation: 'Edit'}
   },
   {
     path: 'details/:id',
     component: UserDetailsComponent,
-    data: {animation: 'UserDetails'}
+    data: {animation: 'Details'}
   }
 ];
 
