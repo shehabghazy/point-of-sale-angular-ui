@@ -12,26 +12,30 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from '@angular/material/select';
 import {EditUserComponent} from '@app/pages/manage-users/containers/edit-user/edit-user.component';
-import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { UserDetailsComponent } from './containers/user-details/user-details.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: ManageUsersComponent
+    component: ManageUsersComponent,
+    data: {animation: 'ManageUsers'}
   },
   {
     path: 'add',
-    component: AddUserComponent
+    component: AddUserComponent,
+    data: {animation: 'AddUser'}
   },
   {
     path: 'edit/:id',
-    component: EditUserComponent
+    component: EditUserComponent,
+    data: {animation: 'EditUser'}
   },
   {
     path: 'details/:id',
-    component: UserDetailsComponent
+    component: UserDetailsComponent,
+    data: {animation: 'UserDetails'}
   }
 ];
 
