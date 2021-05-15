@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Product} from '../models/product.model';
 import {Pagination} from '../models/pagination.model';
 import {ProductsFilter} from '../models/products-filter.model';
@@ -7,6 +7,7 @@ import {catchError, distinctUntilChanged, map, tap} from 'rxjs/operators';
 import {createParamsFromObject} from '../utils/create-params-from-object';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpResponse} from '@angular/common/http';
+import {API_URL} from '@core/api.token';
 
 export const products: Product[] = [
   {
@@ -75,9 +76,12 @@ export class ProductService {
     return this.state.getValue();
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject(API_URL) private api: string) {
   }
 
+  getProductsss(): Observable<Product[]>{
+    return this.http.get<Product[]>(`${this.api}/products`);
+  }
 
   // getProducts(filters: Partial<ProductsFilter> = {},
   //             pagination: Pagination): Observable<{ data: Product[], pagination: Pagination }> {

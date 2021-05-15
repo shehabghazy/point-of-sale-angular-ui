@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {products, ProductService} from '../../../../core/services/product.service';
+import {products, ProductService} from '@core/services/product.service';
 import {DataSource} from '@angular/cdk/collections';
-import {Product} from '../../../../core/models/product.model';
+import {Product} from '@core/models/product.model';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+
   displayedColumns: string[] = ['id', 'name', 'description', 'price', 'lowStock', 'optimalStock', 'stock', 'stock_type', 'barcode'];
   dataSource: any;
 
@@ -19,6 +20,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = products;
+    this.productsService.getProductsss().subscribe(console.log);
     // this.productsService.getProducts();
   }
 

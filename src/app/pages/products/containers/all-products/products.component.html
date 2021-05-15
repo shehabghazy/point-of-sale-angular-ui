@@ -1,0 +1,11 @@
+<div>
+  <div style="margin-bottom: 30px">
+    <button mat-raised-button color="primary" class="add-button" (click)="addItem()">+ Add</button>
+  </div>
+  <div class="table" style="width: 100%">
+
+    <app-product-table class="product-table" [dataSource]="dataSource"
+                       [displayedColumns]="displayedColumns"></app-product-table>
+  </div>
+
+</div>

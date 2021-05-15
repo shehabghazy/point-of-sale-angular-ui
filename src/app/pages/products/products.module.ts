@@ -1,23 +1,46 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ProductsComponent} from './products.component';
+import {ProductsComponent} from './containers/all-products/products.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
-import {AddProductComponent} from '../../containers/add-product/add-product.component';
+import {AddProductComponent} from './containers/add-product/add-product.component';
 import {MatCardModule} from '@angular/material/card';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {ProductDetailsComponent} from '@app/pages/products/containers/product-details/product-details.component';
+import {ProductTableComponent} from '@app/pages/products/components/product-table/product-table.component';
 
-const routes: Routes = [{
-  path: '', component: ProductsComponent}];
+const routes: Routes = [
+  {
+    path: '',
+    component: ProductsComponent
+  },
+  {
+    path: 'details/:id',
+    component: ProductDetailsComponent
+  },
+  {
+    path: 'add',
+    component: AddProductComponent
+  },
+  {
+    path: 'edit/:id',
+    component: AddProductComponent
+  }
+];
 
 @NgModule({
   declarations: [
+    // containers
     ProductsComponent,
-    AddProductComponent
+    AddProductComponent,
+    ProductDetailsComponent,
+
+    // components
+    ProductTableComponent
   ],
   imports: [
     CommonModule,
@@ -28,8 +51,7 @@ const routes: Routes = [{
     MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
-
+    MatInputModule,
   ]
 })
 export class ProductsModule {
