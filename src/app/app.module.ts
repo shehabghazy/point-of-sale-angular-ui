@@ -18,7 +18,7 @@ import {AuthInterceptorProvider} from '@core/interceptors/auth.interceptor';
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
   ],
   providers: [
     AuthInterceptorProvider

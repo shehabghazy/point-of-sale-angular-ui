@@ -14,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {EditUserComponent} from '@app/pages/manage-users/containers/edit-user/edit-user.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { UserDetailsComponent } from './containers/user-details/user-details.component';
+import {MatIconModule} from "@angular/material/icon";
 
 
 const routes: Routes = [
@@ -57,7 +58,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIconModule
   ]
 })
 export class ManageUsersModule {

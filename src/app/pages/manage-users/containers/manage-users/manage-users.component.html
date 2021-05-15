@@ -5,8 +5,10 @@
   <mat-form-field appearance="outline" class="example-full-width">
     <mat-label>Search</mat-label>
     <input matInput  placeholder="ex. John Doe" (keydown)="filterUsers($any($event.target).value)">
+    <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
-    <button routerLink="add" mat-raised-button color="primary">Add</button>
+    <button routerLink="add" mat-raised-button color="primary">
+      + Add</button>
   </div>
 <app-users-table [data]="data"></app-users-table>
   </div>

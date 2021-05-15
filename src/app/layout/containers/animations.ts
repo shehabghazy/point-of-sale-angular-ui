@@ -46,6 +46,8 @@ export const next = [
     ])
   ]),
 ];
+
+
 export const slideInAnimation =
   trigger('routeAnimations', [
     transition('Add => *', previous),
