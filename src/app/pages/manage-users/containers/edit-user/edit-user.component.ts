@@ -18,10 +18,6 @@ export class EditUserComponent implements OnInit {
   loading = false;
   roles = [
     {
-      label: 'Admin',
-      value: 'admin'
-    },
-    {
       label: 'Manager',
       value: 'manager'
     },
@@ -69,7 +65,7 @@ export class EditUserComponent implements OnInit {
   submit(): void {
     this.users.update(this.form.value, this.form.get('id')?.value).pipe(take(1)).subscribe(
       value => {
-        this.router.navigate(['home/manage-users']).then();
+        this.router.navigate(['manage-users']).then();
         this.snackBar.open('User edited successfully', 'close', {duration: 1000});
       },
       error => {

@@ -47,7 +47,7 @@ export class AuthService {
       tap(data => {
         this.auth.next(data);
         localStorage.setItem('auth', JSON.stringify(data));
-        this.router.navigateByUrl('/home').then();
+        this.router.navigateByUrl('/products').then();
       })
     );
   }

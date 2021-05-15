@@ -63,7 +63,7 @@ export class AddUserComponent implements OnInit {
   submit(): void {
     this.users.create(this.form.value).pipe(take(1)).subscribe(
       value => {
-        this.router.navigate(['home/manage-users']).then();
+        this.router.navigate(['manage-users']).then();
         this.snackBar.open('User created successfully', 'close', {duration: 1000});
       },
       error => {

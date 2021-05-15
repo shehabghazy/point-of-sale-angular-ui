@@ -26,6 +26,6 @@ export class ProductsComponent implements OnInit {
     console.log(row);
   }
   addItem(): void {
-    this.router.navigateByUrl('home/products/add');
+    this.router.navigateByUrl('products/add');
   }
 }

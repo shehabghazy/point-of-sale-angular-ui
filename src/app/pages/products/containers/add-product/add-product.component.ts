@@ -36,7 +36,7 @@ export class AddProductComponent implements OnInit {
   }
 
   back(): void {
-    this.router.navigateByUrl('home/products').then();
+    this.router.navigateByUrl('products').then();
   }
 
 }
