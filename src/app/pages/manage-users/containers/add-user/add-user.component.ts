@@ -5,6 +5,7 @@ import {take} from "rxjs/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {handleServerSideValidation} from "@core/utils/server-side-validation";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-user',
@@ -42,7 +43,8 @@ export class AddUserComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private users: UsersService,
-    public snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
   }
 
@@ -52,6 +54,8 @@ export class AddUserComponent implements OnInit {
   submit(): void {
     this.users.create(this.form.value).pipe(take(1)).subscribe(
       value => {
+        this.router.navigate(['home/manage-users']).then();
+        this.snackBar.open('User created successfully', 'close', {duration: 1000});
       },
       error => {
         if (error instanceof HttpErrorResponse) {

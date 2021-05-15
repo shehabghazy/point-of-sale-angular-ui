@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {UsersService} from '@core/services/users.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {take} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -46,7 +46,8 @@ export class EditUserComponent implements OnInit {
     private fb: FormBuilder,
     private users: UsersService,
     private route: ActivatedRoute,
-    public snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
   }
 
@@ -68,6 +69,8 @@ export class EditUserComponent implements OnInit {
   submit(): void {
     this.users.update(this.form.value, this.form.get('id')?.value).pipe(take(1)).subscribe(
       value => {
+        this.router.navigate(['home/manage-users']).then();
+        this.snackBar.open('User edited successfully', 'close', {duration: 1000});
       },
       error => {
         if (error instanceof HttpErrorResponse) {
