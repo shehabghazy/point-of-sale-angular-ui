@@ -1,4 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container-fluid pt-4">
-  <router-outlet></router-outlet>
+  <div [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+  </div>
 </div>
