@@ -2,7 +2,6 @@ import {Inject, Injectable} from '@angular/core';
 import {API_URL} from '@core/api.token';
 import {HttpClient} from '@angular/common/http';
 import {User} from '@core/models/user.model';
-import {shareReplay} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -10,7 +9,7 @@ import {Observable} from 'rxjs';
 })
 export class UsersService {
 
-  all$ = this.http.get<User[]>(`${this.api}/users`).pipe(shareReplay(1));
+  all$ = this.http.get<User[]>(`${this.api}/users`);
 
   constructor(@Inject(API_URL) private api: string, private http: HttpClient) {
   }

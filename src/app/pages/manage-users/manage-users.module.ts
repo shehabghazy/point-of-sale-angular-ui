@@ -15,6 +15,7 @@ import {EditUserComponent} from '@app/pages/manage-users/containers/edit-user/ed
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { UserDetailsComponent } from './containers/user-details/user-details.component';
 import {MatIconModule} from "@angular/material/icon";
+import {ConfirmationDialogModule} from "@app/pages/manage-users/components/confirmation-dialog/confirmation-dialog.module";
 
 
 const routes: Routes = [
@@ -59,7 +60,8 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    ConfirmationDialogModule
   ]
 })
 export class ManageUsersModule {

@@ -10,7 +10,7 @@
     <button routerLink="add" mat-raised-button color="primary">
       + Add</button>
   </div>
-<app-users-table [data]="data"></app-users-table>
+<app-users-table (deletedId)="delete($event)" [data]="data"></app-users-table>
   </div>
 </ng-container>
 <ng-template  #loading>

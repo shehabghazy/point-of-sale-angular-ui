@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
-import {UsersService} from "@core/services/users.service";
-import {take} from "rxjs/operators";
-import {HttpErrorResponse} from "@angular/common/http";
-import {handleServerSideValidation} from "@core/utils/server-side-validation";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router} from "@angular/router";
+import {AbstractControl, FormBuilder, FormControl, Validators} from '@angular/forms';
+import {UsersService} from '@core/services/users.service';
+import {take} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {handleServerSideValidation} from '@core/utils/server-side-validation';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {patternValidator} from '@core/utils/custom-validators';
 
 @Component({
   selector: 'app-add-user',
@@ -14,6 +15,7 @@ import {Router} from "@angular/router";
 })
 export class AddUserComponent implements OnInit {
 
+  hide = true;
   roles = [
     {
       label: 'Admin',
@@ -36,7 +38,14 @@ export class AddUserComponent implements OnInit {
   form = this.fb.group({
     name: [null, Validators.required],
     email: [null, Validators.required],
-    password: [null, Validators.required],
+    password: [null, Validators.compose([
+      Validators.required,
+      patternValidator(/\d/, {hasNumber: true}),
+      patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+      patternValidator(/[a-z]/, {hasSmallCase: true}),
+      patternValidator(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/, {hasSpecialCharacters: true}),
+      Validators.minLength(8)
+    ])],
     role: [null, Validators.required]
   });
 
@@ -49,6 +58,10 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get password(): AbstractControl | null {
+    return this.form.get('password');
   }
 
   submit(): void {
