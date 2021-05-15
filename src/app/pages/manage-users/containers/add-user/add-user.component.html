@@ -1,5 +1,10 @@
 <div class="container">
-  <h1>Create User</h1>
+  <div class="d-flex align-items-center mb-3">
+    <button routerLink="../" class="mr-2" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="mb-0">Create User</h1>
+  </div>
   <form [formGroup]="form">
     <div class="d-flex flex-column">
   <mat-form-field appearance="outline">
@@ -20,8 +25,9 @@
       <mat-error *ngIf="password?.errors?.hasNumber">Password should contain at least one number.</mat-error>
       <mat-error *ngIf="password?.errors?.hasCapitalCase">Password should contain at least one capital case.</mat-error>
       <mat-error *ngIf="password?.errors?.hasSpecialCharacters">Password should contain at least one special character.</mat-error>
-      <mat-error *ngIf="password?.errors?.minlength">Password should contain at 8 characters.</mat-error>
+      <mat-error *ngIf="password?.errors?.minlength">Password should contain at least 8 characters.</mat-error>
       <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
         <mat-select formControlName="role">
           <mat-option *ngFor="let role of roles" [value]="role.value">
             {{role.label}}
@@ -31,8 +37,9 @@
     </div>
   </form>
   <div class="d-flex justify-content-end">
-    <button class="mx-1" mat-raised-button routerLink="../" color="primary">Back</button>
-    <button [disabled]="form.invalid" class="mx-1" mat-raised-button color="primary" (click)="submit()">Submit</button>
+    <button [disabled]="form.invalid" class="mx-1" mat-raised-button color="primary" (click)="submit()">
+      <mat-icon>save</mat-icon> Save
+    </button>
 
   </div>
 

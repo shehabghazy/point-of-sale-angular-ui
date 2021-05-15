@@ -12,10 +12,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from '@angular/material/select';
 import {EditUserComponent} from '@app/pages/manage-users/containers/edit-user/edit-user.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { UserDetailsComponent } from './containers/user-details/user-details.component';
-import {MatIconModule} from "@angular/material/icon";
-import {ConfirmationDialogModule} from "@app/pages/manage-users/components/confirmation-dialog/confirmation-dialog.module";
+import {MatIconModule} from '@angular/material/icon';
+import {ConfirmationDialogModule} from '@app/pages/manage-users/components/confirmation-dialog/confirmation-dialog.module';
 
 
 const routes: Routes = [

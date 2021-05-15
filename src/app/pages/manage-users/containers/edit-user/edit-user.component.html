@@ -1,5 +1,10 @@
 <div class="container" *ngIf="!loading; else loadingTemplate">
-  <h1>Edit User</h1>
+  <div class="d-flex align-items-center mb-3">
+  <button routerLink="/manage-users" class="mr-2" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h1 class="mb-0">Edit User</h1>
+  </div>
   <form [formGroup]="form">
     <div class="d-flex flex-column">
       <mat-form-field appearance="outline">
@@ -20,8 +25,9 @@
     </div>
   </form>
   <div class="d-flex justify-content-end">
-    <button class="mx-1" mat-raised-button routerLink="../../" color="primary">Back</button>
-    <button [disabled]="form.invalid || form.untouched" class="mx-1" mat-raised-button color="primary" (click)="submit()">Submit</button>
+    <button [disabled]="form.invalid || form.untouched" class="mx-1" mat-raised-button color="primary" (click)="submit()">
+      <mat-icon>save</mat-icon> Save
+    </button>
   </div>
 </div>
 <ng-template  #loadingTemplate>

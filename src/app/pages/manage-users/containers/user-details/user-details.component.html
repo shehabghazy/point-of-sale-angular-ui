@@ -2,6 +2,11 @@
   {{user | json}}
   <div class="d-flex justify-content-end">
     <button class="mx-1" mat-raised-button routerLink="../../" color="primary">Back</button>
+<!--    <div class="d-flex">-->
+<!--      <button [routerLink]="['edit', element.id]" mat-raised-button color="primary" class="mx-1">-->
+<!--        <mat-icon aria-hidden="false" aria-label="info">edit</mat-icon></button>-->
+<!--      <button (click)="openDialog(element.id)" class="mx-1" mat-raised-button color="warn"><mat-icon aria-hidden="false" aria-label="info">delete</mat-icon></button>-->
+<!--    </div>-->
   </div>
 </div>
   <ng-template #loading>

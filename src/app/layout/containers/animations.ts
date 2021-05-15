@@ -8,19 +8,19 @@ export const previous = [
       position: 'absolute',
       top: 0,
       left: 0,
-      width: '100%'
+      width: '100%',
     })
-  ]),
+  ],  { optional: true }),
   query(':enter', [
     style({left: '-100%'})
-  ]),
+  ], { optional: true }),
   group([
     query(':leave', [
       animate('0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({left: '100%'}))
     ], {optional: true}),
     query(':enter', [
       animate('0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({left: '0%'}))
-    ])
+    ], { optional: true })
   ]),
 ];
 
@@ -33,17 +33,17 @@ export const next = [
       left: 0,
       width: '100%',
     })
-  ]),
+  ], { optional: true }),
   query(':enter', [
     style({left: '100%'})
-  ]),
+  ], { optional: true }),
   group([
     query(':leave', [
       animate('0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({left: '-100%'}))
     ], {optional: true}),
     query(':enter', [
       animate('0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({left: '0%'}))
-    ])
+    ], { optional: true })
   ]),
 ];
 

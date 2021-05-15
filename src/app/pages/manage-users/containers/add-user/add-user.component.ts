@@ -18,10 +18,6 @@ export class AddUserComponent implements OnInit {
   hide = true;
   roles = [
     {
-      label: 'Admin',
-      value: 'admin'
-    },
-    {
       label: 'Manager',
       value: 'manager'
     },
@@ -43,7 +39,7 @@ export class AddUserComponent implements OnInit {
       patternValidator(/\d/, {hasNumber: true}),
       patternValidator(/[A-Z]/, {hasCapitalCase: true}),
       patternValidator(/[a-z]/, {hasSmallCase: true}),
-      patternValidator(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/, {hasSpecialCharacters: true}),
+      patternValidator(/[!-\/:-@[-`{-~]/, {hasSpecialCharacters: true}),
       Validators.minLength(8)
     ])],
     role: [null, Validators.required]

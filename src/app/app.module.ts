@@ -4,9 +4,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from './layout/layout.module';
-import {CookieModule} from 'ngx-cookie';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {AuthInterceptorProvider} from '@core/interceptors/auth.interceptor';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -17,11 +17,11 @@ import {AuthInterceptorProvider} from '@core/interceptors/auth.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
-    HttpClientModule,
-    CookieModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
-    AuthInterceptorProvider
+    AuthInterceptorProvider,
+    MatSnackBar
   ],
   exports: [],
   bootstrap: [AppComponent]

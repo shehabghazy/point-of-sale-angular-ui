@@ -13,7 +13,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class UsersTableComponent {
   @Input() data: User[] = [];
-  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'buttons'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'role'];
   @Output() deletedId = new EventEmitter<number>();
   constructor(public dialog: MatDialog) {
   }

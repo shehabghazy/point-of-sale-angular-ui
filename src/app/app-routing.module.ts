@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {EmptyLayoutComponent} from './layout/containers/empty-layout/empty-layout.component';
 import {MainLayoutComponent} from './layout/containers/main-layout/main-layout.component';
-import {AuthGuard} from './core/guards/auth.guard';
-import {NonAuthGuard} from './core/guards/non-auth.guard';
-import {RoleGuard} from './core/guards/role.guard';
+import {AuthGuard} from '@core/guards/auth.guard';
+import {NonAuthGuard} from '@core/guards/non-auth.guard';
+import {RoleGuard} from '@core/guards/role.guard';
 
 const routes: Routes = [
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'home', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
+    path: '', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
       {
         path: '',
         redirectTo: 'products',

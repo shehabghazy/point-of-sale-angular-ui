@@ -1,5 +1,5 @@
 {
-  "name": "booking-tool",
+  "name": "amigos-pos",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -22,9 +22,6 @@
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
     "bootstrap": "^4.6.0",
-    "jwt-decode": "^3.1.2",
-    "moment": "^2.29.1",
-    "ngx-cookie": "^5.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
