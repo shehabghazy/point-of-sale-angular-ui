@@ -1,25 +1,41 @@
-import {Component, OnInit} from '@angular/core';
-import {ProductService} from '@core/services/product.service';
-import {Router} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '@core/services/product.service';
+import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { CategoryService } from '@core/services/category.service';
+import { fadeIn } from '@app/animations/fadeIn.animation';
 
 @Component({
   selector: 'app-product',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: [ './products.component.scss' ],
+  animations: [fadeIn]
 })
 export class ProductsComponent implements OnInit {
 
   vm$ = this.productsService.state$;
-  displayedColumns: string[] = ['id', 'name', 'description', 'price', 'lowStock', 'optimalStock', 'stock', 'stock_type', 'barcode'];
+  categories$ = this.categoryService.allCategories();
+
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'description',
+    'price',
+    'lowStock',
+    'optimalStock',
+    'stock',
+    'stock_type',
+    'barcode'
+  ];
+
   dataSource: any;
   pagination: any;
 
   load = new BehaviorSubject<any>(undefined);
+
   racing$ = this.load.asObservable().pipe(
     switchMap((value: any) => {
-      debugger;
+      // debugger;
       if (value) {
         if (value?.pageSize) {
           // pagination
@@ -35,18 +51,17 @@ export class ProductsComponent implements OnInit {
     })
   );
 
-  constructor(private productsService: ProductService,
-              private router: Router) {
-  }
+  constructor(
+    private productsService: ProductService,
+    private categoryService: CategoryService,
+  ) {}
 
   ngOnInit(): void {
-    this.vm$.subscribe(console.log)
+    this.vm$.subscribe(console.log);
   }
 
   onClickedRow(row: any): void {
     console.log(row);
   }
-  addItem(): void {
-    this.router.navigateByUrl('home/products/add');
-  }
+
 }

@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {LayoutService} from '../../services/layout.service';
 import {Observable} from 'rxjs';
-import {AuthService} from '@app/pages/auth/services/auth.service';
+import {AuthService} from '@core/services/auth.service';
 import {pluck} from 'rxjs/operators';
 
 @Component({

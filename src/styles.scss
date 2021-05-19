@@ -57,3 +57,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   right: 50%;
   bottom: 50%
 }
+
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

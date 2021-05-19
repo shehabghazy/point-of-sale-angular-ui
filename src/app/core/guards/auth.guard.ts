@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from '@app/pages/auth/services/auth.service';
+import {AuthService} from '@core/services/auth.service';
 import {map, pluck} from 'rxjs/operators';
 
 @Injectable({
@@ -22,4 +22,5 @@ export class AuthGuard implements CanActivate {
       })
     );
   }
+
 }

@@ -1,23 +1,18 @@
 <div class="main-div">
   <div class="button-container">
-    <button type="button" mat-raised-button class="back-button mx-1" (click)="back()"><span
-      class="material-icons">
-      undo
-      </span>
+
+    <button type="button" mat-raised-button class="back-button mx-1" (click)="back()">
+      <mat-icon>undo</mat-icon>
       Back
     </button>
+
     <div class="header-buttons">
       <button type="button" mat-raised-button color="warn" class=" mx-1" (click)="resetForm()">
-        <span class="material-icons">
-        restart_alt
-            </span>
-        Reset
+        <span class="material-icons">restart_alt</span>Reset
       </button>
       <button type="submit" mat-raised-button color="primary" class=" mx-1" [disabled]="formGroup.invalid"
               (click)="createItem()">
-        <span class="material-icons">
-          save
-        </span>
+        <mat-icon>save</mat-icon>
         Save
       </button>
     </div>

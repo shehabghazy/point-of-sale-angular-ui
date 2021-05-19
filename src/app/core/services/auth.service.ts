@@ -1,11 +1,12 @@
-import {Inject, Injectable} from '@angular/core';
-import {Credentials} from '@core/models/credentials.model';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {API_URL} from '@core/api.token';
-import {distinctUntilChanged, tap} from 'rxjs/operators';
-import {LoginResponse} from '@core/models/LoginResponse';
-import {Router} from '@angular/router';
+import { Inject, Injectable } from '@angular/core';
+import { Credentials } from '@core/models/credentials.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from '@core/api.token';
+import { distinctUntilChanged, map, shareReplay, tap } from 'rxjs/operators';
+import { LoginResponse } from '@core/models/LoginResponse';
+import { Router } from '@angular/router';
+import { CreateAdminPayload } from '@core/models/CreateAdminPayload';
 
 export interface AuthState {
   userId: number | null;
@@ -25,13 +26,23 @@ export const initialState: AuthState = {
   role: null
 };
 
-@Injectable({providedIn: 'root' })
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  constructor(@Inject(API_URL) private api: string, private http: HttpClient, private router: Router) {}
+  constructor(
+    @Inject(API_URL) private api: string,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   private auth = new BehaviorSubject<AuthState>(this.getLocalState());
-  auth$ = this.auth.asObservable().pipe(distinctUntilChanged(), tap(x => console.log('auth', x)));
+  public auth$ = this.auth.asObservable().pipe(distinctUntilChanged(),
+    tap(x => console.log('auth', x))
+  );
+
+  adminExists$ = this.http.get<{ exists: boolean }>(`${ this.api }/adminExists`).pipe(
+    shareReplay(1),
+  );
 
   public getLocalState(): AuthState {
     const localState = localStorage.getItem('auth');
@@ -42,7 +53,7 @@ export class AuthService {
   }
 
   login(credentials: Credentials): Observable<LoginResponse> {
-    const path = `${this.api}/login`;
+    const path = `${ this.api }/login`;
     return this.http.post<LoginResponse>(path, credentials).pipe(
       tap(data => {
         this.auth.next(data);
@@ -51,6 +62,12 @@ export class AuthService {
       })
     );
   }
+
+  createAdmin(payload: CreateAdminPayload): Observable<{ message: string }> {
+    const path = `${ this.api }/createAdmin`;
+    return this.http.post<{ message: string }>(path, payload);
+  }
+
   logout(): void {
     localStorage.clear();
     this.auth.next(this.getLocalState());

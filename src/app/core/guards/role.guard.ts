@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from '@app/pages/auth/services/auth.service';
+import {AuthService} from '@core/services/auth.service';
 import {pluck} from 'rxjs/operators';
 import {LayoutService} from '@app/layout/services/layout.service';
 
