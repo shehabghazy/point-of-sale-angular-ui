@@ -1,11 +1,57 @@
-<div>
-  <div style="margin-bottom: 30px">
-    <button mat-raised-button color="primary" class="add-button" (click)="addItem()">+ Add</button>
-  </div>
-  <div class="table" style="width: 100%">
+<!--<ng-container *ngIf="racing$ | async"></ng-container>-->
+<!--<ng-container *ngIf=" vm$ | async as vm">-->
+<!--&lt;!&ndash;  <div style="margin-bottom: 30px">&ndash;&gt;-->
+<!--&lt;!&ndash;    <button mat-raised-button color="primary" class="add-button" (click)="addItem()">+ Add</button>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
 
-    <app-product-table class="product-table" [dataSource]="dataSource"
-                       [displayedColumns]="displayedColumns"></app-product-table>
-  </div>
+<!--    <app-product-table class="product-table"-->
+<!--                       *ngIf="vm.data.length > 0 && !vm.loading"-->
+<!--                       [dataSource]="vm.data"-->
+<!--                       [displayedColumns]="displayedColumns"-->
+<!--                       [pagination]="pagination"-->
+<!--                       (paginated)="load.next($event)"-->
+<!--    >-->
+<!--    </app-product-table>-->
+
+
+<!--</ng-container>-->
+
+
+<div class="p-3">
+
+  <ng-container *ngIf="racing$ | async"></ng-container>
+
+  <ng-container *ngIf="vm$ | async as vm">
+
+    <div style="margin-bottom: 30px">
+      <button mat-raised-button color="primary" class="add-button" (click)="addItem()">+ Add</button>
+    </div>
+        <app-product-filter-form
+          [filters]="vm.filters"
+          (filtered)="load.next($event)">
+        </app-product-filter-form>
+
+    <app-product-table class="product-table"
+                       *ngIf="vm.data.length > 0 && !vm.loading"
+                       [dataSource]="vm.data"
+                       [displayedColumns]="displayedColumns"
+                       [pagination]="vm.pagination"
+                       (paginated)=" load.next($event)"
+
+    >
+    </app-product-table>
+    <!--                       load.next($event)-->
+    <!--    <div *ngIf="vm.loading" class="center">-->
+    <!--      <mat-spinner></mat-spinner>-->
+    <!--    </div>-->
+
+    <!--    <div *ngIf="vm.data.length === 0 && vm.loaded && !vm.error" class="no-data">-->
+    <!--      No data found!-->
+    <!--    </div>-->
+
+    <!--    <div *ngIf="vm.error" class="error">-->
+    <!--      {{ vm.error }}-->
+    <!--    </div>-->
+  </ng-container>
 
 </div>

@@ -12,6 +12,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {ProductDetailsComponent} from '@app/pages/products/containers/product-details/product-details.component';
 import {ProductTableComponent} from '@app/pages/products/components/product-table/product-table.component';
+import { ProductFilterFormComponent } from './components/product-filter-form/product-filter-form.component';
+import {MatSelectModule} from '@angular/material/select';
 
 const routes: Routes = [
   {
@@ -40,19 +42,21 @@ const routes: Routes = [
     ProductDetailsComponent,
 
     // components
-    ProductTableComponent
+    ProductTableComponent,
+      ProductFilterFormComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatTableModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatTableModule,
+        MatPaginatorModule,
+        MatButtonModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+    ]
 })
 export class ProductsModule {
 }

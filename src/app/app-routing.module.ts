@@ -29,20 +29,12 @@ const routes: Routes = [
       {
         path: 'products',
         canActivate: [RoleGuard],
-        data: {roles: ['admin', 'adminuser']},
-        loadChildren: () => import('./pages/products/components/product/products.module').then(m => m.ProductsModule)
-      },
-      {
-        path: 'products/add',
-        loadChildren: () => import('./pages/products/containers/add-product/add-product.module')
-          .then( m => m.AddProductModule),
-        data: {roles: ['admin', 'adminuser']},
-
+        data: {},
+        loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule)
       },
       {
         path: 'manage-users',
         canActivate: [RoleGuard],
-        data: {roles: ['admin']},
         loadChildren: () => import('./pages/manage-users/manage-users.module').then(m => m.ManageUsersModule)
       },
       {
