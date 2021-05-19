@@ -50,7 +50,7 @@ export class CreateAdminComponent implements OnInit {
     this.auth.createAdmin(this.form.value).pipe(take(1)).subscribe(
       ({ message }) => {
         this.openSnackBar(message, 'success-snackbar');
-        this.router.navigateByUrl('/auth');
+        this.router.navigateByUrl('/auth/login');
       },
       error => {
         if (error instanceof HttpErrorResponse) {
