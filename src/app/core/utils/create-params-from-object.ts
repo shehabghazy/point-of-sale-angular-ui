@@ -9,7 +9,7 @@ export function createParamsFromObject(filters: object): HttpParams {
       if (key === 'id' || key === 'active') {
         params = params.append(key, value + '');
       } else {
-        params = params.append(key + '_like', value + '');
+        params = params.append(key + '', value + '');
       }
     }
   }
