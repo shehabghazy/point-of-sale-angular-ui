@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '@core/services/product.service';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-product-details',
-  templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss']
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.scss']
 })
-export class ProductDetailsComponent {
+export class EditProductComponent {
 
   product$ = this.route.paramMap.pipe(switchMap(params => {
     // tslint:disable-next-line:no-non-null-assertion
@@ -19,5 +19,9 @@ export class ProductDetailsComponent {
     private route: ActivatedRoute,
     private productService: ProductService
   ) { }
+
+  handleEdit(): void {
+    console.log("edit");
+  }
 
 }

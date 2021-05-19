@@ -16,6 +16,8 @@ import { ProductFilterFormComponent } from './components/product-filter-form/pro
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EditProductComponent } from './containers/edit-product/edit-product.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 const routes: Routes = [
   {
@@ -32,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'edit/:id',
-    component: AddProductComponent
+    component: EditProductComponent
   }
 ];
 
@@ -45,7 +47,9 @@ const routes: Routes = [
 
     // components
     ProductTableComponent,
-      ProductFilterFormComponent
+      ProductFilterFormComponent,
+      EditProductComponent,
+      ProductFormComponent
   ],
   imports: [
     CommonModule,

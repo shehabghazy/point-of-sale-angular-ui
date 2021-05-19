@@ -1,77 +1,16 @@
-<div class="main-div">
-  <div class="button-container">
+<div class="container">
 
-    <button type="button" mat-raised-button class="back-button mx-1" (click)="back()">
-      <mat-icon>undo</mat-icon>
-      Back
-    </button>
-
-    <div class="header-buttons">
-      <button type="button" mat-raised-button color="warn" class=" mx-1" (click)="resetForm()">
-        <span class="material-icons">restart_alt</span>Reset
+    <div class="d-flex align-items-center mb-3">
+      <button routerLink="/products" class="mr-2" mat-icon-button>
+        <mat-icon>arrow_back</mat-icon>
       </button>
-      <button type="submit" mat-raised-button color="primary" class=" mx-1" [disabled]="formGroup.invalid"
-              (click)="createItem()">
-        <mat-icon>save</mat-icon>
-        Save
-      </button>
+      <h1 class="m-0">Add product</h1>
     </div>
-  </div>
+
+    <mat-card>
+      <mat-card-content>
+        <app-product-form (submitted)="handleAdd($event)"></app-product-form>
+      </mat-card-content>
+    </mat-card>
+
 </div>
-<mat-card class="card-container p-5">
-
-  <form action="" [formGroup]="formGroup">
-    <div class="row">
-      <div class="col md-6">
-        <mat-form-field class="example-full-width" appearance="outline">
-
-          <mat-label>Name</mat-label>
-          <input type="text" matInput placeholder="Ex. Pizza" formControlName="name">
-        </mat-form-field>
-
-      </div>
-      <div class="col md-6">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Price</mat-label>
-          <input type="number" matInput placeholder="Ex. 23 ALL" formControlName="price">
-        </mat-form-field>
-
-      </div>
-    </div>
-    <div class="row">
-
-      <div class="col md-6">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Barcode</mat-label>
-          <input type="text" matInput placeholder="Ex. 324521213" formControlName="barcode">
-        </mat-form-field>
-
-      </div>
-      <div class="col md-6">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Stock Type</mat-label>
-          <input type="text" matInput placeholder="Ex. cope" formControlName="stock_type">
-        </mat-form-field>
-
-      </div>
-    </div>
-    <div class="row">
-      <div class="col md-6">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Low stock</mat-label>
-          <input type="number" matInput placeholder="Ex. 15" formControlName="low_stock">
-        </mat-form-field>
-
-      </div>
-      <div class="col md-6">
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Optimal stock</mat-label>
-          <input type="number" matInput placeholder="Ex. 40" formControlName="optimal_stock">
-        </mat-form-field>
-
-      </div>
-    </div>
-
-  </form>
-</mat-card>
-

@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {Product} from '../models/product.model';
+import { Product, ProductDetails } from '../models/product.model';
 import {Pagination} from '../models/pagination.model';
 import {ProductsFilter} from '../models/products-filter.model';
 import {BehaviorSubject, Observable, of} from 'rxjs';
@@ -28,9 +28,7 @@ const initialState: ProductsState = {
 };
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 
 export class ProductService {
 
@@ -41,8 +39,7 @@ export class ProductService {
     return this.state.getValue();
   }
 
-  constructor(private http: HttpClient, @Inject(API_URL) private api: string) {
-  }
+  constructor(private http: HttpClient, @Inject(API_URL) private api: string) {}
 
   private getProducts(filters: Partial<ProductsFilter> = {},
                       pagination: Pagination): Observable<any> {
@@ -96,6 +93,10 @@ export class ProductService {
         return of(error);
       })
     );
+  }
+
+  getById(id: string): Observable<ProductDetails> {
+    return this.http.get<ProductDetails>(`${this.api}/products/${id}`);
   }
 
   createProduct(value: any): Observable<Product> {
