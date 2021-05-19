@@ -73,8 +73,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.clear();
-    this.auth.next(this.getLocalState());
+    localStorage.removeItem('auth');
+    this.auth.next(initialState);
     this.router.navigateByUrl('auth/login').then();
   }
 
