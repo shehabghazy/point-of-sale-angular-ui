@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Product } from '@core/models/product.model';
-import { BehaviorSubject } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { distinctUntilChanged, take } from 'rxjs/operators';
+import { API_URL } from '@core/api.token';
+import { HttpClient } from '@angular/common/http';
 
 export interface InvoiceProduct {
   product: Product;
@@ -28,7 +30,11 @@ export class InvoiceService {
     return this.invoiceState.getValue();
   }
 
-  constructor() {
+  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {
+  }
+
+  all(): Observable<any> {
+    return this.http.get(`${this.api}/invoices`);
   }
 
   setActiveCategory(categoryId: number): void {
@@ -81,6 +87,23 @@ export class InvoiceService {
       ...this.state,
       invoiceProducts: newProductsList
     });
+  }
+
+  createInvoice(): void {
+    const payload = {
+      items: this.state.invoiceProducts.map(item => {
+        return {
+          quantity: item.count,
+          price: item.product.price,
+          product_id: item.product.id
+        };
+      })
+    };
+
+    this.http.post(`${this.api}/createInvoice`, payload).pipe(take(1))
+      .subscribe(value => {
+        console.log(value);
+      });
   }
 
 }

@@ -9,7 +9,7 @@ import { fadeIn } from '@app/animations/fadeIn.animation';
   selector: 'app-product',
   templateUrl: './products.component.html',
   styleUrls: [ './products.component.scss' ],
-  animations: [fadeIn]
+  animations: [ fadeIn ]
 })
 export class ProductsComponent implements OnInit {
 
@@ -54,7 +54,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productsService: ProductService,
     private categoryService: CategoryService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.vm$.subscribe(console.log);
