@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { AuthService, AuthState } from '@core/services/auth.service';
 import { catchError, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -24,11 +24,13 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       }),
       catchError(error => {
-        if (error.error.message.includes('Unauthenticated.')) {
-          this.auth.logout();
-          this.router.navigate(['/auth']).then();
+        if (error instanceof HttpErrorResponse) {
+          if (error.error.message?.includes('Unauthenticated.')) {
+            this.auth.logout();
+            this.router.navigate(['/auth']).then();
+          }
         }
-        return of(error);
+        return throwError(error);
       })
     );
   }

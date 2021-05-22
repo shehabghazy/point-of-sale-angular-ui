@@ -41,6 +41,8 @@ export class AuthService {
     tap(x => console.log('auth', x))
   );
 
+  get state(): AuthState { return this.auth.getValue(); }
+
   adminExists$ = this.http.get<{ exists: boolean }>(`${this.api}/adminExists`).pipe(
     shareReplay(1),
   );
