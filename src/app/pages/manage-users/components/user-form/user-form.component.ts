@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { patternValidator } from '@core/utils/custom-validators';
-import { User } from '@core/models/user.model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {patternValidator} from '@core/utils/custom-validators';
+import {User} from '@core/models/user.model';
+import {ShiftsService} from "@core/services/shifts.service";
 
 @Component({
   selector: 'app-user-form',
@@ -33,9 +34,11 @@ export class UserFormComponent implements OnInit {
     }
   ];
 
+  shifts$ = this.shiftsService.all();
+
   form = this.fb.group({
-    name: [ null, Validators.required ],
-    email: [ null, Validators.required ],
+    name: [null, Validators.required],
+    email: [null, Validators.required],
     // password: [ null, Validators.compose([
     //   Validators.required,
     //   patternValidator(/\d/, { hasNumber: true }),
@@ -44,10 +47,12 @@ export class UserFormComponent implements OnInit {
     //   patternValidator(/[!-\/:-@[-`{-~]/, { hasSpecialCharacters: true }),
     //   Validators.minLength(8)
     // ]) ],
-    role: [ null, Validators.required ]
+    shift: [null, Validators.required],
+    role: [null, Validators.required]
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private shiftsService: ShiftsService) {
+  }
 
   ngOnInit(): void {
     if (this.user) {

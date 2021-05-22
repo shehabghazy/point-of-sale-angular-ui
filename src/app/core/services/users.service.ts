@@ -14,7 +14,9 @@ export class UsersService {
   private users = new BehaviorSubject<User[]>([]);
   users$ = this.users.asObservable();
 
-  constructor(@Inject(API_URL) private api: string, private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(@Inject(API_URL) private api: string, private http: HttpClient, private snackBar: MatSnackBar) {
+    this.users$.subscribe(console.log);
+  }
 
   loadUsers(): void {
     this.http.get<User[]>(`${this.api}/users`).pipe(take(1)).subscribe(response => {

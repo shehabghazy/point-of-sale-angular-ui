@@ -35,6 +35,15 @@
     </mat-error>
 
     <mat-form-field appearance="outline">
+      <mat-label>Shift</mat-label>
+      <mat-select formControlName="shift">
+        <mat-option *ngFor="let shift of (shifts$ | async)" [value]="shift.id">
+          {{shift.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Role</mat-label>
       <mat-select formControlName="role">
         <mat-option *ngFor="let role of roles" [value]="role.value">
