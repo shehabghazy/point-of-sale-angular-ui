@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '@core/services/category.service';
 import { ProductService } from '@core/services/product.service';
-import { InvoiceService } from '@app/pages/invoice/invoice.service';
+import { InvoiceProduct, InvoiceService } from '@app/pages/invoice/invoice.service';
 import { Product } from '@core/models/product.model';
 
 @Component({
@@ -10,7 +10,6 @@ import { Product } from '@core/models/product.model';
   styleUrls: ['./create-invoice.component.scss']
 })
 export class CreateInvoiceComponent implements OnInit {
-
 
   categories$ = this.categoryService.all();
   products$ = this.productService.state$;
@@ -24,10 +23,12 @@ export class CreateInvoiceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.productService.loadProducts();
   }
 
   handleProductSearch(event: any): void {
     console.log(event.target.value);
+
   }
 
   setActiveCategory(categoryId: number): void {
@@ -44,6 +45,16 @@ export class CreateInvoiceComponent implements OnInit {
 
   createInvoice(): void {
     this.invoiceService.createInvoice();
+  }
+
+  allTotal(items: InvoiceProduct[]): number {
+    let total = 0;
+
+    items.forEach(item => {
+      total += item.product.price * item.count;
+    });
+
+    return total;
   }
 
 }

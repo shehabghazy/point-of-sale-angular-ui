@@ -40,13 +40,33 @@
         <div class="col-12 col-md-6">
           <h2>Invoice</h2>
 
-          <ul>
-            <li *ngFor="let item of vm.invoiceProducts">
-              {{ item.product.name }} --- {{ item.count }}
-
-              <button (click)="removeItem(item.product.id)" mat-button color="warn">Remove</button>
-            </li>
-          </ul>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Count</th>
+              <th>Total</th>
+              <th>Remove</th>
+            </tr>
+            <tr *ngFor="let item of vm.invoiceProducts">
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.product.price }}</td>
+              <td>{{ item.count }}</td>
+              <td>{{ item.count * item.product.price }}</td>
+              <td>
+                <button (click)="removeItem(item.product.id)" mat-button color="warn">
+                  Remove
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Total:</td>
+              <td>{{ allTotal(vm.invoiceProducts) }}</td>
+              <td></td>
+            </tr>
+          </table>
 
           <br>
           <button mat-button color="primary" (click)="createInvoice()">
