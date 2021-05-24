@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '@core/services/category.service';
 import { ProductService } from '@core/services/product.service';
-import { InvoiceProduct, InvoiceService } from '@app/pages/invoice/invoice.service';
 import { Product } from '@core/models/product.model';
+import { InvoiceService, InvoiceProduct } from '@core/services/invoice.service';
 
 @Component({
   selector: 'app-create-invoice',

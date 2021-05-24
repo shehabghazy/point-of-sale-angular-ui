@@ -13,10 +13,20 @@ export class ProductTableComponent {
 
   @Input() dataSource: Product[] = [];
 
-  @Input() displayedColumns: any;
-
   @Input() pagination: Pagination = { pageIndex: 0, pageSize: 10, total: 0 };
 
   @Output() paginated = new EventEmitter<PageEvent>();
+
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'description',
+    'price',
+    'lowStock',
+    'optimalStock',
+    'stock',
+    'stock_type',
+    'barcode'
+  ];
 
 }

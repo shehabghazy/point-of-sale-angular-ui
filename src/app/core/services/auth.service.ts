@@ -37,9 +37,7 @@ export class AuthService {
   ) {}
 
   private auth = new BehaviorSubject<AuthState>(this.getLocalState());
-  public auth$ = this.auth.asObservable().pipe(distinctUntilChanged(),
-    tap(x => console.log('auth', x))
-  );
+  public auth$ = this.auth.asObservable().pipe(distinctUntilChanged());
 
   get state(): AuthState { return this.auth.getValue(); }
 

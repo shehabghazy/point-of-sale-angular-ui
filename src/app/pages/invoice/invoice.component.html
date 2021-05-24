@@ -1,26 +1,44 @@
-<div>
-  invoice list
+<div class="container p-3">
 
-  <button mat-button routerLink="/invoice/create" color="primary">Create</button>
-</div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex align-items-center">
+      <h1 class="m-0">Invoices</h1>
+      <button class="mx-3" routerLink="/invoice/create" mat-button color="primary">
+        <mat-icon class="mr-2">add</mat-icon>
+        <span>Create invoice</span>
+      </button>
+    </div>
+  </div>
 
-<div *ngIf="all$ | async as data">
+  <app-invoice-filter
+    @fadeIn
+    *ngIf="users$ | async as users"
+    [users]="users"
+    (filtered)="handleFilter($event)">
+  </app-invoice-filter>
 
-  <table>
-    <tr>
-      <th>ID</th>
-      <th>Total</th>
-      <th>is_paid</th>
-      <th>user_id</th>
-      <th>created_at</th>
-    </tr>
-    <tr *ngFor="let item of data">
-      <td>{{ item.id }}</td>
-      <td>{{ item.total }} Lek</td>
-      <td>{{ item.is_paid }}</td>
-      <td>{{ item.user.name }}</td>
-      <td>{{ item.created_at | date }}</td>
-    </tr>
-  </table>
+  <div *ngIf="data$ | async as data; else loading">
+
+    <app-invoice-table
+      @fadeIn
+      *ngIf="data.data.length > 0"
+      class="invoice-table"
+      [dataSource]="data"
+      (paginated)="handlePagination($event)">
+    </app-invoice-table>
+
+    <div *ngIf="data.data.length === 0" @fadeIn class="no-data">
+      No data found!
+    </div>
+
+
+  </div>
+
+  <ng-template #loading>
+    <div class="flex-center mt-4">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
 
 </div>

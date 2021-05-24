@@ -16,18 +16,6 @@ export class ProductsComponent implements OnInit {
   vm$ = this.productsService.state$;
   categories$ = this.categoryService.all();
 
-  displayedColumns: string[] = [
-    'id',
-    'name',
-    'description',
-    'price',
-    'lowStock',
-    'optimalStock',
-    'stock',
-    'stock_type',
-    'barcode'
-  ];
-
   dataSource: any;
   pagination: any;
 

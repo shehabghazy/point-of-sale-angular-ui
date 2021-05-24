@@ -1,9 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { Product } from '@core/models/product.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, take } from 'rxjs/operators';
+import { distinctUntilChanged, take, tap } from 'rxjs/operators';
 import { API_URL } from '@core/api.token';
 import { HttpClient } from '@angular/common/http';
+import { AllInvoicesRes } from '@core/models/Invoice';
+import { createParamsFromObject } from '@core/utils/create-params-from-object';
+import { InvoiceFilter } from '@core/models/InvoiceFilter';
 
 export interface InvoiceProduct {
   product: Product;
@@ -13,11 +16,13 @@ export interface InvoiceProduct {
 export interface InvoiceState {
   activeCategoryId: number | null;
   invoiceProducts: InvoiceProduct[];
+  filters: InvoiceFilter | null;
 }
 
 export const initialState: InvoiceState = {
   activeCategoryId: null,
-  invoiceProducts: []
+  invoiceProducts: [],
+  filters: null
 };
 
 @Injectable({ providedIn: 'root' })
@@ -30,11 +35,25 @@ export class InvoiceService {
     return this.invoiceState.getValue();
   }
 
-  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {
-  }
+  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {}
 
-  all(): Observable<any> {
-    return this.http.get(`${this.api}/invoices`);
+  all(
+    page: number, pageSize: number,
+    filters?: InvoiceFilter,
+  ): Observable<AllInvoicesRes> {
+
+    let finalFilters = this.state.filters ?? {};
+
+    if (filters) {
+      finalFilters = filters;
+    }
+
+    const params = createParamsFromObject(finalFilters)
+      .append('page', page)
+      .append('pageSize', pageSize);
+
+    return this.http.get<AllInvoicesRes>(`${ this.api }/invoices`, { params })
+      .pipe(tap(x => console.log(x)));
   }
 
   setActiveCategory(categoryId: number): void {
@@ -100,7 +119,7 @@ export class InvoiceService {
       })
     };
 
-    this.http.post(`${this.api}/createInvoice`, payload).pipe(take(1))
+    this.http.post(`${ this.api }/createInvoice`, payload).pipe(take(1))
       .subscribe(value => {
         console.log(value);
       });

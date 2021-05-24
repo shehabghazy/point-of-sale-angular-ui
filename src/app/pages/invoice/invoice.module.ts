@@ -7,6 +7,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
+import { InvoiceTableComponent } from './components/invoice-table/invoice-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { InvoiceFilterComponent } from './components/invoice-filter/invoice-filter.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 const routes: Routes = [
@@ -18,7 +27,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     InvoiceComponent,
-    CreateInvoiceComponent
+    CreateInvoiceComponent,
+    InvoiceTableComponent,
+    InvoiceFilterComponent
   ],
   imports: [
     CommonModule,
@@ -26,8 +37,16 @@ const routes: Routes = [
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule
   ],
-  exports: [RouterModule]
+  exports: [ RouterModule ]
 })
-export class InvoiceModule { }
+export class InvoiceModule {
+}
