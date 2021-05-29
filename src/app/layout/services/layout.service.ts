@@ -5,6 +5,12 @@ export class LayoutService {
 
   navItems = [
     {
+      label: 'Dashboard',
+      path: 'dashboard',
+      icon: 'dashboard',
+      roles: [ 'admin', 'manager' ]
+    },
+    {
       label: 'Invoices',
       path: 'invoice',
       icon: 'receipt',

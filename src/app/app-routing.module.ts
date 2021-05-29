@@ -23,7 +23,7 @@ const routes: Routes = [
     path: '', component: MainLayoutComponent, canActivate: [ AuthGuard ], children: [
       {
         path: '',
-        redirectTo: 'products',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       },
       {
@@ -57,6 +57,11 @@ const routes: Routes = [
         path: 'invoice',
         loadChildren: () => import('./pages/invoice/invoice.module').then(m => m.InvoiceModule)
       },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+
+      }
     ]
   },
 ];
