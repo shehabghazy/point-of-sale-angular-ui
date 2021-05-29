@@ -1,23 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { LowStockProduct } from '@core/models/DashboardResponse';
 
 @Component({
   selector: 'app-below-stock-products-table',
   templateUrl: './below-stock-products-table.component.html',
-  styleUrls: [ './below-stock-products-table.component.scss' ]
+  styleUrls: [ './below-stock-products-table.component.scss' ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BelowStockProductsTableComponent implements OnInit {
+export class BelowStockProductsTableComponent {
 
-  @Input() dataSource: { id: number; name: string; minimumStock: number; stock: number; }[] = [];
+  @Input() dataSource: LowStockProduct[] = [];
 
   displayedColumns = [ 'name', 'minimumStock', 'stock', 'button' ];
-
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
-
 
   getColor(stock: number, minimumStock: number): string {
     const limit = minimumStock * 0.2;

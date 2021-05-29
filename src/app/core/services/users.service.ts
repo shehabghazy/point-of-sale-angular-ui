@@ -1,14 +1,12 @@
-import {Inject, Injectable} from '@angular/core';
-import {API_URL} from '@core/api.token';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {User} from '@core/models/user.model';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map, take} from 'rxjs/operators';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Inject, Injectable } from '@angular/core';
+import { API_URL } from '@core/api.token';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { User } from '@core/models/user.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class UsersService {
 
   private users = new BehaviorSubject<User[]>([]);
@@ -21,27 +19,28 @@ export class UsersService {
   ) { }
 
   loadUsers(): void {
-    this.http.get<User[]>(`${this.api}/users`).pipe(take(1)).subscribe(response => {
-      this.users.next(response);
-    }, error => {
+    this.http.get<User[]>(`${ this.api }/users`).pipe(take(1))
+      .subscribe(response => {
+        this.users.next(response);
+      }, error => {
         this.openSnackBar(error.message, 'danger-alert');
-    });
+      });
   }
 
   one(id: number): Observable<any> {
-    return this.http.get(`${this.api}/users/${id}`);
+    return this.http.get(`${ this.api }/users/${ id }`);
   }
 
   create(payload: User): Observable<any> {
-    return this.http.post(`${this.api}/users`, payload);
+    return this.http.post(`${ this.api }/users`, payload);
   }
 
   update(id: number, payload: User): Observable<any> {
-    return this.http.patch(`${this.api}/users/${id}`, payload);
+    return this.http.patch(`${ this.api }/users/${ id }`, payload);
   }
 
   delete(id: number): void {
-    this.http.delete(`${this.api}/users/${id}`).pipe(take(1)).subscribe(
+    this.http.delete(`${ this.api }/users/${ id }`).pipe(take(1)).subscribe(
       value => {
         this.users$ = this.users$.pipe(map(users => users.filter(u => u.id !== id)));
         this.openSnackBar('User deleted successfully', 'success-snackbar');

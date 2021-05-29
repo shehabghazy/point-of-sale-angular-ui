@@ -4,4 +4,14 @@ export interface User {
   email: string;
   role: string;
   userId: number;
+
+  user_shift: {
+    id: number;
+    user_id: number;
+    shift_id: number;
+    shift: {
+      id: number;
+      name: string
+    };
+  } | null;
 }

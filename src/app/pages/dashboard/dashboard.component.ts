@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '@core/services/dashboard.service';
+import { DashboardResponse } from '@core/models/DashboardResponse';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +10,30 @@ import { DashboardService } from '@core/services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  data$ = this.dashboardService.data$;
+  data: Partial<DashboardResponse> = {
+    sales: undefined,
+    invoiceCount: undefined,
+    productSales: undefined,
+    salesByCategory: undefined,
+    lowStockProducts: undefined
+  };
 
-  constructor(private dashboardService: DashboardService) {
-  }
+  loading = false;
+
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
+    this.getDashboardStats();
+  }
 
+  getDashboardStats(): void {
+    this.loading = true;
+    this.dashboardService.data$.pipe(take(1)).subscribe(
+      res => {
+        this.data = res;
+        this.loading = false;
+      }
+    );
   }
 
 }

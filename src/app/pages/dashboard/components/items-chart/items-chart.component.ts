@@ -3,11 +3,11 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-items-chart',
   templateUrl: './items-chart.component.html',
-  styleUrls: ['./items-chart.component.scss']
+  styleUrls: [ './items-chart.component.scss' ]
 })
 export class ItemsChartComponent implements OnInit {
 
-  @Input() data: {name: string, value: number}[] = [];
+  @Input() data: { id: number; name: string, value: number }[] = [];
 
   itemsChartOpts = {
     animations: true,
@@ -26,7 +26,8 @@ export class ItemsChartComponent implements OnInit {
     }
   };
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
