@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
@@ -6,7 +6,10 @@ import { LegendPosition } from '@swimlane/ngx-charts';
   templateUrl: './categories-chart.component.html',
   styleUrls: ['./categories-chart.component.scss']
 })
-export class CategoriesChartComponent implements OnInit {
+export class CategoriesChartComponent implements OnInit, AfterContentChecked {
+
+  @ViewChild('chartContainer') chartContainer?: ElementRef;
+  offsetWidthContainer = 200;
 
   @Input() data: {name: string, value: number}[] = [];
 
@@ -42,4 +45,7 @@ export class CategoriesChartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngAfterContentChecked(): void {
+    this.offsetWidthContainer = this.chartContainer?.nativeElement.offsetWidth;
+  }
 }

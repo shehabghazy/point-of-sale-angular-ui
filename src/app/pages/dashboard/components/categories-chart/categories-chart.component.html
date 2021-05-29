@@ -1,6 +1,6 @@
-<div #ContainerRef>
+<div #chartContainer>
 <ngx-charts-pie-chart
-  [view]="[ContainerRef.offsetWidth, 300]"
+  [view]="[offsetWidthContainer, 300]"
   [scheme]="categoriesChartOpts.colorScheme"
   [results]="data"
   [gradient]="categoriesChartOpts.gradient"
