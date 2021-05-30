@@ -24,7 +24,8 @@
       *ngIf="data.data.length > 0"
       class="invoice-table"
       [dataSource]="data"
-      (paginated)="handlePagination($event)">
+      (paginated)="handlePagination($event)"
+      (invoiceClicked)="editInvoice($event)">
     </app-invoice-table>
 
     <div *ngIf="data.data.length === 0" @fadeIn class="no-data">

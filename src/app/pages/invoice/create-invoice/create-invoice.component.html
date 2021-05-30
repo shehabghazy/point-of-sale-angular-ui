@@ -1,79 +1,73 @@
 <div class="container-fluid">
-  <mat-card>
-    <mat-card-content>
-      <div class="row" *ngIf="vm$ | async as vm">
-        <div class="col-12 col-md-2">
-          <h2>Categories</h2>
-          <div class="categories-container" *ngIf="categories$ | async as categories">
-            <button *ngFor="let category of categories" class="category-item"
-                    (click)="setActiveCategory(category.id)"
-                    [class.active]="vm.activeCategoryId === category.id"
-                    mat-button type="button" [style.color]="category.color">
-              <mat-icon class="mr-2">{{ category.icon }}</mat-icon>
-              <span>{{ category.name }}</span>
-            </button>
-          </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <h2>Products</h2>
-          <mat-form-field appearance="outline" style="width: 250px;">
-            <mat-label>Search products</mat-label>
-            <input (keydown)="handleProductSearch($event)" type="text" matInput>
-          </mat-form-field>
 
-          <div class="products-container container-fluid">
-            <div class="row justify-content-center align-items-center"
-                 *ngIf="products$ | async as productsState">
-              <div *ngFor="let product of productsState.data" class="col-12 col-md-6 mb-2 px-0">
-                <div class="product-item" (click)="addItem(product)">
-                  <b>{{ product.name }}</b>
-                  <div class="details">
-                    <span>{{ $any(product.stock).quantity }} {{ $any(product.stock).type }}</span>
-                    <span>{{ product.price }} Lek</span>
-                  </div>
-                </div>
+  <div class="row" *ngIf="vm$ | async as vm">
+    <div *ngIf="vm.loading" class="col-12">
+      <div class="flex-center">
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+    <div *ngIf="!vm.loading" class="col-12 col-md-2">
+      <h2>Categories</h2>
+      <div class="categories-container" *ngIf="categories$ | async as categories">
+        <button *ngFor="let category of categories" class="category-item"
+                (click)="setActiveCategory(category.id)"
+                [class.active]="vm.activeCategoryId === category.id"
+                mat-button type="button" [style.color]="category.color">
+          <mat-icon class="mr-2">{{ category.icon }}</mat-icon>
+          <span>{{ category.name }}</span>
+        </button>
+      </div>
+    </div>
+    <div *ngIf="!vm.loading" class="col-12 col-md-4">
+      <h2>Products</h2>
+      <mat-form-field appearance="outline" style="width: 250px;">
+        <mat-label>Search products</mat-label>
+        <input (change)="handleProductSearch($event)" type="text" matInput>
+      </mat-form-field>
+
+      <div class="products-container container-fluid">
+        <div *ngIf="products$ | async as productsState"
+             class="row justify-content-start align-items-center">
+          <div *ngFor="let product of productsState.data" class="col-12 col-md-6 mb-2 px-0">
+            <div @fadeIn class="product-item" (click)="addItem(product, vm.invoiceProducts)">
+              <b>{{ product.name }}</b>
+              <div class="details">
+                    <span>
+                      {{ product | currentStockQuantity: vm.invoiceProducts }}
+                      {{ product.stock.type }}
+                    </span>
+                <span>{{ product.price }} Lek</span>
               </div>
             </div>
           </div>
-
-        </div>
-        <div class="col-12 col-md-6">
-          <h2>Invoice</h2>
-
-          <table>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Count</th>
-              <th>Total</th>
-              <th>Remove</th>
-            </tr>
-            <tr *ngFor="let item of vm.invoiceProducts">
-              <td>{{ item.product.name }}</td>
-              <td>{{ item.product.price }}</td>
-              <td>{{ item.count }}</td>
-              <td>{{ item.count * item.product.price }}</td>
-              <td>
-                <button (click)="removeItem(item.product.id)" mat-button color="warn">
-                  Remove
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td>Total:</td>
-              <td>{{ allTotal(vm.invoiceProducts) }}</td>
-              <td></td>
-            </tr>
-          </table>
-
-          <br>
-          <button mat-button color="primary" (click)="createInvoice()">
-            Create invoice
-          </button>
         </div>
       </div>
-    </mat-card-content>
-  </mat-card>
+
+    </div>
+    <div *ngIf="!vm.loading" class="col-12 col-md-6">
+      <h2>Invoice</h2>
+
+      <app-create-invoice-table
+        [invoiceProducts]="vm.invoiceProducts"
+        (removed)="removeItem($event)"
+        (increase)="increaseItemQuantity($event)"
+        (decrease)="decreaseItemQuantity($event)">
+      </app-create-invoice-table>
+
+      <br>
+     <div class="d-flex justify-content-between">
+       <button *ngIf="vm.invoiceId === null"
+               mat-flat-button color="primary"
+               (click)="createInvoice()">
+         Create invoice
+       </button>
+       <button *ngIf="vm.invoiceId !== null"
+               mat-flat-button color="primary"
+               (click)="updateInvoice()">
+         Update invoice
+       </button>
+     </div>
+    </div>
+  </div>
+
 </div>

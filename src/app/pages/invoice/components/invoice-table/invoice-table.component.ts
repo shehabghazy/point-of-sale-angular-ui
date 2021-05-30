@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { AllInvoicesRes } from '@core/models/Invoice';
+import { AllInvoicesRes, Invoice } from '@core/models/Invoice';
 
 @Component({
   selector: 'app-invoice-table',
@@ -12,6 +12,7 @@ export class InvoiceTableComponent {
   @Input() dataSource!: AllInvoicesRes;
 
   @Output() paginated = new EventEmitter<PageEvent>();
+  @Output() invoiceClicked = new EventEmitter<Invoice>();
 
   displayedColumns = [ 'id', 'user', 'total', 'paid', 'time', ];
 

@@ -1,3 +1,5 @@
+import { ProductDetails } from '@core/models/product.model';
+
 export interface User {
   id: number;
   name: string;
@@ -30,7 +32,7 @@ export interface InvoiceProduct {
   invoice_id: number;
   created_at: Date;
   updated_at: Date;
-  product: Product;
+  product: ProductDetails;
 }
 
 export interface Invoice {

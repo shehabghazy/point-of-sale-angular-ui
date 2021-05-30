@@ -5,8 +5,9 @@ import { ProductsFilter } from '../models/products-filter.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, distinctUntilChanged, tap } from 'rxjs/operators';
 import { createParamsFromObject } from '../utils/create-params-from-object';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_URL } from '@core/api.token';
+import { ProductsFilterRes } from '@core/models/ProductsFilterRes';
 
 
 export interface ProductsState {
@@ -99,6 +100,19 @@ export class ProductService {
 
   getById(id: string): Observable<ProductDetails> {
     return this.http.get<ProductDetails>(`${ this.api }/products/${ id }`);
+  }
+
+  filterProducts(query?: string, category?: number): Observable<ProductsFilterRes> {
+    let params = new HttpParams();
+
+    if (query) {
+      params = params.append('searchQuery', query);
+    }
+    if (category) {
+      params = params.append('category', category);
+    }
+
+    return this.http.get<ProductsFilterRes>(`${ this.api }/products/filter`, { params });
   }
 
   createProduct(value: any): Observable<Product> {

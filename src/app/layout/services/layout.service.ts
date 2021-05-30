@@ -23,7 +23,7 @@ export class LayoutService {
       roles: [ 'admin', 'manager' ]
     },
     {
-      label: 'Manage Users',
+      label: 'Users',
       path: 'manage-users',
       icon: 'people',
       roles: [ 'admin' ]

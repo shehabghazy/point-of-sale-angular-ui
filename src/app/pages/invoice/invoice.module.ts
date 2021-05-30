@@ -16,6 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CreateInvoiceTableComponent } from './components/create-invoice-table/create-invoice-table.component';
+import { CurrentStockQuantityPipe } from './create-invoice/current-stock-quantity.pipe';
 
 
 const routes: Routes = [
@@ -29,7 +31,9 @@ const routes: Routes = [
     InvoiceComponent,
     CreateInvoiceComponent,
     InvoiceTableComponent,
-    InvoiceFilterComponent
+    InvoiceFilterComponent,
+    CreateInvoiceTableComponent,
+    CurrentStockQuantityPipe
   ],
   imports: [
     CommonModule,

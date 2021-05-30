@@ -26,7 +26,8 @@
     </ng-container>
     <!--    [routerLink]="['/products/details', row.id]"-->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr class="element-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="element-row" mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="invoiceClicked.emit(row)"></tr>
 
   </table>
   <!--  remove 1 from current page and add 1 when changing page-->

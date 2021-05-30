@@ -4,6 +4,10 @@ import { PageEvent } from '@angular/material/paginator';
 import { InvoiceService } from '@core/services/invoice.service';
 import { UsersService } from '@core/services/users.service';
 import { InvoiceFilter } from '@core/models/InvoiceFilter';
+import { Invoice } from '@core/models/Invoice';
+import { InvoicePageService } from '@core/services/invoice-page.service';
+import { take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice',
@@ -15,7 +19,9 @@ export class InvoiceComponent implements OnInit {
 
   constructor(
     private invoiceService: InvoiceService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private router: Router,
+    private invoicePageService: InvoicePageService
   ) { }
 
   data$ = this.invoiceService.all(1, 20);
@@ -31,6 +37,15 @@ export class InvoiceComponent implements OnInit {
 
   handleFilter(filters: InvoiceFilter): void {
     this.data$ = this.invoiceService.all(1, 20, filters);
+  }
+
+  editInvoice(invoice: Invoice): void {
+    this.invoiceService.getById(invoice.id).pipe(take(1)).subscribe(
+      invoiceDetails => {
+        this.invoicePageService.editInvoice(invoiceDetails);
+        this.router.navigateByUrl('/invoice/create');
+      }
+    );
   }
 
 }
