@@ -1,11 +1,13 @@
+import { Validators } from '@angular/forms';
+
 export interface Product {
   id: number;
   description: string;
   name: string;
   price: number;
   barcode: string;
-  lowStock: number;
-  optimalStock: number;
+  low_stock: number;
+  optimal_stock: number;
   stock: number;
   stock_type: string;
 }
@@ -34,4 +36,15 @@ export interface Stock {
   product_id: number;
   created_at?: any;
   updated_at?: any;
+}
+
+
+export interface SaveProductPayload {
+  name: string;
+  price: number;
+  barcode: string;
+  low_stock: number;
+  optimal_stock: number;
+  stock_type: string;
+  category_id: number;
 }

@@ -6,9 +6,19 @@
         <mat-spinner></mat-spinner>
       </div>
     </div>
+
+    <div *ngIf="vm.invoiceDetails" class="col-12 my-2">
+      <div class="invoice-details">
+        <span>User: {{ vm.invoiceDetails.user.name }}</span>
+        <span>Paid: {{ vm.invoiceDetails.is_paid === 1 ? 'Yes': 'No' }}</span>
+        <span>Time: {{ vm.invoiceDetails.created_at | date: 'medium': '+0000' }}</span>
+        <span>Total: {{ vm.invoiceDetails.total }} Lekë</span>
+      </div>
+    </div>
+
     <div *ngIf="!vm.loading" class="col-12 col-md-2">
       <h2>Categories</h2>
-      <div class="categories-container" *ngIf="categories$ | async as categories">
+      <div class="categories-container" *ngIf="categories$ | async as categories;else loading">
         <button *ngFor="let category of categories" class="category-item"
                 (click)="setActiveCategory(category.id)"
                 [class.active]="vm.activeCategoryId === category.id"
@@ -17,6 +27,12 @@
           <span>{{ category.name }}</span>
         </button>
       </div>
+      <ng-template #loading>
+        <div class="flex-center">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-template>
+
     </div>
     <div *ngIf="!vm.loading" class="col-12 col-md-4">
       <h2>Products</h2>
@@ -55,18 +71,29 @@
       </app-create-invoice-table>
 
       <br>
-     <div class="d-flex justify-content-between">
-       <button *ngIf="vm.invoiceId === null"
-               mat-flat-button color="primary"
-               (click)="createInvoice()">
-         Create invoice
-       </button>
-       <button *ngIf="vm.invoiceId !== null"
-               mat-flat-button color="primary"
-               (click)="updateInvoice()">
-         Update invoice
-       </button>
-     </div>
+      <div *ngIf="vm.invoiceProducts.length > 0" class="d-flex justify-content-between">
+        <button *ngIf="vm.invoiceDetails === null"
+                mat-flat-button color="primary"
+                (click)="createInvoice()">
+          <mat-icon class="mr-2">plus</mat-icon>
+          <span>Create invoice</span>
+        </button>
+        <button *ngIf="vm.invoiceDetails !== null"
+                mat-flat-button color="primary"
+                (click)="updateInvoice()">
+          Update invoice
+        </button>
+        <button *ngIf="vm.invoiceDetails === null"
+                mat-flat-button color="primary">
+          <mat-icon class="mr-2">money</mat-icon>
+          <span>Pay now</span>
+        </button>
+        <button *ngIf="vm.invoiceDetails === null"
+                mat-flat-button color="primary">
+          <mat-icon class="mr-2">print</mat-icon>
+          <span>Print invoice</span>
+        </button>
+      </div>
     </div>
   </div>
 

@@ -1,15 +1,5 @@
 import { ProductDetails } from '@core/models/product.model';
-
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  email_verified_at?: any;
-  role: string;
-  deleted: number;
-  created_at: Date;
-  updated_at: Date;
-}
+import { User } from '@core/models/user.model';
 
 export interface Product {
   id: number;

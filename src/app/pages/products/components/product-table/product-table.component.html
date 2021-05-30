@@ -1,39 +1,30 @@
 <div class="mat-elevation-z1 rounded-table">
   <table mat-table [dataSource]="dataSource" class="mat-table full-width">
-    <!-- Id Column -->
+
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> No.</th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name</th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
-    <!-- Description Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description</th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
-
-    <!-- Price Column -->
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> Price</th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.price}} Lekë </td>
     </ng-container>
 
-    <!-- LowStock Column -->
     <ng-container matColumnDef="lowStock">
       <th mat-header-cell *matHeaderCellDef> LowStock</th>
-      <td mat-cell *matCellDef="let element"> {{element.lowStock}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.low_stock}} </td>
     </ng-container>
 
     <!-- OptimalStock Column -->
     <ng-container matColumnDef="optimalStock">
       <th mat-header-cell *matHeaderCellDef> OptimalStock</th>
-      <td mat-cell *matCellDef="let element"> {{element.optimalStock}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.optimal_stock}} </td>
     </ng-container>
 
     <!-- Stock Column -->

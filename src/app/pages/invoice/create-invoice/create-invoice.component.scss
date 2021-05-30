@@ -60,3 +60,22 @@ tr {
     text-align: left;
   }
 }
+
+
+.invoice-details {
+  display: flex;
+  gap: 20px;
+
+  span {
+    background: #e4e4e470;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 18px;
+    transition: 0.2s all;
+
+    &:hover {
+      background: rgba(146, 146, 146, 0.75);
+    }
+  }
+}

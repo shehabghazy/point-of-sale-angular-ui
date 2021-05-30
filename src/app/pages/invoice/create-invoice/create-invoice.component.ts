@@ -65,4 +65,8 @@ export class CreateInvoiceComponent {
     this.invoicePageService.updateInvoice();
   }
 
+  pay(): void {
+    // this.invoicePageService.pay();
+  }
+
 }

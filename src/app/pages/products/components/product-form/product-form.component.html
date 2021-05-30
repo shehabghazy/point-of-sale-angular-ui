@@ -24,8 +24,25 @@
 
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-2">
       <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category_id">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-2">
+      <mat-form-field class="full-width" appearance="outline">
         <mat-label>Stock Type</mat-label>
-        <input type="text" matInput placeholder="Ex. cope" formControlName="stock_type">
+        <mat-select formControlName="stock_type">
+          <mat-option></mat-option>
+          <mat-option value="l">L</mat-option>
+          <mat-option value="kg">Kg</mat-option>
+          <mat-option value="pcs">Piece</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 

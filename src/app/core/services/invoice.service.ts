@@ -3,9 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { API_URL } from '@core/api.token';
 import { HttpClient } from '@angular/common/http';
-import { AllInvoicesRes } from '@core/models/Invoice';
+import { AllInvoicesRes, Invoice } from '@core/models/Invoice';
 import { createParamsFromObject } from '@core/utils/create-params-from-object';
 import { InvoiceFilter } from '@core/models/InvoiceFilter';
+import { AuthService } from '@core/services/auth.service';
 
 export interface InvoiceState {
   filters: InvoiceFilter | null;
@@ -24,15 +25,22 @@ export class InvoiceService {
     return this.invoiceState.getValue();
   }
 
-  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {
-  }
+  constructor(
+    @Inject(API_URL) private api: string,
+    private http: HttpClient,
+    private auth: AuthService
+  ) { }
 
-  all(page: number, pageSize: number, filters?: InvoiceFilter): Observable<AllInvoicesRes> {
+  all(page: number, pageSize: number, filters?: Partial<InvoiceFilter>): Observable<AllInvoicesRes> {
 
-    let finalFilters = this.state.filters ?? {};
+    let finalFilters: Partial<InvoiceFilter> = this.state.filters ?? {};
 
     if (filters) {
       finalFilters = filters;
+    }
+
+    if (this.auth.role === 'user') {
+      finalFilters = { ...finalFilters, user: this.auth.state.userId! };
     }
 
     const params = createParamsFromObject(finalFilters)
@@ -43,8 +51,8 @@ export class InvoiceService {
       .pipe(tap(x => console.log(x)));
   }
 
-  getById(id: number): Observable<any> {
-    return this.http.get(`${ this.api }/invoices/${ id }`);
+  getById(id: number): Observable<Invoice> {
+    return this.http.get<Invoice>(`${ this.api }/invoices/${ id }`);
   }
 
 }

@@ -10,12 +10,23 @@
     </div>
   </div>
 
-  <app-invoice-filter
-    @fadeIn
-    *ngIf="users$ | async as users"
-    [users]="users"
-    (filtered)="handleFilter($event)">
-  </app-invoice-filter>
+  <ng-container *ngIf="role !== 'user'">
+    <app-invoice-filter
+      @fadeIn
+      *ngIf="users$ | async as users"
+      [users]="users"
+      (filtered)="handleFilter($event)">
+    </app-invoice-filter>
+  </ng-container>
+
+  <ng-container *ngIf="role === 'user'">
+    <app-invoice-filter
+      @fadeIn
+      [showUsers]="false"
+      (filtered)="handleFilter($event)">
+    </app-invoice-filter>
+  </ng-container>
+
 
   <div *ngIf="data$ | async as data; else loading">
 

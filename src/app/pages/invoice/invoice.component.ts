@@ -8,6 +8,7 @@ import { Invoice } from '@core/models/Invoice';
 import { InvoicePageService } from '@core/services/invoice-page.service';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
   selector: 'app-invoice',
@@ -20,6 +21,7 @@ export class InvoiceComponent implements OnInit {
   constructor(
     private invoiceService: InvoiceService,
     private usersService: UsersService,
+    private auth: AuthService,
     private router: Router,
     private invoicePageService: InvoicePageService
   ) { }
@@ -27,8 +29,13 @@ export class InvoiceComponent implements OnInit {
   data$ = this.invoiceService.all(1, 20);
   users$ = this.usersService.users$;
 
+  role = this.auth.role;
+
   ngOnInit(): void {
-    this.usersService.loadUsers();
+
+    if (this.role !== 'user') {
+      this.usersService.loadUsers();
+    }
   }
 
   handlePagination({ pageSize, pageIndex }: PageEvent): void {

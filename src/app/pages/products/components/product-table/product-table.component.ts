@@ -20,13 +20,12 @@ export class ProductTableComponent {
   displayedColumns: string[] = [
     'id',
     'name',
-    'description',
     'price',
-    'lowStock',
-    'optimalStock',
     'stock',
     'stock_type',
-    'barcode'
+    'barcode',
+    'lowStock',
+    'optimalStock',
   ];
 
 }

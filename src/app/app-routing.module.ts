@@ -13,14 +13,20 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '', component: EmptyLayoutComponent, canActivate: [ NonAuthGuard ], children: [
+    path: '',
+    component: EmptyLayoutComponent,
+    canActivate: [ NonAuthGuard ],
+    children: [
       {
-        path: 'auth', loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
+        path: 'auth', loadChildren: () => import('./pages/auth/auth.module')
+          .then(m => m.AuthModule)
       },
     ]
   },
   {
-    path: '', component: MainLayoutComponent, canActivate: [ AuthGuard ], children: [
+    path: '', component: MainLayoutComponent,
+    canActivate: [ AuthGuard ],
+    children: [
       {
         path: '',
         redirectTo: 'dashboard',
@@ -30,37 +36,49 @@ const routes: Routes = [
         path: 'products',
         canActivate: [ RoleGuard ],
         data: {},
-        loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule)
+        loadChildren: () => import('./pages/products/products.module')
+          .then(m => m.ProductsModule)
       },
       {
         path: 'manage-users',
         canActivate: [ RoleGuard ],
-        loadChildren: () => import('./pages/manage-users/manage-users.module').then(m => m.ManageUsersModule)
+        loadChildren: () => import('./pages/manage-users/manage-users.module')
+          .then(m => m.ManageUsersModule)
       },
       {
         path: 'profile',
-        loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule)
+        loadChildren: () => import('./pages/profile/profile.module')
+          .then(m => m.ProfileModule)
       },
       {
         path: 'settings',
-        loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule)
+        loadChildren: () => import('./pages/settings/settings.module')
+          .then(m => m.SettingsModule)
       },
       {
         path: 'shifts',
-        loadChildren: () => import('./pages/shifts/shifts.module').then(m => m.ShiftsModule)
+        loadChildren: () => import('./pages/shifts/shifts.module')
+          .then(m => m.ShiftsModule)
       },
       {
         path: 'categories',
-        loadChildren: () => import('./pages/categories/categories.module').then(m => m.CategoriesModule)
+        loadChildren: () => import('./pages/categories/categories.module')
+          .then(m => m.CategoriesModule)
       },
       {
         path: 'invoice',
-        loadChildren: () => import('./pages/invoice/invoice.module').then(m => m.InvoiceModule)
+        loadChildren: () => import('./pages/invoice/invoice.module')
+          .then(m => m.InvoiceModule)
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
-
+        loadChildren: () => import('./pages/dashboard/dashboard.module')
+          .then(m => m.DashboardModule)
+      },
+      {
+        path: 'supplies',
+        loadChildren: () => import('./pages/supplies/supplies.module')
+          .then(m => m.SuppliesModule)
       }
     ]
   },

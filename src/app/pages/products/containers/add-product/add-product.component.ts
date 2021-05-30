@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ProductService } from '@core/services/product.service';
-import { ProductDetails } from '@core/models/product.model';
+import { SaveProductPayload } from '@core/models/product.model';
+import { CategoryService } from '@core/services/category.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-product',
@@ -11,16 +12,19 @@ import { ProductDetails } from '@core/models/product.model';
 })
 export class AddProductComponent {
 
+  categories$ = this.categoryService.all();
+
   constructor(
-    private fb: FormBuilder,
     private router: Router,
     private productsService: ProductService,
-    private activatedRoute: ActivatedRoute,
-    private route: Router
+    private categoryService: CategoryService,
   ) {}
 
-  handleAdd(product: ProductDetails): void {
-    // this.productsService.addProduct()
+  handleAdd(product: SaveProductPayload): void {
+    this.productsService.createProduct(product).pipe(take(1))
+      .subscribe(res =>
+        this.router.navigate([ '/products/details', res.id ])
+      );
   }
 
 }

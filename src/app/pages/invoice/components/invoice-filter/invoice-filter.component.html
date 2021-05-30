@@ -2,7 +2,7 @@
   <mat-card class="filter-form">
     <mat-card-content>
       <div class="row">
-        <div class="col">
+        <div *ngIf="showUsers" class="col">
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>User</mat-label>
             <mat-select formControlName="user">

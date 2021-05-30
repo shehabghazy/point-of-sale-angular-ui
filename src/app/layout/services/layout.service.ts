@@ -23,6 +23,12 @@ export class LayoutService {
       roles: [ 'admin', 'manager' ]
     },
     {
+      label: 'Supplies',
+      path: 'supplies',
+      icon: 'inventory_2',
+      roles: [ 'admin', 'manager' ]
+    },
+    {
       label: 'Users',
       path: 'manage-users',
       icon: 'people',

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '@core/services/product.service';
 import { switchMap } from 'rxjs/operators';
+import { CategoryService } from '@core/services/category.service';
 
 @Component({
   selector: 'app-product-details',
@@ -15,9 +16,12 @@ export class ProductDetailsComponent {
     return this.productService.getById(params.get('id')!);
   }));
 
+  categories$ = this.categoryService.all();
+
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private categoryService: CategoryService,
   ) { }
 
 }

@@ -14,14 +14,14 @@ export interface InvoiceProduct {
 }
 
 export interface InvoicePageState {
-  invoiceId: number | null;
+  invoiceDetails: Invoice | null;
   activeCategoryId: number | null;
   invoiceProducts: InvoiceProduct[];
   loading: boolean;
 }
 
 export const initialState: InvoicePageState = {
-  invoiceId: null,
+  invoiceDetails: null,
   activeCategoryId: null,
   invoiceProducts: [],
   loading: false
@@ -41,7 +41,8 @@ export class InvoicePageService {
     @Inject(API_URL) private api: string,
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) {
+  }
 
   setActiveCategory(categoryId: number): void {
     if (this.state.activeCategoryId === categoryId) {
@@ -122,7 +123,7 @@ export class InvoicePageService {
   // will be used to populate the state when we need to update an invoice
   editInvoice(invoice: Invoice): void {
     this.invoiceState.next({
-      invoiceId: invoice.id,
+      invoiceDetails: invoice,
       loading: false,
       activeCategoryId: null,
       invoiceProducts: invoice.invoice_products.map(invoiceProduct => {
@@ -165,8 +166,18 @@ export class InvoicePageService {
       })
     };
 
-    const path = `${ this.api }/updateInvoice/${ this.state.invoiceId }`;
+    const path = `${ this.api }/updateInvoice/${ this.state.invoiceDetails?.id }`;
     this.http.post(path, payload).pipe(take(1))
+      .subscribe(value => {
+        this.invoiceState.next(initialState);
+        this.router.navigateByUrl('/invoice').then();
+        console.log(value);
+      });
+  }
+
+  payInvoice(): void {
+    const path = `${ this.api }/invoices/${ this.state.invoiceDetails?.id }`;
+    this.http.post(path, {}).pipe(take(1))
       .subscribe(value => {
         this.invoiceState.next(initialState);
         this.router.navigateByUrl('/invoice').then();

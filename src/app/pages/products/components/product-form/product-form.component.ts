@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '@core/services/product.service';
-import { Product, ProductDetails } from '@core/models/product.model';
+import { ProductDetails, SaveProductPayload } from '@core/models/product.model';
+import { Category } from '@core/models/Category';
 
 @Component({
   selector: 'app-product-form',
@@ -12,9 +11,12 @@ import { Product, ProductDetails } from '@core/models/product.model';
 export class ProductFormComponent implements OnInit {
 
   @Input() product?: ProductDetails;
+
+  @Input() categories: Category[] = [];
+
   @Input() readonly = false;
 
-  @Output() submitted = new EventEmitter<ProductDetails>();
+  @Output() submitted = new EventEmitter<SaveProductPayload>();
 
   form = this.fb.group({
     name: [ '', Validators.required ],
@@ -33,6 +35,7 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.product) {
       this.form.patchValue(this.product);
+      this.form.get('stock_type')?.patchValue(this.product.stock.type);
     }
     if (this.readonly) {
       this.form.disable();

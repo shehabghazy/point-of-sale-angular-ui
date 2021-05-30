@@ -11,8 +11,12 @@
     </div>
 
     <mat-card>
-      <mat-card-content>
-        <app-product-form [product]="product"></app-product-form>
+      <mat-card-content *ngIf="categories$ | async as categories">
+        <app-product-form
+          [categories]="categories"
+          [product]="product"
+          (submitted)="handleEdit(product.id, $event)">
+        </app-product-form>
       </mat-card-content>
     </mat-card>
 

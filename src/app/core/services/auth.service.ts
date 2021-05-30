@@ -40,6 +40,7 @@ export class AuthService {
   public auth$ = this.auth.asObservable().pipe(distinctUntilChanged());
 
   get state(): AuthState { return this.auth.getValue(); }
+  get role(): string | null { return this.state.role; }
 
   adminExists$ = this.http.get<{ exists: boolean }>(`${this.api}/adminExists`).pipe(
     shareReplay(1),
@@ -61,7 +62,7 @@ export class AuthService {
       tap(data => {
         this.auth.next(data);
         localStorage.setItem('auth', JSON.stringify(data));
-        this.router.navigateByUrl('/products').then();
+        this.router.navigateByUrl('/dashboard').then();
       })
     );
   }

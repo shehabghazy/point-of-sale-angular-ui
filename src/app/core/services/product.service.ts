@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Product, ProductDetails } from '../models/product.model';
+import { Product, ProductDetails, SaveProductPayload } from '../models/product.model';
 import { Pagination } from '../models/pagination.model';
 import { ProductsFilter } from '../models/products-filter.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -115,13 +115,13 @@ export class ProductService {
     return this.http.get<ProductsFilterRes>(`${ this.api }/products/filter`, { params });
   }
 
-  createProduct(value: any): Observable<Product> {
+  createProduct(payload: SaveProductPayload): Observable<Product> {
     const path = `${ this.api }/products`;
-    return this.http.post<Product>(path, value);
+    return this.http.post<Product>(path, payload);
   }
 
-  updateProduct(id: number, body: any): Observable<Product> {
+  updateProduct(id: number, payload: SaveProductPayload): Observable<Product> {
     const path = `${ this.api }/products/${ id }`;
-    return this.http.patch<Product>(path, body);
+    return this.http.patch<Product>(path, payload);
   }
 }
