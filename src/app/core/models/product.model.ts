@@ -1,5 +1,3 @@
-import { Validators } from '@angular/forms';
-
 export interface Product {
   id: number;
   description: string;

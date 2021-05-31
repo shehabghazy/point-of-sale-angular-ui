@@ -47,9 +47,9 @@ const routes: Routes = [
 
     // components
     ProductTableComponent,
-      ProductFilterFormComponent,
-      EditProductComponent,
-      ProductFormComponent
+    ProductFilterFormComponent,
+    EditProductComponent,
+    ProductFormComponent
   ],
   imports: [
     CommonModule,

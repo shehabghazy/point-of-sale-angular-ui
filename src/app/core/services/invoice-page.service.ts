@@ -185,4 +185,8 @@ export class InvoicePageService {
       });
   }
 
+  reset(): void {
+    this.invoiceState.next(initialState);
+  }
+
 }

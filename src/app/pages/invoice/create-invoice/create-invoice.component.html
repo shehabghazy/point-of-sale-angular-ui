@@ -10,7 +10,7 @@
     <div *ngIf="vm.invoiceDetails" class="col-12 my-2">
       <div class="invoice-details">
         <span>User: {{ vm.invoiceDetails.user.name }}</span>
-        <span>Paid: {{ vm.invoiceDetails.is_paid === 1 ? 'Yes': 'No' }}</span>
+        <span>Paid: {{ vm.invoiceDetails.is_paid === 1 ? 'Yes' : 'No' }}</span>
         <span>Time: {{ vm.invoiceDetails.created_at | date: 'medium': '+0000' }}</span>
         <span>Total: {{ vm.invoiceDetails.total }} Lekë</span>
       </div>
@@ -45,7 +45,8 @@
         <div *ngIf="products$ | async as productsState"
              class="row justify-content-start align-items-center">
           <div *ngFor="let product of productsState.data" class="col-12 col-md-6 mb-2 px-0">
-            <div @fadeIn class="product-item" (click)="addItem(product, vm.invoiceProducts)">
+            <div @fadeIn class="product-item" (click)="addItem(product, vm.invoiceProducts)"
+                 [class.empty]="(product | currentStockQuantity: vm.invoiceProducts) === 0">
               <b>{{ product.name }}</b>
               <div class="details">
                     <span>

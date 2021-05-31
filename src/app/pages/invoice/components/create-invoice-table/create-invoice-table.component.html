@@ -9,7 +9,7 @@
 
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> Price</th>
-      <td mat-cell *matCellDef="let element"> {{element.product.price}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.product.price}} Lekë</td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 
@@ -30,7 +30,7 @@
 
     <ng-container matColumnDef="total">
       <th mat-header-cell *matHeaderCellDef> Total</th>
-      <td mat-cell *matCellDef="let element"> {{element.count * element.product.price}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.count * element.product.price}} Lekë</td>
       <td mat-footer-cell *matFooterCellDef> {{allTotal()}} Lekë</td>
     </ng-container>
 

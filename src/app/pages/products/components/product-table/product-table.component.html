@@ -13,7 +13,7 @@
 
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> Price</th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} Lekë </td>
+      <td mat-cell *matCellDef="let element"> {{element.price}} Lekë</td>
     </ng-container>
 
     <ng-container matColumnDef="lowStock">
@@ -45,12 +45,25 @@
       <td mat-cell *matCellDef="let element"> {{element.barcode}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button type="button" color="primary"
+                [routerLink]="['/products/details', element.id]">
+          <mat-icon>info</mat-icon>
+        </button>
+        <button mat-button type="button" [routerLink]="['/supplies/add', element.id]">
+          <mat-icon class="mr-2">add_shopping_cart</mat-icon>
+          <span>Supply</span>
+        </button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr class="element-row" [routerLink]="['/products/details', row.id]"
-        mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="element-row" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
-<!--  Pyet Enean per length dhe hiqe nga statike-->
+  <!--  Pyet Enean per length dhe hiqe nga statike-->
   <mat-paginator
     showFirstLastButtons
     [length]="pagination.total"

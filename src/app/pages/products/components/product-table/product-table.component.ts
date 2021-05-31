@@ -26,6 +26,7 @@ export class ProductTableComponent {
     'barcode',
     'lowStock',
     'optimalStock',
+    'actions',
   ];
 
 }

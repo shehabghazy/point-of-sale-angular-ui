@@ -55,4 +55,8 @@ export class InvoiceComponent implements OnInit {
     );
   }
 
+  resetInvoice(): void {
+    this.invoicePageService.reset();
+  }
+
 }

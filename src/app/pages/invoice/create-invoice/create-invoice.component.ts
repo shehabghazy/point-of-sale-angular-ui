@@ -36,13 +36,15 @@ export class CreateInvoiceComponent {
   }
 
   addItem(product: ProductDetails, invoiceProducts: InvoiceProduct[]): void {
-    const existingProduct = invoiceProducts.find(x => x.product.id === product.id);
-    if (existingProduct) {
-      if (existingProduct.product.stock.quantity <= existingProduct.count) {
+    const item = invoiceProducts.find(x => x.product.id === product.id);
+    if (item) {
+      if (item.product.stock.quantity <= item.count) {
         return;
       }
     }
-    this.invoicePageService.addInvoiceProduct(product);
+    if (product.stock.quantity > 0) {
+      this.invoicePageService.addInvoiceProduct(product);
+    }
   }
 
   removeItem(productId: number): void {
@@ -59,14 +61,17 @@ export class CreateInvoiceComponent {
 
   createInvoice(): void {
     this.invoicePageService.createInvoice();
+    this.invoicePageService.reset();
   }
 
   updateInvoice(): void {
     this.invoicePageService.updateInvoice();
+    this.invoicePageService.reset();
   }
 
   pay(): void {
     // this.invoicePageService.pay();
+
   }
 
 }

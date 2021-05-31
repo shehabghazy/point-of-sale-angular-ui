@@ -30,8 +30,9 @@
     <ng-container matColumnDef="button">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button type="button" [routerLink]="['/products/details', element.id]">
-          <mat-icon>arrow_forward</mat-icon>
+        <button mat-button type="button" [routerLink]="['/supplies/add', element.id]">
+          <mat-icon class="mr-2">arrow_forward</mat-icon>
+          <span>Supply</span>
         </button>
       </td>
     </ng-container>

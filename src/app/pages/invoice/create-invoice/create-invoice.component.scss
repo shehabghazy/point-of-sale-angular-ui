@@ -37,6 +37,10 @@
     flex-direction: column;
     cursor: pointer;
 
+    &.empty {
+      background: rgb(255 118 0 / 49%);
+    }
+
     .details {
       width: 100%;
       font-size: 12px;

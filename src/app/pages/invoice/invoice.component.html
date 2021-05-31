@@ -3,7 +3,8 @@
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="d-flex align-items-center">
       <h1 class="m-0">Invoices</h1>
-      <button class="mx-3" routerLink="/invoice/create" mat-button color="primary">
+      <button class="mx-3" routerLink="/invoice/create"
+              (click)="resetInvoice()" mat-button color="primary">
         <mat-icon class="mr-2">add</mat-icon>
         <span>Create invoice</span>
       </button>
@@ -42,7 +43,6 @@
     <div *ngIf="data.data.length === 0" @fadeIn class="no-data">
       No data found!
     </div>
-
 
   </div>
 
