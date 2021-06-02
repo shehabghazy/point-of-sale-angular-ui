@@ -89,13 +89,20 @@
           <mat-icon class="mr-2">money</mat-icon>
           <span>Pay now</span>
         </button>
-        <button *ngIf="vm.invoiceDetails === null"
-                mat-flat-button color="primary">
+        <button *ngIf="vm.invoiceDetails !== null"
+                mat-flat-button color="primary" (click)="printInvoice()">
           <mat-icon class="mr-2">print</mat-icon>
           <span>Print invoice</span>
         </button>
       </div>
     </div>
   </div>
-
 </div>
+
+<div *ngIf="vm$ | async as vm" class="invoice-format">
+  <div *ngIf="vm.invoiceDetails !== null" class="invoice-format">
+    <app-invoice-format [invoiceDetails]="vm.invoiceDetails" class="invoice-format"></app-invoice-format>
+  </div>
+</div>
+
+

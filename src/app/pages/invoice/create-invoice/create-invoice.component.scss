@@ -65,6 +65,10 @@ tr {
   }
 }
 
+.invoice-format{
+  display: none;
+}
+
 
 .invoice-details {
   display: flex;
@@ -81,5 +85,14 @@ tr {
     &:hover {
       background: rgba(146, 146, 146, 0.75);
     }
+  }
+}
+
+@media print {
+ :not(.invoice-format) {
+   display: none;
+ }
+  .invoice-format{
+    display: block;
   }
 }
