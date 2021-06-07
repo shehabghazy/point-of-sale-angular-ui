@@ -22,6 +22,10 @@ export class ProfileComponent {
 
   hasPhotoUploaded = false;
 
+  uploadForm: FormGroup = this.fb.group({
+    profile: ['']
+  });
+
   changePasswordForm = this.fb.group({
     oldPassword: [ '', Validators.required ],
     newPassword: [ '', Validators.required ],
@@ -78,8 +82,7 @@ export class ProfileComponent {
     console.log(event)
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      this.uploadForm?.get('profile')?.setValue(event.target.files[0]);
 
       reader.onload = (e) => { // called once readAsDataURL is completed
         this.url = e?.target?.result;
@@ -90,11 +93,14 @@ export class ProfileComponent {
   }
   delete(): void {
     this.url = null;
+    this.uploadForm.get('profile')?.patchValue(null);
     this.hasPhotoUploaded = false;
   }
 
   save(): void {
     console.log(this.url);
+    const formData = new FormData();
+    formData.append('file', this.uploadForm?.get('profile')?.value);
     this.hasPhotoUploaded = false;
   }
 
