@@ -15,8 +15,12 @@ export class ProfileComponent {
 
   user$ = this.auth.profile$;
 
+  url: string | ArrayBuffer | null | undefined = '';
+
   editName = false;
   changePassword = false;
+
+  hasPhotoUploaded = false;
 
   changePasswordForm = this.fb.group({
     oldPassword: [ '', Validators.required ],
@@ -68,6 +72,30 @@ export class ProfileComponent {
       verticalPosition: 'top',
       panelClass
     });
+  }
+
+  onSelectFile(event: any): void {
+    console.log(event)
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (e) => { // called once readAsDataURL is completed
+        this.url = e?.target?.result;
+        this.hasPhotoUploaded = true;
+        console.log(this.url);
+      };
+    }
+  }
+  delete(): void {
+    this.url = null;
+    this.hasPhotoUploaded = false;
+  }
+
+  save(): void {
+    console.log(this.url);
+    this.hasPhotoUploaded = false;
   }
 
 }

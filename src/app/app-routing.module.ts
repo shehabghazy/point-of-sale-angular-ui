@@ -7,16 +7,17 @@ import { NonAuthGuard } from '@core/guards/non-auth.guard';
 import { RoleGuard } from '@core/guards/role.guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'auth',
-    pathMatch: 'full'
-  },
+
   {
     path: '',
     component: EmptyLayoutComponent,
     canActivate: [ NonAuthGuard ],
     children: [
+      {
+        path: '',
+        redirectTo: 'auth',
+        pathMatch: 'full'
+      },
       {
         path: 'auth', loadChildren: () => import('./pages/auth/auth.module')
           .then(m => m.AuthModule)
