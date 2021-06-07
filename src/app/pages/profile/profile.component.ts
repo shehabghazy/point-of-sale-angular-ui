@@ -79,11 +79,13 @@ export class ProfileComponent {
   }
 
   onSelectFile(event: any): void {
-    console.log(event)
+    console.log(event);
+    console.log(this.url);
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       this.uploadForm?.get('profile')?.setValue(event.target.files[0]);
 
+      reader.readAsDataURL(event.target.files[0]);
       reader.onload = (e) => { // called once readAsDataURL is completed
         this.url = e?.target?.result;
         this.hasPhotoUploaded = true;
