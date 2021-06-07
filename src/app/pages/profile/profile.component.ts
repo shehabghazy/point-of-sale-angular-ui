@@ -101,6 +101,7 @@ export class ProfileComponent {
     console.log(this.url);
     const formData = new FormData();
     formData.append('file', this.uploadForm?.get('profile')?.value);
+    this.auth.changeProfilePhoto(formData).subscribe(res => console.log(res));
     this.hasPhotoUploaded = false;
   }
 
