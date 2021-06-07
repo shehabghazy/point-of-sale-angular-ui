@@ -39,13 +39,13 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .alert-snackbar {
-  color: #fff;
-  background-color: #F44336;
+  color: #fff !important;
+  background-color: #F44336 !important;
 }
 
 .success-snackbar {
-  color: #fff;
-  background-color: #00c853;
+  color: #fff !important;
+  background-color: #00c853 !important;
 }
 
 .center {

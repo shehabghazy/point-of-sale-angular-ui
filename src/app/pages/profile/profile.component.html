@@ -5,7 +5,7 @@
       <div class="avatar">
         <label class="hoverable" for="fileInput">
           <div class="image-container">
-        <img [src]="url ? url :'assets/user.png'" height="120">
+        <img [src]="imageSource(user!.photo)" height="120">
             <p class="middle">Change profile photo</p>
           </div>
         <input accept="image/png, image/gif, image/jpeg" id="fileInput" type='file' (change)="onSelectFile($event)">

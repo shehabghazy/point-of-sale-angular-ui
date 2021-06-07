@@ -4,6 +4,7 @@ export interface User {
   email: string;
   role: string;
   userId: number;
+  photo: string | null;
 
   user_shift: {
     id: number;

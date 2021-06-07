@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { fadeIn } from '@app/animations/fadeIn.animation';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { API_URL } from '@core/api.token';
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +24,7 @@ export class ProfileComponent {
   hasPhotoUploaded = false;
 
   uploadForm: FormGroup = this.fb.group({
-    profile: ['']
+    profile: [ '' ]
   });
 
   changePasswordForm = this.fb.group({
@@ -34,6 +35,7 @@ export class ProfileComponent {
 
   constructor(private auth: AuthService, private fb: FormBuilder,
               private snackBar: MatSnackBar,
+              @Inject(API_URL) private api: string,
   ) {
   }
 
@@ -69,14 +71,7 @@ export class ProfileComponent {
     return password === confirmPassword ? null : { notSame: true };
   }
 
-  openSnackBar(message: string, panelClass: string): void {
-    this.snackBar.open(message, '', {
-      duration: 3000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      panelClass
-    });
-  }
+
 
   onSelectFile(event: any): void {
     console.log(event);
@@ -93,6 +88,7 @@ export class ProfileComponent {
       };
     }
   }
+
   delete(): void {
     this.url = null;
     this.uploadForm.get('profile')?.patchValue(null);
@@ -102,9 +98,34 @@ export class ProfileComponent {
   save(): void {
     console.log(this.url);
     const formData = new FormData();
-    formData.append('file', this.uploadForm?.get('profile')?.value);
-    this.auth.changeProfilePhoto(formData).subscribe(res => console.log(res));
-    this.hasPhotoUploaded = false;
+    formData.append('photo', this.uploadForm?.get('profile')?.value);
+    this.auth.changeProfilePhoto(formData).subscribe(res => {
+      if (res) {
+        this.openSnackBar('Photo Changed Successfully', 'success-snackbar');
+        this.hasPhotoUploaded = false;
+      }
+    }, error => {
+      this.openSnackBar(error.message, 'alert-snackbar');
+    });
+  }
+
+  imageSource(image: string | null): string | ArrayBuffer{
+    if (this.url) {
+      return this.url;
+    } else if (image) {
+      return this.api.substring(0, this.api.length - 3) + image;
+    } else {
+      return 'assets/user.png';
+    }
+  }
+
+  openSnackBar(message: string, panelClass: string): void {
+    this.snackBar.open(message, '', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass
+    });
   }
 
 }
