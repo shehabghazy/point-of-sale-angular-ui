@@ -13,7 +13,7 @@ export class ProductTableComponent {
 
   @Input() dataSource: Product[] = [];
 
-  @Input() pagination: Pagination = { pageIndex: 0, pageSize: 10, total: 0 };
+  @Input() pagination: Pagination = { pageIndex: 0, pageSize: 20, total: 0 };
 
   @Output() paginated = new EventEmitter<PageEvent>();
 

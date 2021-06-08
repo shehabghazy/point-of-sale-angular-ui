@@ -76,17 +76,19 @@
         <button *ngIf="vm.invoiceDetails === null"
                 mat-flat-button color="primary"
                 (click)="createInvoice()">
-          <mat-icon class="mr-2">plus</mat-icon>
+          <mat-icon class="mr-2">shopping_cart</mat-icon>
           <span>Create invoice</span>
         </button>
-        <button *ngIf="vm.invoiceDetails !== null"
+        <button *ngIf="vm.invoiceDetails !== null && vm.invoiceDetails?.is_paid === 0"
                 mat-flat-button color="primary"
                 (click)="updateInvoice()">
-          Update invoice
+          <mat-icon class="mr-2">edit</mat-icon>
+          <span>Update invoice</span>
         </button>
-        <button *ngIf="vm.invoiceDetails === null"
-                mat-flat-button color="primary">
-          <mat-icon class="mr-2">money</mat-icon>
+        <button *ngIf="vm.invoiceDetails?.is_paid === 0"
+                mat-flat-button color="accent"
+                (click)="payInvoice()">
+          <mat-icon class="mr-2">point_of_sale</mat-icon>
           <span>Pay now</span>
         </button>
         <button *ngIf="vm.invoiceDetails !== null"

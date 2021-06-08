@@ -69,7 +69,7 @@
     [length]="pagination.total"
     [pageIndex]="pagination.pageIndex - 1"
     [pageSize]="pagination.pageSize"
-    [pageSizeOptions]="[2, 5, 10]"
+    [pageSizeOptions]="[20, 50, 100]"
     (page)="paginated.emit($event)">
   </mat-paginator>
 </div>

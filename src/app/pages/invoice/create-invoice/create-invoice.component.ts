@@ -70,9 +70,8 @@ export class CreateInvoiceComponent {
     this.invoicePageService.reset();
   }
 
-  pay(): void {
-    // this.invoicePageService.pay();
-
+  payInvoice(): void {
+    this.invoicePageService.payInvoice();
   }
 
   printInvoice(): void {

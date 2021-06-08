@@ -176,7 +176,7 @@ export class InvoicePageService {
   }
 
   payInvoice(): void {
-    const path = `${ this.api }/invoices/${ this.state.invoiceDetails?.id }`;
+    const path = `${ this.api }/invoices/${ this.state.invoiceDetails?.id }/pay`;
     this.http.post(path, {}).pipe(take(1))
       .subscribe(value => {
         this.invoiceState.next(initialState);
