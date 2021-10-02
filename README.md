@@ -37,4 +37,4 @@ Navigate to `http://localhost:4200/`.
 The app will automatically reload if you change any of the source files.
 
 ## Backend Repo
-Find the backend code here: [Point of sale Laravel API](https://github.com/eneajaho/point-of-sale-laravel-api).
+Find the backend code here: [Point of sale Laravel API](https://github.com/eneajaho/point-of-sale-laravel).
