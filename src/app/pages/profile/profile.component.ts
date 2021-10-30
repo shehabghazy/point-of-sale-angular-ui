@@ -63,9 +63,9 @@ export class ProfileComponent {
   }
 
   checkPasswords(group: FormGroup): null | { notSame: boolean } {
-    // tslint:disable-next-line:no-non-null-assertion
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const password = group.get('newPassword')!.value;
-    // tslint:disable-next-line:no-non-null-assertion
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const confirmPassword = group.get('confirmPassword')!.value;
 
     return password === confirmPassword ? null : { notSame: true };

@@ -48,11 +48,12 @@ export class AuthService {
     return this.state.role;
   }
 
-  adminExists$ = this.http.get<{ exists: boolean }>(`${ this.api }/adminExists`).pipe(
+  adminExists$ = this.http.get<{ exists: boolean }>(`${this.api}/adminExists`).pipe(
+    map(res => res.exists),
     shareReplay(1),
   );
 
-  profile$ = this.http.get<User>(`${ this.api }/auth/user`);
+  profile$ = this.http.get<User>(`${this.api}/auth/user`);
 
   public getLocalState(): AuthState {
     const localState = localStorage.getItem('auth');
@@ -63,7 +64,7 @@ export class AuthService {
   }
 
   login(credentials: Credentials): Observable<LoginResponse> {
-    const path = `${ this.api }/login`;
+    const path = `${this.api}/login`;
     return this.http.post<LoginResponse>(path, credentials).pipe(
       tap(data => {
         this.auth.next(data);
@@ -74,18 +75,18 @@ export class AuthService {
   }
 
   createAdmin(payload: CreateAdminPayload): Observable<{ message: string }> {
-    const path = `${ this.api }/createAdmin`;
+    const path = `${this.api}/createAdmin`;
     return this.http.post<{ message: string }>(path, payload);
   }
 
   changeName(name: string): Observable<User> {
-    return this.http.post<User>(`${ this.api }/auth/changeName`, { name }).pipe(
+    return this.http.post<User>(`${this.api}/auth/changeName`, { name }).pipe(
       tap(_ => this.auth.next({ ...this.auth.getValue(), name }))
     );
   }
 
   changePassword(payload: any): Observable<User> {
-    return this.http.post<User>(`${ this.api }/auth/changePassword`, payload);
+    return this.http.post<User>(`${this.api}/auth/changePassword`, payload);
   }
 
   logout(): void {
@@ -95,6 +96,6 @@ export class AuthService {
   }
 
   changeProfilePhoto(photo: any): Observable<any> {
-    return this.http.post(`${ this.api }/users/${ this.state.userId }/setPhoto`, photo);
+    return this.http.post(`${this.api}/users/${this.state.userId}/setPhoto`, photo);
   }
 }

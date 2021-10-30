@@ -12,7 +12,7 @@ import { CategoryService } from '@core/services/category.service';
 export class ProductDetailsComponent {
 
   product$ = this.route.paramMap.pipe(switchMap(params => {
-    // tslint:disable-next-line:no-non-null-assertion
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return this.productService.getById(params.get('id')!);
   }));
 

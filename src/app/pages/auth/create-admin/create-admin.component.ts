@@ -32,14 +32,13 @@ export class CreateAdminComponent implements OnInit {
   ngOnInit(): void {
     this.auth.adminExists$.pipe(
       take(1),
-    ).subscribe(({ exists }) => {
-        if (exists) {
-          this.router.navigateByUrl('/auth/login');
-        } else {
-          this.showForm = true;
-        }
+    ).subscribe((exists) => {
+      if (exists) {
+        this.router.navigateByUrl('/auth/login');
+      } else {
+        this.showForm = true;
       }
-    );
+    });
   }
 
   submit(): void {

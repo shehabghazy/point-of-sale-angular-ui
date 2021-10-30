@@ -2,7 +2,7 @@ import { Directive, Input, NgModule, TemplateRef, ViewContainerRef } from '@angu
 import { AuthService } from '../services/auth.service';
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[canView]'
 })
 export class HideForDirective {

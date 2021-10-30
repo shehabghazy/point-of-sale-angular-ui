@@ -11,7 +11,7 @@ export class AdminExistsGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.auth.adminExists$.pipe(
-      map(({ exists }) => {
+      map((exists) => {
         if (!exists) {
           this.router.navigateByUrl('/auth/createAdmin');
         }
