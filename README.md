@@ -38,3 +38,21 @@ The app will automatically reload if you change any of the source files.
 
 ## Backend Repo
 Find the backend code here: [Point of sale Laravel API](https://github.com/eneajaho/point-of-sale-laravel).
+
+## Screenshots
+![Screenshot4](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(4).jpeg)
+![Screenshot7](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(7).jpeg)
+![Screenshot1](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(1).jpeg)
+![Screenshot5](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(5).jpeg)
+![Screenshot15](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(15).jpeg)
+![Screenshot6](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(6).jpeg)
+![Screenshot8](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(8).jpeg)
+![Screenshot16](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(16).jpeg)
+![Screenshot9](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(9).jpeg)
+![Screenshot2](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(2).jpeg)
+![Screenshot10](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(10).jpeg)
+![Screenshot11](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(11).jpeg)
+![Screenshot12](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(12).jpeg)
+![Screenshot14](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(14).jpeg)
+![Screenshot13](https://raw.githubusercontent.com/eneajaho/point-of-sale-angular/master/screenshots/screenshot%20(13).jpeg)
+
