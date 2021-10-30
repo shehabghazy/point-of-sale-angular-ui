@@ -14,16 +14,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 
-const routes: Routes = [
-  { path: '', component: ShiftsComponent }
-];
+const routes: Routes = [{ path: '', component: ShiftsComponent }];
 
 @NgModule({
-  declarations: [
-    ShiftsComponent,
-    ShiftsTableComponent,
-    ShiftsFormComponent
-  ],
+  declarations: [ShiftsComponent, ShiftsTableComponent, ShiftsFormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -34,9 +28,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
-  exports: [ RouterModule ]
+  exports: [RouterModule],
 })
-export class ShiftsModule {
-}
+export class ShiftsModule {}

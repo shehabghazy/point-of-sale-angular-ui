@@ -10,29 +10,29 @@ import { CategoryFormComponent } from '@app/pages/categories/category-form/categ
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  animations: [ fadeIn ]
+  animations: [fadeIn],
 })
 export class CategoriesComponent {
-
   categories$: Observable<Category[]> = this.categories.all();
 
-  constructor(private categories: CategoryService, public dialog: MatDialog) { }
+  constructor(private categories: CategoryService, public dialog: MatDialog) {}
 
   addCategory(): void {
     const dialogRef = this.dialog.open(CategoryFormComponent, {
       data: {
         type: 'add',
-        shift: null
-      }
+        shift: null,
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === '') {
         return;
       }
-      this.categories.create(result).pipe(take(1)).subscribe(
-        _ => this.refresh()
-      );
+      this.categories
+        .create(result)
+        .pipe(take(1))
+        .subscribe(_ => this.refresh());
     });
   }
 
@@ -40,22 +40,22 @@ export class CategoriesComponent {
     const dialogRef = this.dialog.open(CategoryFormComponent, {
       data: {
         type: 'edit',
-        category
-      }
+        category,
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === '') {
         return;
       }
-      this.categories.update(category.id, result).pipe(take(1)).subscribe(
-        _ => this.refresh()
-      );
+      this.categories
+        .update(category.id, result)
+        .pipe(take(1))
+        .subscribe(_ => this.refresh());
     });
   }
 
   refresh(): void {
     this.categories$ = this.categories.all();
   }
-
 }

@@ -1,14 +1,19 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { InvoiceProduct } from '@core/services/invoice-page.service';
 
 @Component({
   selector: 'app-create-invoice-table',
   templateUrl: './create-invoice-table.component.html',
   styleUrls: ['./create-invoice-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateInvoiceTableComponent {
-
   @Input() invoiceProducts: InvoiceProduct[] = [];
 
   @Output() removed = new EventEmitter<number>();
@@ -27,5 +32,4 @@ export class CreateInvoiceTableComponent {
 
     return total;
   }
-
 }

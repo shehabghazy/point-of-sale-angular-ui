@@ -5,12 +5,10 @@ import { API_URL } from '@core/api.token';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DashboardService {
-
   data$ = this.http.get<DashboardResponse>(`${this.api}/dashboard/stats`);
 
-  constructor(@Inject(API_URL) private api: string, private http: HttpClient) { }
-
+  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {}
 }

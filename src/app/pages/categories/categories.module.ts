@@ -14,16 +14,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-const routes: Routes = [
-  { path: '', component: CategoriesComponent }
-];
-
+const routes: Routes = [{ path: '', component: CategoriesComponent }];
 
 @NgModule({
   declarations: [
     CategoriesComponent,
     CategoryFormComponent,
-    CategoryTableComponent
+    CategoryTableComponent,
   ],
   imports: [
     CommonModule,
@@ -35,8 +32,8 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
-  exports: [ RouterModule ]
+  exports: [RouterModule],
 })
 export class CategoriesModule {}

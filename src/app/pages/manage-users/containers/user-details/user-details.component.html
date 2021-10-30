@@ -2,13 +2,16 @@
   <div class="row justify-content-center">
     <div *ngIf="user$ | async as user; else loading" class="col-12 col-md-6">
       <div class="d-flex align-items-center justify-content-between mb-3">
-       <div class="d-flex align-items-center">
-         <button routerLink="/manage-users" class="mr-2" mat-icon-button>
-           <mat-icon>arrow_back</mat-icon>
-         </button>
-         <h1 class="mb-0">User details</h1>
-       </div>
-        <button [routerLink]="['/manage-users/edit', user.id]"  mat-button color="primary">
+        <div class="d-flex align-items-center">
+          <button routerLink="/manage-users" class="mr-2" mat-icon-button>
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <h1 class="mb-0">User details</h1>
+        </div>
+        <button
+          [routerLink]="['/manage-users/edit', user.id]"
+          mat-button
+          color="primary">
           <mat-icon class="mr-2">manage_accounts</mat-icon>
           <span>Edit user</span>
         </button>
@@ -19,14 +22,11 @@
           <app-user-form [user]="user" [readonly]="true"></app-user-form>
         </mat-card-content>
       </mat-card>
-
     </div>
     <ng-template #loading>
       <div class="flex-center">
         <mat-spinner></mat-spinner>
       </div>
     </ng-template>
-
   </div>
-
 </div>

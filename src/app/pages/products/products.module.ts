@@ -22,20 +22,20 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 const routes: Routes = [
   {
     path: '',
-    component: ProductsComponent
+    component: ProductsComponent,
   },
   {
     path: 'details/:id',
-    component: ProductDetailsComponent
+    component: ProductDetailsComponent,
   },
   {
     path: 'add',
-    component: AddProductComponent
+    component: AddProductComponent,
   },
   {
     path: 'edit/:id',
-    component: EditProductComponent
-  }
+    component: EditProductComponent,
+  },
 ];
 
 @NgModule({
@@ -49,7 +49,7 @@ const routes: Routes = [
     ProductTableComponent,
     ProductFilterFormComponent,
     EditProductComponent,
-    ProductFormComponent
+    ProductFormComponent,
   ],
   imports: [
     CommonModule,
@@ -64,7 +64,6 @@ const routes: Routes = [
     MatSelectModule,
     MatIconModule,
     MatProgressSpinnerModule,
-  ]
+  ],
 })
-export class ProductsModule {
-}
+export class ProductsModule {}

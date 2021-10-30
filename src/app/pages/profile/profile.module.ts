@@ -10,15 +10,10 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-
-const routes: Routes = [
-  { path: '', component: ProfileComponent }
-];
+const routes: Routes = [{ path: '', component: ProfileComponent }];
 
 @NgModule({
-  declarations: [
-    ProfileComponent
-  ],
+  declarations: [ProfileComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -29,8 +24,7 @@ const routes: Routes = [
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
-  ]
+    MatProgressSpinnerModule,
+  ],
 })
-export class ProfileModule {
-}
+export class ProfileModule {}

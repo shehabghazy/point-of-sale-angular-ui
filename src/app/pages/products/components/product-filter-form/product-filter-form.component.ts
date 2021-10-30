@@ -1,21 +1,20 @@
-import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
-import {Product} from '@core/models/product.model';
-import {ProductsFilter} from '@core/models/products-filter.model';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Product } from '@core/models/product.model';
+import { ProductsFilter } from '@core/models/products-filter.model';
 import { Category } from '@core/models/Category';
 
 @Component({
   selector: 'app-product-filter-form',
   templateUrl: './product-filter-form.component.html',
-  styleUrls: ['./product-filter-form.component.scss']
+  styleUrls: ['./product-filter-form.component.scss'],
 })
 export class ProductFilterFormComponent implements OnInit {
-
   form = this.fb.group({
     name: '',
     barcode: '',
     hasLowStock: '',
-    categoryId: ''
+    categoryId: '',
   });
 
   @Input() filters: ProductsFilter | null = null;
@@ -24,8 +23,7 @@ export class ProductFilterFormComponent implements OnInit {
 
   @Output() filtered = new EventEmitter<Product>();
 
-  constructor(private fb: FormBuilder) {
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.filters) {

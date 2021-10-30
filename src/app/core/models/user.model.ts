@@ -12,7 +12,7 @@ export interface User {
     shift_id: number;
     shift: {
       id: number;
-      name: string
+      name: string;
     };
   } | null;
 }

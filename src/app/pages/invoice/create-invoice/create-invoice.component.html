@@ -1,5 +1,4 @@
 <div class="container-fluid">
-
   <div class="row" *ngIf="vm$ | async as vm">
     <div *ngIf="vm.loading" class="col-12">
       <div class="flex-center">
@@ -11,18 +10,27 @@
       <div class="invoice-details">
         <span>User: {{ vm.invoiceDetails.user.name }}</span>
         <span>Paid: {{ vm.invoiceDetails.is_paid === 1 ? 'Yes' : 'No' }}</span>
-        <span>Time: {{ vm.invoiceDetails.created_at | date: 'medium': '+0000' }}</span>
+        <span
+          >Time:
+          {{ vm.invoiceDetails.created_at | date: 'medium':'+0000' }}</span
+        >
         <span>Total: {{ vm.invoiceDetails.total }} Lekë</span>
       </div>
     </div>
 
     <div *ngIf="!vm.loading" class="col-12 col-md-2">
       <h2>Categories</h2>
-      <div class="categories-container" *ngIf="categories$ | async as categories;else loading">
-        <button *ngFor="let category of categories" class="category-item"
-                (click)="setActiveCategory(category.id)"
-                [class.active]="vm.activeCategoryId === category.id"
-                mat-button type="button" [style.color]="category.color">
+      <div
+        class="categories-container"
+        *ngIf="categories$ | async as categories; else loading">
+        <button
+          *ngFor="let category of categories"
+          class="category-item"
+          (click)="setActiveCategory(category.id)"
+          [class.active]="vm.activeCategoryId === category.id"
+          mat-button
+          type="button"
+          [style.color]="category.color">
           <mat-icon class="mr-2">{{ category.icon }}</mat-icon>
           <span>{{ category.name }}</span>
         </button>
@@ -32,34 +40,40 @@
           <mat-spinner></mat-spinner>
         </div>
       </ng-template>
-
     </div>
     <div *ngIf="!vm.loading" class="col-12 col-md-4">
       <h2>Products</h2>
-      <mat-form-field appearance="outline" style="width: 250px;">
+      <mat-form-field appearance="outline" style="width: 250px">
         <mat-label>Search products</mat-label>
-        <input (change)="handleProductSearch($event)" type="text" matInput>
+        <input (change)="handleProductSearch($event)" type="text" matInput />
       </mat-form-field>
 
       <div class="products-container container-fluid">
-        <div *ngIf="products$ | async as productsState"
-             class="row justify-content-start align-items-center">
-          <div *ngFor="let product of productsState.data" class="col-12 col-md-6 mb-2 px-0">
-            <div @fadeIn class="product-item" (click)="addItem(product, vm.invoiceProducts)"
-                 [class.empty]="(product | currentStockQuantity: vm.invoiceProducts) === 0">
+        <div
+          *ngIf="products$ | async as productsState"
+          class="row justify-content-start align-items-center">
+          <div
+            *ngFor="let product of productsState.data"
+            class="col-12 col-md-6 mb-2 px-0">
+            <div
+              @fadeIn
+              class="product-item"
+              (click)="addItem(product, vm.invoiceProducts)"
+              [class.empty]="
+                (product | currentStockQuantity: vm.invoiceProducts) === 0
+              ">
               <b>{{ product.name }}</b>
               <div class="details">
-                    <span>
-                      {{ product | currentStockQuantity: vm.invoiceProducts }}
-                      {{ product.stock.type }}
-                    </span>
+                <span>
+                  {{ product | currentStockQuantity: vm.invoiceProducts }}
+                  {{ product.stock.type }}
+                </span>
                 <span>{{ product.price }} Lek</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
     <div *ngIf="!vm.loading" class="col-12 col-md-6">
       <h2>Invoice</h2>
@@ -71,28 +85,39 @@
         (decrease)="decreaseItemQuantity($event)">
       </app-create-invoice-table>
 
-      <br>
-      <div *ngIf="vm.invoiceProducts.length > 0" class="d-flex justify-content-between">
-        <button *ngIf="vm.invoiceDetails === null"
-                mat-flat-button color="primary"
-                (click)="createInvoice()">
+      <br />
+      <div
+        *ngIf="vm.invoiceProducts.length > 0"
+        class="d-flex justify-content-between">
+        <button
+          *ngIf="vm.invoiceDetails === null"
+          mat-flat-button
+          color="primary"
+          (click)="createInvoice()">
           <mat-icon class="mr-2">shopping_cart</mat-icon>
           <span>Create invoice</span>
         </button>
-        <button *ngIf="vm.invoiceDetails !== null && vm.invoiceDetails?.is_paid === 0"
-                mat-flat-button color="primary"
-                (click)="updateInvoice()">
+        <button
+          *ngIf="vm.invoiceDetails !== null && vm.invoiceDetails?.is_paid === 0"
+          mat-flat-button
+          color="primary"
+          (click)="updateInvoice()">
           <mat-icon class="mr-2">edit</mat-icon>
           <span>Update invoice</span>
         </button>
-        <button *ngIf="vm.invoiceDetails?.is_paid === 0"
-                mat-flat-button color="accent"
-                (click)="payInvoice()">
+        <button
+          *ngIf="vm.invoiceDetails?.is_paid === 0"
+          mat-flat-button
+          color="accent"
+          (click)="payInvoice()">
           <mat-icon class="mr-2">point_of_sale</mat-icon>
           <span>Pay now</span>
         </button>
-        <button *ngIf="vm.invoiceDetails !== null"
-                mat-flat-button color="primary" (click)="printInvoice()">
+        <button
+          *ngIf="vm.invoiceDetails !== null"
+          mat-flat-button
+          color="primary"
+          (click)="printInvoice()">
           <mat-icon class="mr-2">print</mat-icon>
           <span>Print invoice</span>
         </button>
@@ -103,8 +128,8 @@
 
 <div *ngIf="vm$ | async as vm" class="invoice-format">
   <div *ngIf="vm.invoiceDetails !== null" class="invoice-format">
-    <app-invoice-format [invoiceDetails]="vm.invoiceDetails" class="invoice-format"></app-invoice-format>
+    <app-invoice-format
+      [invoiceDetails]="vm.invoiceDetails"
+      class="invoice-format"></app-invoice-format>
   </div>
 </div>
-
-

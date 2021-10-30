@@ -5,13 +5,22 @@
         <div class="col">
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Name" type="text" formControlName="name" min="0">
+            <input
+              matInput
+              placeholder="Name"
+              type="text"
+              formControlName="name"
+              min="0" />
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Barcode</mat-label>
-            <input matInput placeholder="E.g. John" type="text" formControlName="barcode">
+            <input
+              matInput
+              placeholder="E.g. John"
+              type="text"
+              formControlName="barcode" />
           </mat-form-field>
         </div>
         <div class="col">
@@ -19,7 +28,9 @@
             <mat-label>Category</mat-label>
             <mat-select formControlName="categoryId">
               <mat-option></mat-option>
-              <mat-option *ngFor="let category of categories" [value]="category.id">
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category.id">
                 {{ category.name }}
               </mat-option>
             </mat-select>
@@ -42,12 +53,15 @@
           <button mat-raised-button color="primary" class="mr-2" type="submit">
             Filter products
           </button>
-          <button mat-button color="warn" type="button" (click)="form.reset(); onSubmit()">
+          <button
+            mat-button
+            color="warn"
+            type="button"
+            (click)="form.reset(); onSubmit()">
             Reset form
           </button>
         </div>
       </div>
-
     </mat-card-content>
   </mat-card>
 </form>

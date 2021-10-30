@@ -6,10 +6,9 @@ import { Category } from '@core/models/Category';
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
-  styleUrls: [ './product-form.component.scss' ]
+  styleUrls: ['./product-form.component.scss'],
 })
 export class ProductFormComponent implements OnInit {
-
   @Input() product?: ProductDetails;
 
   @Input() categories: Category[] = [];
@@ -19,18 +18,16 @@ export class ProductFormComponent implements OnInit {
   @Output() submitted = new EventEmitter<SaveProductPayload>();
 
   form = this.fb.group({
-    name: [ '', Validators.required ],
-    price: [ '', Validators.required ],
-    barcode: [ '', Validators.required ],
-    low_stock: [ '', Validators.required ],
-    optimal_stock: [ '', Validators.required ],
-    stock_type: [ '', Validators.required ],
-    category_id: [ '', Validators.required ]
+    name: ['', Validators.required],
+    price: ['', Validators.required],
+    barcode: ['', Validators.required],
+    low_stock: ['', Validators.required],
+    optimal_stock: ['', Validators.required],
+    stock_type: ['', Validators.required],
+    category_id: ['', Validators.required],
   });
 
-  constructor(
-    private fb: FormBuilder,
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.product) {
@@ -50,5 +47,4 @@ export class ProductFormComponent implements OnInit {
 
     this.submitted.emit(this.form.value);
   }
-
 }

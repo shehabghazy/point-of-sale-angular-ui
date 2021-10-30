@@ -13,12 +13,11 @@ export interface InvoiceState {
 }
 
 export const initialState: InvoiceState = {
-  filters: null
+  filters: null,
 };
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceService {
-
   private invoiceState = new BehaviorSubject<InvoiceState>(initialState);
 
   get state(): InvoiceState {
@@ -29,10 +28,13 @@ export class InvoiceService {
     @Inject(API_URL) private api: string,
     private http: HttpClient,
     private auth: AuthService
-  ) { }
+  ) {}
 
-  all(page: number, pageSize: number, filters?: Partial<InvoiceFilter>): Observable<AllInvoicesRes> {
-
+  all(
+    page: number,
+    pageSize: number,
+    filters?: Partial<InvoiceFilter>
+  ): Observable<AllInvoicesRes> {
     let finalFilters: Partial<InvoiceFilter> = this.state.filters ?? {};
 
     if (filters) {
@@ -47,12 +49,12 @@ export class InvoiceService {
       .append('page', page)
       .append('pageSize', pageSize);
 
-    return this.http.get<AllInvoicesRes>(`${ this.api }/invoices`, { params })
+    return this.http
+      .get<AllInvoicesRes>(`${this.api}/invoices`, { params })
       .pipe(tap(x => console.log(x)));
   }
 
   getById(id: number): Observable<Invoice> {
-    return this.http.get<Invoice>(`${ this.api }/invoices/${ id }`);
+    return this.http.get<Invoice>(`${this.api}/invoices/${id}`);
   }
-
 }

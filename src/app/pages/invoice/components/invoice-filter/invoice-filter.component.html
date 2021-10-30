@@ -27,16 +27,26 @@
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Choose date</mat-label>
             <mat-date-range-input [rangePicker]="picker">
-              <input matStartDate formControlName="startDate" placeholder="Start date">
-              <input matEndDate formControlName="endDate" placeholder="End date">
+              <input
+                matStartDate
+                formControlName="startDate"
+                placeholder="Start date" />
+              <input
+                matEndDate
+                formControlName="endDate"
+                placeholder="End date" />
             </mat-date-range-input>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
 
-            <mat-error *ngIf="form.get('startDate')?.hasError('matStartDateInvalid')">
+            <mat-error
+              *ngIf="form.get('startDate')?.hasError('matStartDateInvalid')">
               Invalid start date
             </mat-error>
-            <mat-error *ngIf="form.get('endDate')?.hasError('matEndDateInvalid')">
+            <mat-error
+              *ngIf="form.get('endDate')?.hasError('matEndDateInvalid')">
               Invalid end date
             </mat-error>
           </mat-form-field>
@@ -47,13 +57,15 @@
             <mat-icon class="mr-2">search</mat-icon>
             <span>Search</span>
           </button>
-          <button mat-button color="warn" type="button" (click)="form.reset(); onSubmit()">
+          <button
+            mat-button
+            color="warn"
+            type="button"
+            (click)="form.reset(); onSubmit()">
             Reset
           </button>
         </div>
       </div>
-
-
     </mat-card-content>
   </mat-card>
 </form>

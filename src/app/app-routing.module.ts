@@ -7,87 +7,99 @@ import { NonAuthGuard } from '@core/guards/non-auth.guard';
 import { RoleGuard } from '@core/guards/role.guard';
 
 const routes: Routes = [
-
   {
     path: '',
     component: EmptyLayoutComponent,
-    canActivate: [ NonAuthGuard ],
+    canActivate: [NonAuthGuard],
     children: [
       {
         path: '',
         redirectTo: 'auth',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
-        path: 'auth', loadChildren: () => import('./pages/auth/auth.module')
-          .then(m => m.AuthModule)
+        path: 'auth',
+        loadChildren: () =>
+          import('./pages/auth/auth.module').then(m => m.AuthModule),
       },
-    ]
+    ],
   },
   {
-    path: '', component: MainLayoutComponent,
-    canActivate: [ AuthGuard ],
+    path: '',
+    component: MainLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'products',
-        canActivate: [ RoleGuard ],
+        canActivate: [RoleGuard],
         data: {},
-        loadChildren: () => import('./pages/products/products.module')
-          .then(m => m.ProductsModule)
+        loadChildren: () =>
+          import('./pages/products/products.module').then(
+            m => m.ProductsModule
+          ),
       },
       {
         path: 'manage-users',
-        canActivate: [ RoleGuard ],
-        loadChildren: () => import('./pages/manage-users/manage-users.module')
-          .then(m => m.ManageUsersModule)
+        canActivate: [RoleGuard],
+        loadChildren: () =>
+          import('./pages/manage-users/manage-users.module').then(
+            m => m.ManageUsersModule
+          ),
       },
       {
         path: 'profile',
-        loadChildren: () => import('./pages/profile/profile.module')
-          .then(m => m.ProfileModule)
+        loadChildren: () =>
+          import('./pages/profile/profile.module').then(m => m.ProfileModule),
       },
       {
         path: 'settings',
-        loadChildren: () => import('./pages/settings/settings.module')
-          .then(m => m.SettingsModule)
+        loadChildren: () =>
+          import('./pages/settings/settings.module').then(
+            m => m.SettingsModule
+          ),
       },
       {
         path: 'shifts',
-        loadChildren: () => import('./pages/shifts/shifts.module')
-          .then(m => m.ShiftsModule)
+        loadChildren: () =>
+          import('./pages/shifts/shifts.module').then(m => m.ShiftsModule),
       },
       {
         path: 'categories',
-        loadChildren: () => import('./pages/categories/categories.module')
-          .then(m => m.CategoriesModule)
+        loadChildren: () =>
+          import('./pages/categories/categories.module').then(
+            m => m.CategoriesModule
+          ),
       },
       {
         path: 'invoice',
-        loadChildren: () => import('./pages/invoice/invoice.module')
-          .then(m => m.InvoiceModule)
+        loadChildren: () =>
+          import('./pages/invoice/invoice.module').then(m => m.InvoiceModule),
       },
       {
         path: 'dashboard',
-        loadChildren: () => import('./pages/dashboard/dashboard.module')
-          .then(m => m.DashboardModule)
+        loadChildren: () =>
+          import('./pages/dashboard/dashboard.module').then(
+            m => m.DashboardModule
+          ),
       },
       {
         path: 'supplies',
-        loadChildren: () => import('./pages/supplies/supplies.module')
-          .then(m => m.SuppliesModule)
-      }
-    ]
+        loadChildren: () =>
+          import('./pages/supplies/supplies.module').then(
+            m => m.SuppliesModule
+          ),
+      },
+    ],
   },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

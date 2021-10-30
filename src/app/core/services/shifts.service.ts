@@ -7,9 +7,7 @@ import { Shift } from '@core/models/shift.model';
 
 @Injectable({ providedIn: 'root' })
 export class ShiftsService {
-
-  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {
-  }
+  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {}
 
   one(id: number): Observable<any> {
     return this.http.get(`${this.api}/shifts/${id}`);

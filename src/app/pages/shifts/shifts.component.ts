@@ -10,29 +10,29 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-shifts',
   templateUrl: './shifts.component.html',
-  animations: [ fadeIn ]
+  animations: [fadeIn],
 })
 export class ShiftsComponent {
-
   shifts$: Observable<Shift[]> = this.shifts.all();
 
-  constructor(private shifts: ShiftsService, public dialog: MatDialog) { }
+  constructor(private shifts: ShiftsService, public dialog: MatDialog) {}
 
   addShift(): void {
     const dialogRef = this.dialog.open(ShiftsFormComponent, {
       data: {
         type: 'add',
-        shift: null
-      }
+        shift: null,
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === '') {
         return;
       }
-      this.shifts.create(result).pipe(take(1)).subscribe(
-        _ => this.refresh()
-      );
+      this.shifts
+        .create(result)
+        .pipe(take(1))
+        .subscribe(_ => this.refresh());
     });
   }
 
@@ -40,22 +40,22 @@ export class ShiftsComponent {
     const dialogRef = this.dialog.open(ShiftsFormComponent, {
       data: {
         type: 'edit',
-        shift
-      }
+        shift,
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === '') {
         return;
       }
-      this.shifts.update(shift.id, result).pipe(take(1)).subscribe(
-        _ => this.refresh()
-      );
+      this.shifts
+        .update(shift.id, result)
+        .pipe(take(1))
+        .subscribe(_ => this.refresh());
     });
   }
 
   refresh(): void {
     this.shifts$ = this.shifts.all();
   }
-
 }

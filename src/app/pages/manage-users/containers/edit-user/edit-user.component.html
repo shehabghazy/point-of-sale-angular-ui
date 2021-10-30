@@ -10,7 +10,9 @@
 
       <mat-card>
         <mat-card-content *ngIf="user$ | async as user; else loading" @fadeIn>
-          <app-user-form [user]="user" (submitted)="handleEdit($event)"></app-user-form>
+          <app-user-form
+            [user]="user"
+            (submitted)="handleEdit($event)"></app-user-form>
         </mat-card-content>
 
         <ng-template #loading>
@@ -18,10 +20,7 @@
             <mat-spinner></mat-spinner>
           </div>
         </ng-template>
-
       </mat-card>
-
     </div>
   </div>
-
 </div>

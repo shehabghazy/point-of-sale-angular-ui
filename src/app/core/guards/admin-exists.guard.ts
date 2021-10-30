@@ -6,12 +6,11 @@ import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AdminExistsGuard implements CanActivate {
-
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) {}
 
   canActivate(): Observable<boolean> {
     return this.auth.adminExists$.pipe(
-      map((exists) => {
+      map(exists => {
         if (!exists) {
           this.router.navigateByUrl('/auth/createAdmin');
         }
@@ -19,5 +18,4 @@ export class AdminExistsGuard implements CanActivate {
       })
     );
   }
-
 }

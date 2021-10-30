@@ -10,16 +10,15 @@ import { SupplyService } from '@core/services/supply.service';
 @Component({
   selector: 'app-add-supply',
   templateUrl: './add-supply.component.html',
-  styleUrls: [ './add-supply.component.scss' ]
+  styleUrls: ['./add-supply.component.scss'],
 })
 export class AddSupplyComponent {
-
   product$: Observable<ProductDetails> = this.route.paramMap.pipe(
     switchMap(params => this.productService.getById(params.get('productId')!))
   );
 
   form = this.fb.group({
-    supplyQuantity: [ '', Validators.required ]
+    supplyQuantity: ['', Validators.required],
   });
 
   constructor(
@@ -34,13 +33,15 @@ export class AddSupplyComponent {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
     } else {
-      this.supplyService.create({
-        supplyQuantity: this.form.value.supplyQuantity,
-        productId: product.id
-      }).pipe(take(1)).subscribe(res => {
-        this.router.navigateByUrl('/supplies').then();
-      });
+      this.supplyService
+        .create({
+          supplyQuantity: this.form.value.supplyQuantity,
+          productId: product.id,
+        })
+        .pipe(take(1))
+        .subscribe(res => {
+          this.router.navigateByUrl('/supplies').then();
+        });
     }
   }
-
 }

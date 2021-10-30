@@ -1,23 +1,27 @@
-import { Directive, Input, NgModule, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  Input,
+  NgModule,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[canView]'
+  selector: '[canView]',
 })
 export class HideForDirective {
-
   private hasView = false;
 
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
     private auth: AuthService
-  ) { }
+  ) {}
 
   @Input() set canView(role: 'manager' | 'admin' | 'user' | 'economist') {
     switch (role) {
-
       case 'admin':
         if (this.isAdmin()) {
           this.viewContainer.createEmbeddedView(this.templateRef);
@@ -25,8 +29,6 @@ export class HideForDirective {
         } else {
           this.hide();
         }
-
-
     }
     // // if role is agent, than hide for agent
     // // console.log(role);
@@ -67,17 +69,10 @@ export class HideForDirective {
   isEconomist(): boolean {
     return this.auth.state.role === 'economist';
   }
-
 }
-
 
 @NgModule({
-  declarations: [
-    HideForDirective
-  ],
-  exports: [
-    HideForDirective
-  ]
+  declarations: [HideForDirective],
+  exports: [HideForDirective],
 })
-export class HideForModule {
-}
+export class HideForModule {}

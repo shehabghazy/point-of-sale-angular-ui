@@ -15,12 +15,11 @@ import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { AdminExistsGuard } from '@core/guards/admin-exists.guard';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '',
@@ -28,23 +27,19 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        canActivate: [ AdminExistsGuard ],
-        component: LoginComponent
+        canActivate: [AdminExistsGuard],
+        component: LoginComponent,
       },
       {
         path: 'createAdmin',
-        component: CreateAdminComponent
-      }
-    ]
-  }
+        component: CreateAdminComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
-  declarations: [
-    AuthLayoutComponent,
-    LoginComponent,
-    CreateAdminComponent
-  ],
+  declarations: [AuthLayoutComponent, LoginComponent, CreateAdminComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -56,8 +51,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatSnackBarModule,
     MatCardModule,
-    MatProgressSpinnerModule
-  ]
+    MatProgressSpinnerModule,
+  ],
 })
-export class AuthModule {
-}
+export class AuthModule {}

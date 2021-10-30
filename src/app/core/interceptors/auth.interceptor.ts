@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { AuthService, AuthState } from '@core/services/auth.service';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -7,16 +14,21 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
   constructor(private auth: AuthService, private router: Router) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
     return this.auth.auth$.pipe(
       switchMap((auth: AuthState) => {
         const { access_token } = auth;
         if (access_token) {
           const authReq = request.clone({
-            headers: request.headers.set('Authorization', `Bearer ${ access_token }`)
+            headers: request.headers.set(
+              'Authorization',
+              `Bearer ${access_token}`
+            ),
           });
           return next.handle(authReq);
         } else {
@@ -39,5 +51,5 @@ export class AuthInterceptor implements HttpInterceptor {
 export const AuthInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
   useClass: AuthInterceptor,
-  multi: true
+  multi: true,
 };

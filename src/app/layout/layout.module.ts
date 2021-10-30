@@ -11,13 +11,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 
-
 @NgModule({
-  declarations: [
-    EmptyLayoutComponent,
-    MainLayoutComponent,
-    NavbarComponent,
-  ],
+  declarations: [EmptyLayoutComponent, MainLayoutComponent, NavbarComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,8 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    MatMenuModule
-  ]
+    MatMenuModule,
+  ],
 })
-export class LayoutModule {
-}
+export class LayoutModule {}

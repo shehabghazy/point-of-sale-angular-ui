@@ -6,21 +6,22 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-shifts-form',
   templateUrl: './shifts-form.component.html',
-  styles: [`
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      min-width: 300px;
-    }
-  `]
+  styles: [
+    `
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 300px;
+      }
+    `,
+  ],
 })
 export class ShiftsFormComponent implements OnInit {
-
   form = this.fb.group({
-    name: [ '', Validators.required ],
-    start_time: [ '', Validators.required ],
-    end_time: [ '', Validators.required ],
+    name: ['', Validators.required],
+    start_time: ['', Validators.required],
+    end_time: ['', Validators.required],
   });
 
   constructor(
@@ -33,5 +34,4 @@ export class ShiftsFormComponent implements OnInit {
       this.form.patchValue(this.data.shift);
     }
   }
-
 }

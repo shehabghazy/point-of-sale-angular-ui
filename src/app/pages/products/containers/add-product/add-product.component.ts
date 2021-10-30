@@ -8,23 +8,21 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: [ './add-product.component.scss' ]
+  styleUrls: ['./add-product.component.scss'],
 })
 export class AddProductComponent {
-
   categories$ = this.categoryService.all();
 
   constructor(
     private router: Router,
     private productsService: ProductService,
-    private categoryService: CategoryService,
+    private categoryService: CategoryService
   ) {}
 
   handleAdd(product: SaveProductPayload): void {
-    this.productsService.createProduct(product).pipe(take(1))
-      .subscribe(res =>
-        this.router.navigate([ '/products/details', res.id ])
-      );
+    this.productsService
+      .createProduct(product)
+      .pipe(take(1))
+      .subscribe(res => this.router.navigate(['/products/details', res.id]));
   }
-
 }

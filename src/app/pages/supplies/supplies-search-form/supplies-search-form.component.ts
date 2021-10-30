@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { convertDateForBE } from '@core/utils/date-utils';
 import { Category } from '@core/models/Category';
@@ -8,10 +14,9 @@ import { SupplyFilter } from '@core/models/SupplyFilter';
   selector: 'app-supplies-search-form',
   templateUrl: './supplies-search-form.component.html',
   styleUrls: ['./supplies-search-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SuppliesSearchFormComponent {
-
   @Input() categories: Category[] = [];
 
   @Output() searched = new EventEmitter<SupplyFilter>();
@@ -23,7 +28,7 @@ export class SuppliesSearchFormComponent {
     endDate: null,
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   onSubmit(): void {
     const startDate = this.form.get('startDate')!.value;
@@ -37,5 +42,4 @@ export class SuppliesSearchFormComponent {
 
     this.searched.emit(filters);
   }
-
 }

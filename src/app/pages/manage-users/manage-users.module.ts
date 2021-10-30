@@ -19,28 +19,27 @@ import { ConfirmationDialogModule } from '@app/pages/manage-users/components/con
 import { MatCardModule } from '@angular/material/card';
 import { UserFormComponent } from './components/user-form/user-form.component';
 
-
 const routes: Routes = [
   {
     path: '',
     component: ManageUsersComponent,
-    data: { animation: 'ManageUsers' }
+    data: { animation: 'ManageUsers' },
   },
   {
     path: 'add',
     component: AddUserComponent,
-    data: { animation: 'Add' }
+    data: { animation: 'Add' },
   },
   {
     path: 'edit/:id',
     component: EditUserComponent,
-    data: { animation: 'Edit' }
+    data: { animation: 'Edit' },
   },
   {
     path: 'details/:id',
     component: UserDetailsComponent,
-    data: { animation: 'Details' }
-  }
+    data: { animation: 'Details' },
+  },
 ];
 
 @NgModule({
@@ -50,7 +49,7 @@ const routes: Routes = [
     AddUserComponent,
     EditUserComponent,
     UserDetailsComponent,
-    UserFormComponent
+    UserFormComponent,
   ],
   imports: [
     CommonModule,
@@ -65,8 +64,7 @@ const routes: Routes = [
     MatSnackBarModule,
     MatIconModule,
     ConfirmationDialogModule,
-    MatCardModule
-  ]
+    MatCardModule,
+  ],
 })
-export class ManageUsersModule {
-}
+export class ManageUsersModule {}

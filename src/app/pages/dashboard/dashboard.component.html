@@ -1,5 +1,4 @@
 <div class="row mb-3">
-
   <div class="col-md-4">
     <mat-card class="mb-3">
       <mat-card-content>
@@ -13,7 +12,7 @@
     <mat-card class="mt-3">
       <mat-card-content>
         <h2>Invoices</h2>
-        <p *ngIf="!loading" class="dashboard-number">{{data.invoiceCount}}</p>
+        <p *ngIf="!loading" class="dashboard-number">{{ data.invoiceCount }}</p>
         <div *ngIf="loading" class="flex-center">
           <mat-spinner></mat-spinner>
         </div>
@@ -25,18 +24,18 @@
     <mat-card class="full-height">
       <mat-card-content style="min-height: 200px">
         <h2 class="text-center m-0">Most sold products</h2>
-        <app-items-chart *ngIf="data.productSales" [data]="data.productSales"></app-items-chart>
+        <app-items-chart
+          *ngIf="data.productSales"
+          [data]="data.productSales"></app-items-chart>
         <div *ngIf="loading" class="flex-center">
           <mat-spinner></mat-spinner>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
-
 </div>
 
 <div class="row mb-4" style="height: 250px">
-
   <div class="col-md-4">
     <mat-card class="full-height">
       <mat-card-content>
@@ -49,7 +48,6 @@
           <mat-spinner></mat-spinner>
         </div>
       </mat-card-content>
-
     </mat-card>
   </div>
 
@@ -66,6 +64,5 @@
         </div>
       </mat-card-content>
     </mat-card>
-
   </div>
 </div>

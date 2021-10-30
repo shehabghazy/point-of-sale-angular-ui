@@ -7,7 +7,6 @@ import { distinctUntilChanged, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Invoice } from '@core/models/Invoice';
 
-
 export interface InvoiceProduct {
   product: ProductDetails;
   count: number;
@@ -24,12 +23,11 @@ export const initialState: InvoicePageState = {
   invoiceDetails: null,
   activeCategoryId: null,
   invoiceProducts: [],
-  loading: false
+  loading: false,
 };
 
 @Injectable({ providedIn: 'root' })
 export class InvoicePageService {
-
   private invoiceState = new BehaviorSubject<InvoicePageState>(initialState);
   state$ = this.invoiceState.asObservable().pipe(distinctUntilChanged());
 
@@ -41,19 +39,18 @@ export class InvoicePageService {
     @Inject(API_URL) private api: string,
     private http: HttpClient,
     private router: Router
-  ) {
-  }
+  ) {}
 
   setActiveCategory(categoryId: number): void {
     if (this.state.activeCategoryId === categoryId) {
       this.invoiceState.next({
         ...this.state,
-        activeCategoryId: null
+        activeCategoryId: null,
       });
     } else {
       this.invoiceState.next({
         ...this.state,
-        activeCategoryId: categoryId
+        activeCategoryId: categoryId,
       });
     }
 
@@ -61,35 +58,36 @@ export class InvoicePageService {
   }
 
   addInvoiceProduct(product: ProductDetails): void {
-    const existingProduct = this.state.invoiceProducts.find(x => x.product.id === product.id);
+    const existingProduct = this.state.invoiceProducts.find(
+      x => x.product.id === product.id
+    );
 
     if (existingProduct) {
       const newProductsList = this.state.invoiceProducts.map(item => {
         if (item.product.id === product.id) {
           return {
             product,
-            count: item.count + 1
+            count: item.count + 1,
           };
         }
         return item;
       });
       this.invoiceState.next({
         ...this.state,
-        invoiceProducts: newProductsList
+        invoiceProducts: newProductsList,
       });
     } else {
       this.invoiceState.next({
         ...this.state,
-        invoiceProducts: [
-          ...this.state.invoiceProducts,
-          { product, count: 1 }
-        ]
+        invoiceProducts: [...this.state.invoiceProducts, { product, count: 1 }],
       });
     }
   }
 
   changeProductQuantity(productId: number, type: 'plus' | 'minus'): void {
-    const existingProduct = this.state.invoiceProducts.find(x => x.product.id === productId);
+    const existingProduct = this.state.invoiceProducts.find(
+      x => x.product.id === productId
+    );
 
     if (!existingProduct) {
       return;
@@ -99,24 +97,25 @@ export class InvoicePageService {
       if (item.product.id === productId) {
         return {
           product: item.product,
-          count: type === 'plus' ? item.count + 1 : item.count - 1
+          count: type === 'plus' ? item.count + 1 : item.count - 1,
         };
       }
       return item;
     });
     this.invoiceState.next({
       ...this.state,
-      invoiceProducts: newProductsList.filter(x => x.count > 0)
+      invoiceProducts: newProductsList.filter(x => x.count > 0),
     });
-
   }
 
   removeInvoiceProduct(productId: number): void {
-    const newProductsList = this.state.invoiceProducts.filter(item => item.product.id !== productId);
+    const newProductsList = this.state.invoiceProducts.filter(
+      item => item.product.id !== productId
+    );
 
     this.invoiceState.next({
       ...this.state,
-      invoiceProducts: newProductsList
+      invoiceProducts: newProductsList,
     });
   }
 
@@ -129,9 +128,9 @@ export class InvoicePageService {
       invoiceProducts: invoice.invoice_products.map(invoiceProduct => {
         return {
           product: invoiceProduct.product,
-          count: invoiceProduct.quantity
+          count: invoiceProduct.quantity,
         };
-      })
+      }),
     });
   }
 
@@ -142,12 +141,14 @@ export class InvoicePageService {
         return {
           quantity: item.count,
           price: item.product.price,
-          product_id: item.product.id
+          product_id: item.product.id,
         };
-      })
+      }),
     };
 
-    this.http.post(`${ this.api }/createInvoice`, payload).pipe(take(1))
+    this.http
+      .post(`${this.api}/createInvoice`, payload)
+      .pipe(take(1))
       .subscribe(value => {
         this.invoiceState.next(initialState);
         this.router.navigateByUrl('/invoice').then();
@@ -161,13 +162,15 @@ export class InvoicePageService {
         return {
           quantity: item.count,
           price: item.product.price,
-          product_id: item.product.id
+          product_id: item.product.id,
         };
-      })
+      }),
     };
 
-    const path = `${ this.api }/updateInvoice/${ this.state.invoiceDetails?.id }`;
-    this.http.post(path, payload).pipe(take(1))
+    const path = `${this.api}/updateInvoice/${this.state.invoiceDetails?.id}`;
+    this.http
+      .post(path, payload)
+      .pipe(take(1))
       .subscribe(value => {
         this.invoiceState.next(initialState);
         this.router.navigateByUrl('/invoice').then();
@@ -176,8 +179,10 @@ export class InvoicePageService {
   }
 
   payInvoice(): void {
-    const path = `${ this.api }/invoices/${ this.state.invoiceDetails?.id }/pay`;
-    this.http.post(path, {}).pipe(take(1))
+    const path = `${this.api}/invoices/${this.state.invoiceDetails?.id}/pay`;
+    this.http
+      .post(path, {})
+      .pipe(take(1))
       .subscribe(value => {
         this.invoiceState.next(initialState);
         this.router.navigateByUrl('/invoice').then();
@@ -188,5 +193,4 @@ export class InvoicePageService {
   reset(): void {
     this.invoiceState.next(initialState);
   }
-
 }

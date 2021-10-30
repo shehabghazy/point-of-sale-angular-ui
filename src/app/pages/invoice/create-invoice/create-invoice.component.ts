@@ -1,18 +1,20 @@
-import {Component} from '@angular/core';
-import {CategoryService} from '@core/services/category.service';
-import {ProductService} from '@core/services/product.service';
-import {InvoicePageService, InvoiceProduct} from '@core/services/invoice-page.service';
-import {fadeIn} from '@app/animations/fadeIn.animation';
-import {ProductDetails} from '@core/models/product.model';
+import { Component } from '@angular/core';
+import { CategoryService } from '@core/services/category.service';
+import { ProductService } from '@core/services/product.service';
+import {
+  InvoicePageService,
+  InvoiceProduct,
+} from '@core/services/invoice-page.service';
+import { fadeIn } from '@app/animations/fadeIn.animation';
+import { ProductDetails } from '@core/models/product.model';
 
 @Component({
   selector: 'app-create-invoice',
   templateUrl: './create-invoice.component.html',
   styleUrls: ['./create-invoice.component.scss'],
-  animations: [fadeIn]
+  animations: [fadeIn],
 })
 export class CreateInvoiceComponent {
-
   categories$ = this.categoryService.all();
   products$ = this.productService.filterProducts();
 
@@ -22,8 +24,7 @@ export class CreateInvoiceComponent {
     private categoryService: CategoryService,
     private productService: ProductService,
     private invoicePageService: InvoicePageService
-  ) {
-  }
+  ) {}
 
   handleProductSearch(event: any): void {
     const query = event.target.value;
@@ -77,5 +78,4 @@ export class CreateInvoiceComponent {
   printInvoice(): void {
     window.print();
   }
-
 }

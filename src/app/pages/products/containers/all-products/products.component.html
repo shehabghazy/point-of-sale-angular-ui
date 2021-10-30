@@ -1,9 +1,12 @@
 <div class="container-fluid p-3">
-
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="d-flex align-items-center">
       <h1 class="m-0">Products</h1>
-      <button class="mx-3" routerLink="/products/add" mat-button color="primary">
+      <button
+        class="mx-3"
+        routerLink="/products/add"
+        mat-button
+        color="primary">
         <mat-icon class="mr-2">add</mat-icon>
         <span>Add product</span>
       </button>
@@ -13,10 +16,9 @@
   <ng-container *ngIf="racing$ | async"></ng-container>
 
   <ng-container *ngIf="vm$ | async as vm">
-
     <app-product-filter-form
       @fadeIn
-      *ngIf="categories$ | async as categories;"
+      *ngIf="categories$ | async as categories"
       [categories]="categories"
       [filters]="vm.filters"
       (filtered)="load.next($event)">
@@ -28,14 +30,17 @@
       *ngIf="vm.data.length > 0 && !vm.loading"
       [dataSource]="vm.data"
       [pagination]="vm.pagination"
-      (paginated)=" load.next($event)">
+      (paginated)="load.next($event)">
     </app-product-table>
 
     <div *ngIf="vm.loading" @fadeIn class="flex-center mt-4">
       <mat-spinner></mat-spinner>
     </div>
 
-    <div *ngIf="vm.data.length === 0 && vm.loaded && !vm.error" @fadeIn class="no-data">
+    <div
+      *ngIf="vm.data.length === 0 && vm.loaded && !vm.error"
+      @fadeIn
+      class="no-data">
       No data found!
     </div>
 
@@ -43,5 +48,4 @@
       {{ vm.error }}
     </div>
   </ng-container>
-
 </div>

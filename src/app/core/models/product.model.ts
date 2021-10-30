@@ -36,7 +36,6 @@ export interface Stock {
   updated_at?: any;
 }
 
-
 export interface SaveProductPayload {
   name: string;
   price: number;

@@ -6,10 +6,9 @@ import { ShiftsService } from '@core/services/shifts.service';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: [ './user-form.component.scss' ]
+  styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
-
   @Input() user?: User;
   @Input() readonly = false;
 
@@ -20,23 +19,23 @@ export class UserFormComponent implements OnInit {
   roles = [
     {
       label: 'Manager',
-      value: 'manager'
+      value: 'manager',
     },
     {
       label: 'Economist',
-      value: 'economist'
+      value: 'economist',
     },
     {
       label: 'User',
-      value: 'user'
-    }
+      value: 'user',
+    },
   ];
 
   shifts$ = this.shiftsService.all();
 
   form = this.fb.group({
-    name: [ null, Validators.required ],
-    email: [ null, Validators.required ],
+    name: [null, Validators.required],
+    email: [null, Validators.required],
     // password: [ null, Validators.compose([
     //   Validators.required,
     //   patternValidator(/\d/, { hasNumber: true }),
@@ -45,12 +44,11 @@ export class UserFormComponent implements OnInit {
     //   patternValidator(/[!-\/:-@[-`{-~]/, { hasSpecialCharacters: true }),
     //   Validators.minLength(8)
     // ]) ],
-    shift: [ null, Validators.required ],
-    role: [ null, Validators.required ]
+    shift: [null, Validators.required],
+    role: [null, Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private shiftsService: ShiftsService) {
-  }
+  constructor(private fb: FormBuilder, private shiftsService: ShiftsService) {}
 
   ngOnInit(): void {
     if (this.user) {
@@ -75,5 +73,4 @@ export class UserFormComponent implements OnInit {
 
     this.submitted.emit(this.form.value);
   }
-
 }

@@ -1,5 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
-import { Product, ProductDetails, SaveProductPayload } from '../models/product.model';
+import {
+  Product,
+  ProductDetails,
+  SaveProductPayload,
+} from '../models/product.model';
 import { Pagination } from '../models/pagination.model';
 import { ProductsFilter } from '../models/products-filter.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -8,7 +12,6 @@ import { createParamsFromObject } from '../utils/create-params-from-object';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_URL } from '@core/api.token';
 import { ProductsFilterRes } from '@core/models/ProductsFilterRes';
-
 
 export interface ProductsState {
   data: Product[];
@@ -25,14 +28,11 @@ const initialState: ProductsState = {
   filters: null,
   error: null,
   loading: false,
-  loaded: false
+  loaded: false,
 };
 
-
 @Injectable({ providedIn: 'root' })
-
 export class ProductService {
-
   private readonly state = new BehaviorSubject<ProductsState>(initialState);
   readonly state$ = this.state.asObservable().pipe(distinctUntilChanged());
 
@@ -40,15 +40,13 @@ export class ProductService {
     return this.state.getValue();
   }
 
-  constructor(private http: HttpClient, @Inject(API_URL) private api: string) {
-  }
+  constructor(private http: HttpClient, @Inject(API_URL) private api: string) {}
 
   getProducts(
     filters: Partial<ProductsFilter> = {},
     pagination: Pagination
   ): Observable<any> {
-
-    const path = `${ this.api }/products`;
+    const path = `${this.api}/products`;
     const params = createParamsFromObject(filters)
       .append('page', pagination.pageIndex + '')
       .append('pageSize', pagination.pageSize + '');
@@ -58,39 +56,58 @@ export class ProductService {
 
   private setData(data: Product[], pagination: Pagination): void {
     this.state.next({
-      ...this.currentState, data, pagination,
-      loading: false, loaded: true, error: null,
+      ...this.currentState,
+      data,
+      pagination,
+      loading: false,
+      loaded: true,
+      error: null,
     });
   }
 
   private setError(error: string): void {
     this.state.next({
-      ...this.currentState, error,
-      loading: false, loaded: true, data: []
+      ...this.currentState,
+      error,
+      loading: false,
+      loaded: true,
+      data: [],
     });
   }
 
-  loadProducts(filters?: ProductsFilter, pagination?: Partial<Pagination>): Observable<any> {
+  loadProducts(
+    filters?: ProductsFilter,
+    pagination?: Partial<Pagination>
+  ): Observable<any> {
     const currentPagination = this.currentState.pagination;
-    const newPagination = pagination ? { ...currentPagination, ...pagination } : currentPagination;
+    const newPagination = pagination
+      ? { ...currentPagination, ...pagination }
+      : currentPagination;
     const newFilters = filters ?? this.currentState.filters;
 
     this.state.next({
       ...this.currentState,
       filters: newFilters,
       pagination: newPagination,
-      loading: true, error: null, loaded: false
+      loading: true,
+      error: null,
+      loaded: false,
     });
     // const {pageSize, pageIndex} = this.currentState.pagination;
 
-    return this.getProducts(this.currentState.filters ?? {}, this.currentState.pagination).pipe(
-      tap(
-        (res) => {
-          const samplePagination: Pagination = { pageSize: +res.per_page, pageIndex: res.current_page, total: res.total };
+    return this.getProducts(
+      this.currentState.filters ?? {},
+      this.currentState.pagination
+    ).pipe(
+      tap(res => {
+        const samplePagination: Pagination = {
+          pageSize: +res.per_page,
+          pageIndex: res.current_page,
+          total: res.total,
+        };
 
-          return this.setData(res.data, samplePagination);
-        }
-      ),
+        return this.setData(res.data, samplePagination);
+      }),
       catchError(error => {
         this.setError('An error has occurred. Please try again later!');
         return of(error);
@@ -99,10 +116,13 @@ export class ProductService {
   }
 
   getById(id: string): Observable<ProductDetails> {
-    return this.http.get<ProductDetails>(`${ this.api }/products/${ id }`);
+    return this.http.get<ProductDetails>(`${this.api}/products/${id}`);
   }
 
-  filterProducts(query?: string, category?: number): Observable<ProductsFilterRes> {
+  filterProducts(
+    query?: string,
+    category?: number
+  ): Observable<ProductsFilterRes> {
     let params = new HttpParams();
 
     if (query) {
@@ -112,16 +132,18 @@ export class ProductService {
       params = params.append('category', category);
     }
 
-    return this.http.get<ProductsFilterRes>(`${ this.api }/products/filter`, { params });
+    return this.http.get<ProductsFilterRes>(`${this.api}/products/filter`, {
+      params,
+    });
   }
 
   createProduct(payload: SaveProductPayload): Observable<Product> {
-    const path = `${ this.api }/products`;
+    const path = `${this.api}/products`;
     return this.http.post<Product>(path, payload);
   }
 
   updateProduct(id: number, payload: SaveProductPayload): Observable<Product> {
-    const path = `${ this.api }/products/${ id }`;
+    const path = `${this.api}/products/${id}`;
     return this.http.patch<Product>(path, payload);
   }
 }

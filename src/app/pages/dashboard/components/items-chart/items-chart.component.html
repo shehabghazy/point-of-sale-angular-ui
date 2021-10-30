@@ -1,6 +1,6 @@
-<div  #chartContainer *ngIf="data; else loading">
+<div #chartContainer *ngIf="data; else loading">
   <ngx-charts-bar-vertical
-    [view]="[offsetWidthContainer,  180]"
+    [view]="[offsetWidthContainer, 180]"
     [scheme]="itemsChartOpts.colorScheme"
     [results]="data"
     [gradient]="itemsChartOpts.gradient"

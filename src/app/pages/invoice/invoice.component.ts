@@ -13,18 +13,17 @@ import { AuthService } from '@core/services/auth.service';
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
-  styleUrls: [ './invoice.component.scss' ],
-  animations: [ fadeIn ]
+  styleUrls: ['./invoice.component.scss'],
+  animations: [fadeIn],
 })
 export class InvoiceComponent implements OnInit {
-
   constructor(
     private invoiceService: InvoiceService,
     private usersService: UsersService,
     private auth: AuthService,
     private router: Router,
     private invoicePageService: InvoicePageService
-  ) { }
+  ) {}
 
   data$ = this.invoiceService.all(1, 20);
   users$ = this.usersService.users$;
@@ -32,7 +31,6 @@ export class InvoiceComponent implements OnInit {
   role = this.auth.role;
 
   ngOnInit(): void {
-
     if (this.role !== 'user') {
       this.usersService.loadUsers();
     }
@@ -47,16 +45,16 @@ export class InvoiceComponent implements OnInit {
   }
 
   editInvoice(invoice: Invoice): void {
-    this.invoiceService.getById(invoice.id).pipe(take(1)).subscribe(
-      invoiceDetails => {
+    this.invoiceService
+      .getById(invoice.id)
+      .pipe(take(1))
+      .subscribe(invoiceDetails => {
         this.invoicePageService.editInvoice(invoiceDetails);
         this.router.navigateByUrl('/invoice/create');
-      }
-    );
+      });
   }
 
   resetInvoice(): void {
     this.invoicePageService.reset();
   }
-
 }

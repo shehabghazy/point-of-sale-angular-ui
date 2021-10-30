@@ -8,11 +8,10 @@ import { fadeIn } from '@app/animations/fadeIn.animation';
 @Component({
   selector: 'app-product',
   templateUrl: './products.component.html',
-  styleUrls: [ './products.component.scss' ],
-  animations: [ fadeIn ]
+  styleUrls: ['./products.component.scss'],
+  animations: [fadeIn],
 })
 export class ProductsComponent implements OnInit {
-
   vm$ = this.productsService.state$;
   categories$ = this.categoryService.all();
 
@@ -41,9 +40,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productsService: ProductService,
-    private categoryService: CategoryService,
-  ) {
-  }
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit(): void {
     this.vm$.subscribe(console.log);
@@ -52,5 +50,4 @@ export class ProductsComponent implements OnInit {
   onClickedRow(row: any): void {
     console.log(row);
   }
-
 }

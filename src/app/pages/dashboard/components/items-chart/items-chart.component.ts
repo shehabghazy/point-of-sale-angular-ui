@@ -1,16 +1,22 @@
-import { AfterContentChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-items-chart',
   templateUrl: './items-chart.component.html',
-  styleUrls: [ './items-chart.component.scss' ]
+  styleUrls: ['./items-chart.component.scss'],
 })
 export class ItemsChartComponent implements OnInit, AfterContentChecked {
-
   @ViewChild('chartContainer') chartContainer?: ElementRef;
   offsetWidthContainer = 200;
 
-  @Input() data: { id: number; name: string, value: number }[] = [];
+  @Input() data: { id: number; name: string; value: number }[] = [];
 
   itemsChartOpts = {
     animations: true,
@@ -26,17 +32,14 @@ export class ItemsChartComponent implements OnInit, AfterContentChecked {
     colorScheme: 'air',
     onSelect(event: any): void {
       console.log(event);
-    }
+    },
   };
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterContentChecked(): void {
     this.offsetWidthContainer = this.chartContainer?.nativeElement.offsetWidth;
   }
-
 }

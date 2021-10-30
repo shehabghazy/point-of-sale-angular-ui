@@ -9,11 +9,10 @@ import { API_URL } from '@core/api.token';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: [ './profile.component.scss' ],
-  animations: [ fadeIn ]
+  styleUrls: ['./profile.component.scss'],
+  animations: [fadeIn],
 })
 export class ProfileComponent {
-
   user$ = this.auth.profile$;
 
   url: string | ArrayBuffer | null | undefined = '';
@@ -24,42 +23,53 @@ export class ProfileComponent {
   hasPhotoUploaded = false;
 
   uploadForm: FormGroup = this.fb.group({
-    profile: [ '' ]
+    profile: [''],
   });
 
-  changePasswordForm = this.fb.group({
-    oldPassword: [ '', Validators.required ],
-    newPassword: [ '', Validators.required ],
-    confirmPassword: [ '', Validators.required ]
-  }, { validators: this.checkPasswords });
+  changePasswordForm = this.fb.group(
+    {
+      oldPassword: ['', Validators.required],
+      newPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    },
+    { validators: this.checkPasswords }
+  );
 
-  constructor(private auth: AuthService, private fb: FormBuilder,
-              private snackBar: MatSnackBar,
-              @Inject(API_URL) private api: string,
-  ) {
-  }
+  constructor(
+    private auth: AuthService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    @Inject(API_URL) private api: string
+  ) {}
 
   submitName(name: string): void {
     this.editName = false;
 
-    this.auth.changeName(name).pipe(take(1)).subscribe(
-      user => console.log(user)
-    );
+    this.auth
+      .changeName(name)
+      .pipe(take(1))
+      .subscribe(user => console.log(user));
   }
 
   submitChangePassword(): void {
-    this.auth.changePassword(this.changePasswordForm.value).pipe(take(1)).subscribe(
-      user => {
-        this.changePassword = false;
-        this.openSnackBar('Password was changed successfully!', 'success-snackbar');
-      },
-      error => {
-        this.changePassword = true;
-        if (typeof error.error.message === 'string') {
-          this.openSnackBar(error.error.message, 'alert-snackbar');
+    this.auth
+      .changePassword(this.changePasswordForm.value)
+      .pipe(take(1))
+      .subscribe(
+        user => {
+          this.changePassword = false;
+          this.openSnackBar(
+            'Password was changed successfully!',
+            'success-snackbar'
+          );
+        },
+        error => {
+          this.changePassword = true;
+          if (typeof error.error.message === 'string') {
+            this.openSnackBar(error.error.message, 'alert-snackbar');
+          }
         }
-      }
-    );
+      );
   }
 
   checkPasswords(group: FormGroup): null | { notSame: boolean } {
@@ -71,8 +81,6 @@ export class ProfileComponent {
     return password === confirmPassword ? null : { notSame: true };
   }
 
-
-
   onSelectFile(event: any): void {
     console.log(event);
     console.log(this.url);
@@ -81,7 +89,8 @@ export class ProfileComponent {
       this.uploadForm?.get('profile')?.setValue(event.target.files[0]);
 
       reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (e) => { // called once readAsDataURL is completed
+      reader.onload = e => {
+        // called once readAsDataURL is completed
         this.url = e?.target?.result;
         this.hasPhotoUploaded = true;
         console.log(this.url);
@@ -99,17 +108,20 @@ export class ProfileComponent {
     console.log(this.url);
     const formData = new FormData();
     formData.append('photo', this.uploadForm?.get('profile')?.value);
-    this.auth.changeProfilePhoto(formData).subscribe(res => {
-      if (res) {
-        this.openSnackBar('Photo Changed Successfully', 'success-snackbar');
-        this.hasPhotoUploaded = false;
+    this.auth.changeProfilePhoto(formData).subscribe(
+      res => {
+        if (res) {
+          this.openSnackBar('Photo Changed Successfully', 'success-snackbar');
+          this.hasPhotoUploaded = false;
+        }
+      },
+      error => {
+        this.openSnackBar(error.message, 'alert-snackbar');
       }
-    }, error => {
-      this.openSnackBar(error.message, 'alert-snackbar');
-    });
+    );
   }
 
-  imageSource(image: string | null): string | ArrayBuffer{
+  imageSource(image: string | null): string | ArrayBuffer {
     if (this.url) {
       return this.url;
     } else if (image) {
@@ -124,8 +136,7 @@ export class ProfileComponent {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass
+      panelClass,
     });
   }
-
 }

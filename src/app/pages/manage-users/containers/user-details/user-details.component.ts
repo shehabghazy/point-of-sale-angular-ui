@@ -7,15 +7,10 @@ import { fadeIn } from '@app/animations/fadeIn.animation';
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss'],
-  animations: [ fadeIn ]
+  animations: [fadeIn],
 })
 export class UserDetailsComponent {
-
   user$ = this.users.one(this.route.snapshot.params.id);
 
-  constructor(
-    private users: UsersService,
-    private route: ActivatedRoute,
-  ) {}
-
+  constructor(private users: UsersService, private route: ActivatedRoute) {}
 }

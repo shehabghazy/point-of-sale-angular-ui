@@ -6,21 +6,22 @@ import { CategoryFormData } from '@app/pages/categories/CategoryFormData';
 @Component({
   selector: 'app-category-form',
   templateUrl: './category-form.component.html',
-  styles: [`
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      min-width: 300px;
-    }
-  `]
+  styles: [
+    `
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 300px;
+      }
+    `,
+  ],
 })
 export class CategoryFormComponent implements OnInit {
-
   form = this.fb.group({
-    name: [ '', Validators.required ],
-    icon: [ '', Validators.required ],
-    color: [ '', Validators.required ],
+    name: ['', Validators.required],
+    icon: ['', Validators.required],
+    color: ['', Validators.required],
   });
 
   constructor(
@@ -33,5 +34,4 @@ export class CategoryFormComponent implements OnInit {
       this.form.patchValue(this.data.category);
     }
   }
-
 }

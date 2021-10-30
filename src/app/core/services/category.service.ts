@@ -6,7 +6,6 @@ import { Category } from '@core/models/Category';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
-
   constructor(@Inject(API_URL) private api: string, private http: HttpClient) {}
 
   all(): Observable<Category[]> {
@@ -20,5 +19,4 @@ export class CategoryService {
   update(id: number, body: any): Observable<Category> {
     return this.http.patch<Category>(`${this.api}/categories/${id}`, body);
   }
-
 }

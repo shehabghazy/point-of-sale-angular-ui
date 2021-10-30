@@ -8,10 +8,9 @@ import { PageEvent } from '@angular/material/paginator';
   selector: 'app-supplies',
   templateUrl: './supplies.component.html',
   styleUrls: ['./supplies.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SuppliesComponent {
-
   categories$ = this.categoryService.all();
 
   data$ = this.supplyService.all(1, 20);
@@ -19,7 +18,7 @@ export class SuppliesComponent {
   constructor(
     private categoryService: CategoryService,
     private supplyService: SupplyService
-  ) { }
+  ) {}
 
   handlePagination({ pageSize, pageIndex }: PageEvent): void {
     this.data$ = this.supplyService.all(pageIndex + 1, pageSize);
@@ -28,5 +27,4 @@ export class SuppliesComponent {
   handleSearch(filters: SupplyFilter): void {
     this.data$ = this.supplyService.all(1, 20, filters);
   }
-
 }

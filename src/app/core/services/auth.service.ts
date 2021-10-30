@@ -7,7 +7,7 @@ import { distinctUntilChanged, map, shareReplay, tap } from 'rxjs/operators';
 import { LoginResponse } from '@core/models/LoginResponse';
 import { Router } from '@angular/router';
 import { CreateAdminPayload } from '@core/models/CreateAdminPayload';
-import { User } from "@core/models/user.model";
+import { User } from '@core/models/user.model';
 
 export interface AuthState {
   userId: number | null;
@@ -24,18 +24,16 @@ export const initialState: AuthState = {
   token_type: null,
   expires_at: null,
   name: null,
-  role: null
+  role: null,
 };
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
   constructor(
     @Inject(API_URL) private api: string,
     private http: HttpClient,
     private router: Router
-  ) {
-  }
+  ) {}
 
   private auth = new BehaviorSubject<AuthState>(this.getLocalState());
   public auth$ = this.auth.asObservable().pipe(distinctUntilChanged());
@@ -48,10 +46,12 @@ export class AuthService {
     return this.state.role;
   }
 
-  adminExists$ = this.http.get<{ exists: boolean }>(`${this.api}/adminExists`).pipe(
-    map(res => res.exists),
-    shareReplay(1),
-  );
+  adminExists$ = this.http
+    .get<{ exists: boolean }>(`${this.api}/adminExists`)
+    .pipe(
+      map(res => res.exists),
+      shareReplay(1)
+    );
 
   profile$ = this.http.get<User>(`${this.api}/auth/user`);
 
@@ -80,9 +80,9 @@ export class AuthService {
   }
 
   changeName(name: string): Observable<User> {
-    return this.http.post<User>(`${this.api}/auth/changeName`, { name }).pipe(
-      tap(_ => this.auth.next({ ...this.auth.getValue(), name }))
-    );
+    return this.http
+      .post<User>(`${this.api}/auth/changeName`, { name })
+      .pipe(tap(_ => this.auth.next({ ...this.auth.getValue(), name })));
   }
 
   changePassword(payload: any): Observable<User> {
@@ -96,6 +96,9 @@ export class AuthService {
   }
 
   changeProfilePhoto(photo: any): Observable<any> {
-    return this.http.post(`${this.api}/users/${this.state.userId}/setPhoto`, photo);
+    return this.http.post(
+      `${this.api}/users/${this.state.userId}/setPhoto`,
+      photo
+    );
   }
 }

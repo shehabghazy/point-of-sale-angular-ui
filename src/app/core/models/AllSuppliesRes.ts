@@ -13,7 +13,6 @@ export interface Supply {
   product: Product;
 }
 
-
 export interface AllSuppliesRes {
   current_page: number;
   data: Supply[];

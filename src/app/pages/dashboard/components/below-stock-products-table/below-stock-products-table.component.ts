@@ -4,14 +4,13 @@ import { LowStockProduct } from '@core/models/DashboardResponse';
 @Component({
   selector: 'app-below-stock-products-table',
   templateUrl: './below-stock-products-table.component.html',
-  styleUrls: [ './below-stock-products-table.component.scss' ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./below-stock-products-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BelowStockProductsTableComponent {
-
   @Input() dataSource: LowStockProduct[] = [];
 
-  displayedColumns = [ 'name', 'minimumStock', 'stock', 'button' ];
+  displayedColumns = ['name', 'minimumStock', 'stock', 'button'];
 
   getColor(stock: number, minimumStock: number): string {
     const limit = minimumStock * 0.2;

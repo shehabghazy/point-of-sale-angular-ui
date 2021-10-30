@@ -1,5 +1,4 @@
 <div class="container pb-5">
-
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="d-flex align-items-center">
       <h1 class="m-0">Shifts</h1>
@@ -16,7 +15,8 @@
 
   <ng-container *ngIf="shifts$ | async as data; else loading">
     <app-shifts-table
-      *ngIf="data.length > 0" @fadeIn
+      *ngIf="data.length > 0"
+      @fadeIn
       [data]="data"
       (opened)="editShift($event)">
     </app-shifts-table>
@@ -27,7 +27,4 @@
       <mat-spinner></mat-spinner>
     </div>
   </ng-template>
-
-
 </div>
-

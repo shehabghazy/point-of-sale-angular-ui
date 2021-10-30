@@ -21,7 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 const routes: Routes = [
   { path: '', component: SuppliesComponent },
   { path: 'add', component: AddSupplyComponent },
-  { path: 'add/:productId', component: AddSupplyComponent }
+  { path: 'add/:productId', component: AddSupplyComponent },
 ];
 
 @NgModule({
@@ -29,7 +29,7 @@ const routes: Routes = [
     SuppliesComponent,
     SuppliesTableComponent,
     SuppliesSearchFormComponent,
-    AddSupplyComponent
+    AddSupplyComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +47,6 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SuppliesModule { }
+export class SuppliesModule {}

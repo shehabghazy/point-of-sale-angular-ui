@@ -13,25 +13,24 @@ export interface SupplyState {
 }
 
 export const initialState: SupplyState = {
-  filters: null
+  filters: null,
 };
 
 @Injectable({ providedIn: 'root' })
 export class SupplyService {
-
   private supplyState = new BehaviorSubject<SupplyState>(initialState);
 
   get state(): SupplyState {
     return this.supplyState.getValue();
   }
 
-  constructor(
-    @Inject(API_URL) private api: string,
-    private http: HttpClient
-  ) { }
+  constructor(@Inject(API_URL) private api: string, private http: HttpClient) {}
 
-  all(page: number, pageSize: number, filters?: Partial<SupplyFilter>): Observable<AllSuppliesRes> {
-
+  all(
+    page: number,
+    pageSize: number,
+    filters?: Partial<SupplyFilter>
+  ): Observable<AllSuppliesRes> {
     let finalFilters: Partial<SupplyFilter> = this.state.filters ?? {};
 
     if (filters) {
@@ -42,16 +41,19 @@ export class SupplyService {
       .append('page', page)
       .append('pageSize', pageSize);
 
-    return this.http.get<AllSuppliesRes>(`${ this.api }/supplies`, { params })
+    return this.http
+      .get<AllSuppliesRes>(`${this.api}/supplies`, { params })
       .pipe(tap(x => console.log(x)));
   }
 
   getById(id: number): Observable<Invoice> {
-    return this.http.get<Invoice>(`${ this.api }/invoices/${ id }`);
+    return this.http.get<Invoice>(`${this.api}/invoices/${id}`);
   }
 
-  create(payload: { productId: number; supplyQuantity: number }): Observable<any> {
-    return this.http.post<any>(`${ this.api }/supplies/create`, payload);
+  create(payload: {
+    productId: number;
+    supplyQuantity: number;
+  }): Observable<any> {
+    return this.http.post<any>(`${this.api}/supplies/create`, payload);
   }
-
 }

@@ -38,5 +38,3 @@ export interface LowStockProduct {
   updated_at?: any;
   stock: Stock;
 }
-
-

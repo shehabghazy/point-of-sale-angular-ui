@@ -12,17 +12,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-
-const routes: Routes = [
-  { path: '', component: DashboardComponent }
-];
+const routes: Routes = [{ path: '', component: DashboardComponent }];
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ItemsChartComponent,
     CategoriesChartComponent,
-    BelowStockProductsTableComponent
+    BelowStockProductsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -33,8 +30,7 @@ const routes: Routes = [
     PieChartModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
-  ]
+    MatIconModule,
+  ],
 })
-export class DashboardModule {
-}
+export class DashboardModule {}

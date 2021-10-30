@@ -1,5 +1,4 @@
 <div class="container">
-
   <div class="row justify-content-center">
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center mb-3">
@@ -19,7 +18,8 @@
                     <span>Product name:</span> <b>{{ product.name }}</b>
                   </div>
                   <div>
-                    <span>Product category:</span> <b>{{ product.category.name }}</b>
+                    <span>Product category:</span>
+                    <b>{{ product.category.name }}</b>
                   </div>
                   <div>
                     <span>Barcode:</span> <b>{{ product.barcode }}</b>
@@ -28,22 +28,29 @@
                     <span>Minimum stock:</span> <b>{{ product.low_stock }}</b>
                   </div>
                   <div>
-                    <span>Current stock:</span> <b>{{ product.stock.quantity }} {{ product.stock.type }}</b>
+                    <span>Current stock:</span>
+                    <b>{{ product.stock.quantity }} {{ product.stock.type }}</b>
                   </div>
                 </ng-container>
-
               </div>
               <div class="col-8">
                 <mat-form-field class="full-width" appearance="outline">
                   <mat-label>Supply quantity</mat-label>
-                  <input type="text" formControlName="supplyQuantity"
-                         matInput placeholder="Add supply quantity">
+                  <input
+                    type="text"
+                    formControlName="supplyQuantity"
+                    matInput
+                    placeholder="Add supply quantity" />
                   <span matSuffix>{{ product.stock.type }}</span>
                 </mat-form-field>
               </div>
 
               <div class="col-12">
-                <button type="button" (click)="onSubmit(product)" mat-raised-button color="primary">
+                <button
+                  type="button"
+                  (click)="onSubmit(product)"
+                  mat-raised-button
+                  color="primary">
                   <mat-icon class="mr-2">add_shopping_cart</mat-icon>
                   <span>Supply product</span>
                 </button>
@@ -56,11 +63,8 @@
               </div>
             </ng-template>
           </form>
-
         </mat-card-content>
       </mat-card>
-
     </div>
   </div>
-
 </div>

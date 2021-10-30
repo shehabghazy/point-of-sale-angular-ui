@@ -19,16 +19,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { CreateInvoiceTableComponent } from './components/create-invoice-table/create-invoice-table.component';
 import { CurrentStockQuantityPipe } from './create-invoice/current-stock-quantity.pipe';
 import { InvoiceFormatComponent } from './components/invoice-format/invoice-format.component';
-import {NgxBarcodeModule} from 'ngx-barcode';
-import {QRCodeModule} from 'angularx-qrcode';
-import {QrCodeModule} from 'ng-qrcode';
-
+import { NgxBarcodeModule } from 'ngx-barcode';
+import { QRCodeModule } from 'angularx-qrcode';
+import { QrCodeModule } from 'ng-qrcode';
 
 const routes: Routes = [
   { path: '', component: InvoiceComponent },
-  { path: 'create', component: CreateInvoiceComponent }
+  { path: 'create', component: CreateInvoiceComponent },
 ];
-
 
 @NgModule({
   declarations: [
@@ -38,7 +36,7 @@ const routes: Routes = [
     InvoiceFilterComponent,
     CreateInvoiceTableComponent,
     CurrentStockQuantityPipe,
-    InvoiceFormatComponent
+    InvoiceFormatComponent,
   ],
   imports: [
     CommonModule,
@@ -55,9 +53,8 @@ const routes: Routes = [
     MatNativeDateModule,
     ReactiveFormsModule,
     NgxBarcodeModule,
-    QrCodeModule
+    QrCodeModule,
   ],
-  exports: [ RouterModule ]
+  exports: [RouterModule],
 })
-export class InvoiceModule {
-}
+export class InvoiceModule {}

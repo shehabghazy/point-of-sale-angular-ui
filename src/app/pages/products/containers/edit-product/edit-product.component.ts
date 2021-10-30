@@ -8,10 +8,9 @@ import { SaveProductPayload } from '@core/models/product.model';
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
-  styleUrls: [ './edit-product.component.scss' ]
+  styleUrls: ['./edit-product.component.scss'],
 })
 export class EditProductComponent {
-
   product$ = this.route.paramMap.pipe(
     switchMap(params => this.productService.getById(params.get('id')!))
   );
@@ -22,15 +21,13 @@ export class EditProductComponent {
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private categoryService: CategoryService,
+    private categoryService: CategoryService
   ) {}
 
-
   handleEdit(id: number, product: SaveProductPayload): void {
-    this.productService.updateProduct(id, product).pipe(take(1))
-      .subscribe(res =>
-        this.router.navigate([ '/products/details', res.id ])
-      );
+    this.productService
+      .updateProduct(id, product)
+      .pipe(take(1))
+      .subscribe(res => this.router.navigate(['/products/details', res.id]));
   }
-
 }

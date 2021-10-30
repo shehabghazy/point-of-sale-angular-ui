@@ -1,10 +1,13 @@
 <div class="container p-3">
-
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="d-flex align-items-center">
       <h1 class="m-0">Invoices</h1>
-      <button class="mx-3" routerLink="/invoice/create"
-              (click)="resetInvoice()" mat-button color="primary">
+      <button
+        class="mx-3"
+        routerLink="/invoice/create"
+        (click)="resetInvoice()"
+        mat-button
+        color="primary">
         <mat-icon class="mr-2">add</mat-icon>
         <span>Create invoice</span>
       </button>
@@ -28,9 +31,7 @@
     </app-invoice-filter>
   </ng-container>
 
-
   <div *ngIf="data$ | async as data; else loading">
-
     <app-invoice-table
       @fadeIn
       *ngIf="data.data.length > 0"
@@ -43,7 +44,6 @@
     <div *ngIf="data.data.length === 0" @fadeIn class="no-data">
       No data found!
     </div>
-
   </div>
 
   <ng-template #loading>
@@ -51,8 +51,6 @@
       <mat-spinner></mat-spinner>
     </div>
   </ng-template>
-
-
 </div>
 
 <!--<app-invoice-format [invoiceDetails]="invoiceDetails"></app-invoice-format>-->

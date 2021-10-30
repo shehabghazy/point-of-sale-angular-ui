@@ -6,7 +6,7 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: [ './dashboard.component.scss' ],
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   data: Partial<DashboardResponse> = {
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
 
   loading = false;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.getDashboardStats();
@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
 
   getDashboardStats(): void {
     this.loading = true;
-    this.dashboardService.data$.pipe(take(1)).subscribe((res) => {
+    this.dashboardService.data$.pipe(take(1)).subscribe(res => {
       this.data = res;
       this.loading = false;
     });
