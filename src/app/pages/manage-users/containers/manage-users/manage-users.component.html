@@ -10,9 +10,9 @@
     <mat-form-field appearance="outline">
       <mat-label>Search</mat-label>
       <input
+        (keydown)="filterUsers($any($event.target).value)"
         matInput
-        placeholder="ex. John Doe"
-        (keydown)="filterUsers($any($event.target).value)" />
+        placeholder="ex. John Doe" />
       <mat-icon matSuffix>person_search</mat-icon>
     </mat-form-field>
   </div>

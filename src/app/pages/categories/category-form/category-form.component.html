@@ -23,8 +23,8 @@
     <ng-container *ngIf="form.get('name')?.value !== ''">
       <h3>Preview:</h3>
 
-      <button mat-button type="button" [style.color]="form.get('color')?.value">
-        <mat-icon *ngIf="form.get('icon')?.value !== ''" class="mr-2">
+      <button [style.color]="form.get('color')?.value" mat-button type="button">
+        <mat-icon class="mr-2" *ngIf="form.get('icon')?.value !== ''">
           {{ form.get('icon')?.value }}
         </mat-icon>
         <span>{{ form.get('name')?.value }}</span>
@@ -34,12 +34,12 @@
 
     <div>
       <button
+        class="mr-2"
         [disabled]="form.invalid"
-        mat-flat-button
         [mat-dialog-close]="form.value"
+        mat-flat-button
         color="primary"
-        type="submit"
-        class="mr-2">
+        type="submit">
         Save
       </button>
       <button mat-button color="warn" type="button" mat-dialog-close>

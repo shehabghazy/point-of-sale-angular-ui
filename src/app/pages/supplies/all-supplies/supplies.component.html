@@ -15,16 +15,16 @@
     (searched)="handleSearch($event)">
   </app-supplies-search-form>
 
-  <div *ngIf="data$ | async as data; else loading" class="mt-3">
+  <div class="mt-3" *ngIf="data$ | async as data; else loading">
     <app-supplies-table
-      @fadeIn
-      *ngIf="data.data.length > 0"
       class="invoice-table"
+      *ngIf="data.data.length > 0"
+      @fadeIn
       [dataSource]="data"
       (paginated)="handlePagination($event)">
     </app-supplies-table>
 
-    <div *ngIf="data.data.length === 0" @fadeIn class="no-data">
+    <div class="no-data" *ngIf="data.data.length === 0" @fadeIn>
       No data found!
     </div>
   </div>

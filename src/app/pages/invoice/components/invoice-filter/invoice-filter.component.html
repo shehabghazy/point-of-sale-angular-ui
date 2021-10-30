@@ -2,7 +2,7 @@
   <mat-card class="filter-form">
     <mat-card-content>
       <div class="row">
-        <div *ngIf="showUsers" class="col">
+        <div class="col" *ngIf="showUsers">
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>User</mat-label>
             <mat-select formControlName="user">
@@ -37,8 +37,8 @@
                 placeholder="End date" />
             </mat-date-range-input>
             <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"></mat-datepicker-toggle>
+              [for]="picker"
+              matSuffix></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
 
             <mat-error
@@ -53,15 +53,15 @@
         </div>
 
         <div class="col">
-          <button mat-raised-button color="primary" class="mr-2" type="submit">
+          <button class="mr-2" mat-raised-button color="primary" type="submit">
             <mat-icon class="mr-2">search</mat-icon>
             <span>Search</span>
           </button>
           <button
+            (click)="form.reset(); onSubmit()"
             mat-button
             color="warn"
-            type="button"
-            (click)="form.reset(); onSubmit()">
+            type="button">
             Reset
           </button>
         </div>

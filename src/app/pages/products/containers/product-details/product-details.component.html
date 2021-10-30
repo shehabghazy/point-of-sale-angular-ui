@@ -2,15 +2,15 @@
   <ng-container *ngIf="product$ | async as product; else loading">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <div class="d-flex align-items-center">
-        <button routerLink="/products" class="mr-2" mat-icon-button>
+        <button class="mr-2" routerLink="/products" mat-icon-button>
           <mat-icon>arrow_back</mat-icon>
         </button>
         <h1 class="m-0">Product details</h1>
       </div>
       <button
+        [routerLink]="['/products/edit', product.id]"
         mat-button
-        color="primary"
-        [routerLink]="['/products/edit', product.id]">
+        color="primary">
         <mat-icon class="mr-2">edit</mat-icon>
         <span>Edit product</span>
       </button>

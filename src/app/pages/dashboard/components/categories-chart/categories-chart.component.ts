@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   Input,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { LegendPosition } from '@swimlane/ngx-charts';
@@ -13,7 +12,7 @@ import { LegendPosition } from '@swimlane/ngx-charts';
   templateUrl: './categories-chart.component.html',
   styleUrls: ['./categories-chart.component.scss'],
 })
-export class CategoriesChartComponent implements OnInit, AfterContentChecked {
+export class CategoriesChartComponent implements AfterContentChecked {
   @ViewChild('chartContainer') chartContainer?: ElementRef;
   offsetWidthContainer = 200;
 
@@ -45,10 +44,6 @@ export class CategoriesChartComponent implements OnInit, AfterContentChecked {
       console.log(event);
     },
   };
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   ngAfterContentChecked(): void {
     this.offsetWidthContainer = this.chartContainer?.nativeElement.offsetWidth;

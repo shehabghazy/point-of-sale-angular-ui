@@ -1,6 +1,6 @@
 <div
-  *ngIf="user$ | async as user; else loading"
-  class="container d-flex justify-content-center">
+  class="container d-flex justify-content-center"
+  *ngIf="user$ | async as user; else loading">
   <mat-card class="mt-3 py-3 profile-card">
     <mat-card-content
       class="py-3 d-flex flex-column justify-content-center align-items-center">
@@ -11,10 +11,10 @@
             <p class="middle">Change profile photo</p>
           </div>
           <input
-            accept="image/png, image/gif, image/jpeg"
             id="fileInput"
-            type="file"
-            (change)="onSelectFile($event)" />
+            (change)="onSelectFile($event)"
+            accept="image/png, image/gif, image/jpeg"
+            type="file" />
           <div class="role-badge"></div>
         </label>
       </div>
@@ -35,30 +35,30 @@
           align-items-center
         ">
         <h1
-          style="cursor: pointer"
-          @fadeIn
+          class="my-2"
           *ngIf="!editName"
+          @fadeIn
           (dblclick)="editName = true"
-          class="my-2">
+          style="cursor: pointer">
           {{ user.name }}
         </h1>
 
-        <div @fadeIn *ngIf="editName" class="d-flex flex-column my-4">
+        <div class="d-flex flex-column my-4" *ngIf="editName" @fadeIn>
           <mat-form-field>
             <mat-label>Name</mat-label>
             <input
-              matInput
-              placeholder="Ex. John Doe"
               #nameInput
-              [value]="user.name" />
+              [value]="user.name"
+              matInput
+              placeholder="Ex. John Doe" />
           </mat-form-field>
           <div class="d-flex justify-content-center">
-            <button mat-button (click)="editName = false" color="warn">
+            <button (click)="editName = false" mat-button color="warn">
               Close
             </button>
             <button
-              mat-button
               (click)="submitName(nameInput.value)"
+              mat-button
               color="primary">
               Save
             </button>
@@ -67,16 +67,16 @@
 
         <h3>{{ user.email }}</h3>
         <button
-          @fadeIn
-          mat-flat-button
-          color="primary"
           *ngIf="!changePassword"
-          (click)="changePassword = true">
+          @fadeIn
+          (click)="changePassword = true"
+          mat-flat-button
+          color="primary">
           Reset Password
         </button>
 
-        <div @fadeIn *ngIf="changePassword">
-          <form [formGroup]="changePasswordForm" class="d-flex flex-column">
+        <div *ngIf="changePassword" @fadeIn>
+          <form class="d-flex flex-column" [formGroup]="changePasswordForm">
             <mat-form-field>
               <mat-label>Old Password</mat-label>
               <input type="password" matInput formControlName="oldPassword" />
@@ -99,12 +99,12 @@
             >
 
             <div class="d-flex justify-content-center">
-              <button mat-button (click)="changePassword = false" color="warn">
+              <button (click)="changePassword = false" mat-button color="warn">
                 Close
               </button>
               <button
-                (click)="submitChangePassword()"
                 [disabled]="changePasswordForm.invalid"
+                (click)="submitChangePassword()"
                 type="submit"
                 mat-button
                 color="primary">

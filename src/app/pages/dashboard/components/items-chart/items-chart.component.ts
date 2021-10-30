@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   Input,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 
@@ -12,7 +11,7 @@ import {
   templateUrl: './items-chart.component.html',
   styleUrls: ['./items-chart.component.scss'],
 })
-export class ItemsChartComponent implements OnInit, AfterContentChecked {
+export class ItemsChartComponent implements AfterContentChecked {
   @ViewChild('chartContainer') chartContainer?: ElementRef;
   offsetWidthContainer = 200;
 
@@ -34,10 +33,6 @@ export class ItemsChartComponent implements OnInit, AfterContentChecked {
       console.log(event);
     },
   };
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   ngAfterContentChecked(): void {
     this.offsetWidthContainer = this.chartContainer?.nativeElement.offsetWidth;

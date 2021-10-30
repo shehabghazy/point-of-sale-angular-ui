@@ -2,8 +2,8 @@
   <ng-container *ngIf="product$ | async as product; else loading">
     <div class="d-flex align-items-center mb-3">
       <button
-        [routerLink]="['/products/details', product.id]"
         class="mr-2"
+        [routerLink]="['/products/details', product.id]"
         mat-icon-button>
         <mat-icon>arrow_back</mat-icon>
       </button>

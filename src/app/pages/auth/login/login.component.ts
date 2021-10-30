@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '@core/services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { take } from 'rxjs/operators';
-import { handleServerSideValidation } from '@core/utils/server-side-validation';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '@core/services/auth.service';
+import { handleServerSideValidation } from '@core/utils/server-side-validation';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   form = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -25,8 +25,6 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private snackBar: MatSnackBar
   ) {}
-
-  ngOnInit(): void {}
 
   submit(): void {
     if (this.form.invalid) {

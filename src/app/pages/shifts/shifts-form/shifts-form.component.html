@@ -22,12 +22,12 @@
 
     <div>
       <button
+        class="mr-2"
         [disabled]="form.invalid"
-        mat-flat-button
         [mat-dialog-close]="form.value"
+        mat-flat-button
         color="primary"
-        type="submit"
-        class="mr-2">
+        type="submit">
         Save
       </button>
       <button mat-button color="warn" type="button" mat-dialog-close>

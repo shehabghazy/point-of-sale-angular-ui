@@ -70,8 +70,8 @@
 
         <div class="qrCode">
           <qr-code
-            style=""
             [value]="qrCodeLink"
+            style=""
             errorCorrectionLevel="L"></qr-code>
           <!--          <qr-code></qr-code>-->
         </div>
@@ -79,11 +79,11 @@
           <div>
             <div class="barcode" style="width: 200px; display: block">
               <ngx-barcode
-                style="height: 60px; width: 200px"
                 [bc-height]="40"
                 [bc-width]="2"
                 [bc-value]="barcode"
-                [bc-display-value]="false">
+                [bc-display-value]="false"
+                style="height: 60px; width: 200px">
               </ngx-barcode>
             </div>
           </div>
