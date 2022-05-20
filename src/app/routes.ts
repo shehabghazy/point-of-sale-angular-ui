@@ -1,26 +1,23 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { EmptyLayoutComponent } from './layout/containers/empty-layout/empty-layout.component';
-import { MainLayoutComponent } from './layout/containers/main-layout/main-layout.component';
+import { Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth.guard';
 import { NonAuthGuard } from '@core/guards/non-auth.guard';
 import { RoleGuard } from '@core/guards/role.guard';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
-    component: EmptyLayoutComponent,
-    canActivate: [NonAuthGuard],
+    // canActivate: [NonAuthGuard],
     children: [
       {
         path: '',
-        redirectTo: 'auth',
+        redirectTo: 'dashboard',
         pathMatch: 'full',
       },
       {
         path: 'auth',
         loadChildren: () =>
-          import('./pages/auth/auth.module').then(m => m.AuthModule),
+          import('./pages/auth/auth.routes').then(m => m.routes),
       },
     ],
   },
@@ -53,20 +50,13 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        loadChildren: () =>
-          import('./pages/profile/profile.module').then(m => m.ProfileModule),
-      },
-      {
-        path: 'settings',
-        loadChildren: () =>
-          import('./pages/settings/settings.module').then(
-            m => m.SettingsModule
-          ),
+        loadComponent: async () =>
+          (await import('./pages/profile/profile.component')).ProfileComponent,
       },
       {
         path: 'shifts',
-        loadChildren: () =>
-          import('./pages/shifts/shifts.module').then(m => m.ShiftsModule),
+        loadComponent: async () =>
+          (await import('./pages/shifts/shifts.component')).ShiftsComponent,
       },
       {
         path: 'categories',
@@ -97,9 +87,3 @@ const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

@@ -1,3 +1,5 @@
+import { MatTableModule } from '@angular/material/table';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,6 +13,8 @@ import { Shift } from '@core/models/shift.model';
   selector: 'app-shifts-table',
   templateUrl: './shifts-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule, MatTableModule],
 })
 export class ShiftsTableComponent {
   @Input() data: Shift[] = [];

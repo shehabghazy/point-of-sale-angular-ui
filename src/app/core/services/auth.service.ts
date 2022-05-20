@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Credentials } from '@core/models/credentials.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@core/api.token';
 import { distinctUntilChanged, map, shareReplay, tap } from 'rxjs/operators';
@@ -46,12 +46,14 @@ export class AuthService {
     return this.state.role;
   }
 
-  adminExists$ = this.http
-    .get<{ exists: boolean }>(`${this.api}/adminExists`)
-    .pipe(
-      map(res => res.exists),
-      shareReplay(1)
-    );
+  // adminExists$ = this.http
+  //   .get<{ exists: boolean }>(`${this.api}/adminExists`)
+  //   .pipe(
+  //     map(res => res.exists),
+  //     shareReplay(1)
+  //   );
+
+  adminExists$ = of(true);
 
   profile$ = this.http.get<User>(`${this.api}/auth/user`);
 

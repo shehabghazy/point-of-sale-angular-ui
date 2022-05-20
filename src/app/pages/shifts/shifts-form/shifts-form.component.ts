@@ -1,7 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  Validators,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ShiftsFormData } from '@app/pages/shifts/ShiftsFormData';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-shifts-form',
@@ -15,6 +23,15 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
         min-width: 300px;
       }
     `,
+  ],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
 })
 export class ShiftsFormComponent implements OnInit {

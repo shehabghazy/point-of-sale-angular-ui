@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[canView]',
+  standalone: true,
 })
 export class HideForDirective {
   private hasView = false;
@@ -70,9 +71,3 @@ export class HideForDirective {
     return this.auth.state.role === 'economist';
   }
 }
-
-@NgModule({
-  declarations: [HideForDirective],
-  exports: [HideForDirective],
-})
-export class HideForModule {}

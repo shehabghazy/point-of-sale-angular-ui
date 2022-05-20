@@ -7,6 +7,15 @@
       <ng-container *ngFor="let item of navItems">
         <button
           class="mr-2"
+          [routerLink]="[item.path]"
+          mat-button
+          routerLinkActive="active">
+          <mat-icon class="mr-2">{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </button>
+
+        <!-- <button
+          class="mr-2"
           *ngIf="
             item.roles.includes(auth.state.role!) || item.roles.length === 0
           "
@@ -15,7 +24,7 @@
           routerLinkActive="active">
           <mat-icon class="mr-2">{{ item.icon }}</mat-icon>
           <span>{{ item.label }}</span>
-        </button>
+        </button> -->
       </ng-container>
     </div>
   </div>

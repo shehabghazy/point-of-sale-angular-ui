@@ -9,7 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { AuthService } from '@core/services/auth.service';
 import { pluck } from 'rxjs/operators';
-import { LayoutService } from '@app/layout/services/layout.service';
+import { LayoutService } from '@app/layout/layout.service';
 
 @Injectable({
   providedIn: 'root',
