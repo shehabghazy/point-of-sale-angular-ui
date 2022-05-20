@@ -60,10 +60,9 @@ export const routes: Routes = [
       },
       {
         path: 'categories',
-        loadChildren: () =>
-          import('./pages/categories/categories.module').then(
-            m => m.CategoriesModule
-          ),
+        loadComponent: async () =>
+          (await import('./pages/categories/categories.component'))
+            .CategoriesComponent,
       },
       {
         path: 'invoice',
