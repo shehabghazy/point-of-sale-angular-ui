@@ -10,7 +10,12 @@ import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { CategoryFormData } from '@app/pages/categories/CategoryFormData';
+import { Category } from '@app/core/models/Category';
+
+export interface CategoryFormData {
+  type: 'add' | 'edit';
+  category: Category | null;
+}
 
 @Component({
   selector: 'app-category-form',

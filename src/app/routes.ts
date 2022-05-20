@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth.guard';
-import { NonAuthGuard } from '@core/guards/non-auth.guard';
 import { RoleGuard } from '@core/guards/role.guard';
-import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
 export const routes: Routes = [
   {
@@ -23,7 +21,9 @@ export const routes: Routes = [
   },
   {
     path: '',
-    component: MainLayoutComponent,
+    loadComponent: async () =>
+      (await import('./layout/main-layout/main-layout.component'))
+        .MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
       {
