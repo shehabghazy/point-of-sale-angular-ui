@@ -33,6 +33,7 @@ import { ShiftsFormData } from '@app/pages/shifts/ShiftsFormData';
     MatFormFieldModule,
     MatInputModule,
   ],
+  providers: [ReactiveFormsModule],
 })
 export class ShiftsFormComponent implements OnInit {
   form = this.fb.group({
