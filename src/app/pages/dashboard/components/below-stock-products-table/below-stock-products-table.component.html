@@ -20,7 +20,7 @@
         (
         <span
           [ngStyle]="{
-            color: getColor(element.stock.quantity, element.low_stock)
+            color: element.stock.quantity | stockColor: element.low_stock
           }">
           {{ element.stock.quantity - element.low_stock }}
         </span>

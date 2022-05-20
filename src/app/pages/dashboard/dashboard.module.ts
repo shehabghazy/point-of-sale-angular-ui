@@ -19,7 +19,6 @@ const routes: Routes = [{ path: '', component: DashboardComponent }];
     DashboardComponent,
     ItemsChartComponent,
     CategoriesChartComponent,
-    BelowStockProductsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +30,7 @@ const routes: Routes = [{ path: '', component: DashboardComponent }];
     MatTableModule,
     MatButtonModule,
     MatIconModule,
+    BelowStockProductsTableComponent,
   ],
 })
 export class DashboardModule {}
