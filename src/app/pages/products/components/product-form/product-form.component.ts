@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ProductDetails, SaveProductPayload } from '@core/models/product.model';
 import { Category } from '@core/models/Category';
 
@@ -27,7 +27,7 @@ export class ProductFormComponent implements OnInit {
     category_id: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     if (this.product) {

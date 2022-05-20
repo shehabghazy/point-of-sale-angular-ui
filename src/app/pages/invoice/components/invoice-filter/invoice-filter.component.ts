@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { User } from '@core/models/user.model';
 import { InvoiceFilter } from '@core/models/InvoiceFilter';
 import { convertDateForBE } from '@core/utils/date-utils';
@@ -30,7 +30,7 @@ export class InvoiceFilterComponent {
 
   @Output() filtered = new EventEmitter<InvoiceFilter>();
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(private fb: UntypedFormBuilder, private auth: AuthService) {}
 
   onSubmit(): void {
     const startDate = this.form.get('startDate')!.value;

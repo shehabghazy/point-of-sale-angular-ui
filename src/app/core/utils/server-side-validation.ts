@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 export function handleServerSideValidation(
   error: HttpErrorResponse,
-  form: FormGroup
+  form: UntypedFormGroup
 ): undefined | string {
   // if the error isn't with status 422 (Unprocessable Entity) don't do anything
   if (error.status !== 422) {

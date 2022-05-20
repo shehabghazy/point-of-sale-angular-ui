@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { convertDateForBE } from '@core/utils/date-utils';
 import { Category } from '@core/models/Category';
 import { SupplyFilter } from '@core/models/SupplyFilter';
@@ -28,7 +28,7 @@ export class SuppliesSearchFormComponent {
     endDate: null,
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   onSubmit(): void {
     const startDate = this.form.get('startDate')!.value;

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CategoryFormData } from '@app/pages/categories/CategoryFormData';
 
@@ -26,7 +26,7 @@ export class CategoryFormComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: CategoryFormData,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {

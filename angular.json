@@ -6,7 +6,9 @@
       "enabled": true,
       "environment": "all"
     },
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -149,6 +151,5 @@
         }
       }
     }
-  },
-  "defaultProject": "booking-tool"
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { fadeIn } from '@app/animations/fadeIn.animation';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { API_URL } from '@core/api.token';
@@ -22,7 +22,7 @@ export class ProfileComponent {
 
   hasPhotoUploaded = false;
 
-  uploadForm: FormGroup = this.fb.group({
+  uploadForm: UntypedFormGroup = this.fb.group({
     profile: [''],
   });
 
@@ -37,7 +37,7 @@ export class ProfileComponent {
 
   constructor(
     private auth: AuthService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private snackBar: MatSnackBar,
     @Inject(API_URL) private api: string
   ) {}
@@ -72,7 +72,7 @@ export class ProfileComponent {
       );
   }
 
-  checkPasswords(group: FormGroup): null | { notSame: boolean } {
+  checkPasswords(group: UntypedFormGroup): null | { notSame: boolean } {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const password = group.get('newPassword')!.value;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

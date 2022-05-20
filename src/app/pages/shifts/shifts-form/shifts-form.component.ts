@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ShiftsFormData } from '@app/pages/shifts/ShiftsFormData';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-shifts-form',
@@ -26,7 +26,7 @@ export class ShiftsFormComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ShiftsFormData,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {

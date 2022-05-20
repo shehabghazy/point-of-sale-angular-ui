@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Product } from '@core/models/product.model';
 import { ProductsFilter } from '@core/models/products-filter.model';
 import { Category } from '@core/models/Category';
@@ -23,7 +23,7 @@ export class ProductFilterFormComponent implements OnInit {
 
   @Output() filtered = new EventEmitter<Product>();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     if (this.filters) {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, Validators } from '@angular/forms';
 import { User } from '@core/models/user.model';
 import { ShiftsService } from '@core/services/shifts.service';
 
@@ -48,7 +48,7 @@ export class UserFormComponent implements OnInit {
     role: [null, Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private shiftsService: ShiftsService) {}
+  constructor(private fb: UntypedFormBuilder, private shiftsService: ShiftsService) {}
 
   ngOnInit(): void {
     if (this.user) {
