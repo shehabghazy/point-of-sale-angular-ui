@@ -5,7 +5,6 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthInterceptorProvider } from '@app/core/interceptors/auth.interceptor';
-import { routes } from '@app/routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 
