@@ -2,10 +2,12 @@ import { Component, Inject } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { fadeIn } from '@app/animations/fadeIn.animation';
 import {
+  AbstractControl,
   FormsModule,
   ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { take } from 'rxjs/operators';
@@ -67,7 +69,7 @@ export class ProfileComponent {
     private fb: UntypedFormBuilder,
     private snackBar: MatSnackBar,
     @Inject(API_URL) private api: string
-  ) {}
+  ) { }
 
   submitName(name: string): void {
     this.editName = false;
@@ -99,14 +101,15 @@ export class ProfileComponent {
       );
   }
 
-  checkPasswords(group: UntypedFormGroup): null | { notSame: boolean } {
+  checkPasswords(control: AbstractControl): ValidationErrors | null {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const password = group.get('newPassword')!.value;
+    const password = control.get('newPassword')!.value;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const confirmPassword = group.get('confirmPassword')!.value;
+    const confirmPassword = control.get('confirmPassword')!.value;
 
     return password === confirmPassword ? null : { notSame: true };
   }
+
 
   onSelectFile(event: any): void {
     console.log(event);

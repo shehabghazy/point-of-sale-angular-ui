@@ -69,10 +69,9 @@
         <!--        </div>-->
 
         <div class="qrCode">
-          <qr-code
-            [value]="qrCodeLink"
-            style=""
-            errorCorrectionLevel="L"></qr-code>
+          <qrcode
+            [qrdata]="qrCodeLink"
+            errorCorrectionLevel="L"></qrcode>
           <!--          <qr-code></qr-code>-->
         </div>
         <div>
