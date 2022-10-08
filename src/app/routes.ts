@@ -5,22 +5,6 @@ import { RoleGuard } from '@core/guards/role.guard';
 export const routes: Routes = [
   {
     path: '',
-    // canActivate: [NonAuthGuard],
-    children: [
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },
-      {
-        path: 'auth',
-        loadChildren: () =>
-          import('./pages/auth/auth.routes').then(m => m.routes),
-      },
-    ],
-  },
-  {
-    path: '',
     loadComponent: async () =>
       (await import('./layout/main-layout/main-layout.component'))
         .MainLayoutComponent,
