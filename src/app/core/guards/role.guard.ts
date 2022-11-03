@@ -29,18 +29,17 @@ export class RoleGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return true;
-    // let response = false;
-    // this.layoutService.navItems.map(navItem => {
-    //   if (navItem.path === route.url[0].path) {
-    //     if (navItem.roles.includes(this.auth.getLocalState().role as string)) {
-    //       response = true;
-    //       return;
-    //     } else {
-    //       return;
-    //     }
-    //   }
-    // });
-    // return response;
+     let response = false;
+     this.layoutService.navItems.map(navItem => {
+       if (navItem.path === route.url[0].path) {
+         if (navItem.roles.includes(this.auth.getLocalState().role as string)) {
+           response = true;
+           return;
+        } else {
+           return;
+         }
+       }
+     });
+     return response;
   }
 }

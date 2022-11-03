@@ -1,8 +1,20 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth.guard';
 import { RoleGuard } from '@core/guards/role.guard';
+import { NonAuthGuard } from './core/guards/non-auth.guard';
 
 export const routes: Routes = [
+  {
+    path: '',
+    canActivate: [NonAuthGuard],
+    children: [
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./pages/auth/auth.routes').then(m => m.routes),
+      },
+    ],
+  },
   {
     path: '',
     loadComponent: async () =>

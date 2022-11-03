@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { handleServerSideValidation } from '@core/utils/server-side-validation';
 import { take } from 'rxjs/operators';
@@ -35,7 +36,7 @@ import { take } from 'rxjs/operators';
 })
 export class LoginComponent {
   form = this.fb.group({
-    email: ['', Validators.required],
+    username: ['', Validators.required],
     password: ['', Validators.required],
   });
 
@@ -44,7 +45,8 @@ export class LoginComponent {
   constructor(
     private fb: UntypedFormBuilder,
     private auth: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,    
+    private navigate: Router,
   ) {}
 
   submit(): void {
@@ -69,7 +71,6 @@ export class LoginComponent {
               error,
               this.form
             );
-            console.log(unhandledErrors, error);
             if (unhandledErrors) {
               this.openSnackBar(error.statusText, 'error');
             }
@@ -85,5 +86,9 @@ export class LoginComponent {
       verticalPosition: 'top',
       panelClass,
     });
+  }
+
+  navigateToCreateAdmin(){
+    this.navigate.navigate(["/auth/createAdmin/"]);
   }
 }

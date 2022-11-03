@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   login(credentials: Credentials): Observable<LoginResponse> {
-    const path = `${this.api}/login`;
+    const path = `${this.api}/auth/login`;
     return this.http.post<LoginResponse>(path, credentials).pipe(
       tap(data => {
         this.auth.next(data);
@@ -77,7 +77,7 @@ export class AuthService {
   }
 
   createAdmin(payload: CreateAdminPayload): Observable<{ message: string }> {
-    const path = `${this.api}/createAdmin`;
+    const path = `${this.api}/auth/createAdmin`;
     return this.http.post<{ message: string }>(path, payload);
   }
 
