@@ -38,7 +38,7 @@ export class CreateAdminComponent implements OnInit {
   showForm = false;
 
   form = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    username: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     password_confirmation: ['', Validators.required],
   });
@@ -51,13 +51,7 @@ export class CreateAdminComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.auth.adminExists$.pipe(take(1)).subscribe(exists => {
-      if (exists) {
-        this.router.navigateByUrl('/auth/login');
-      } else {
-        this.showForm = true;
-      }
-    });
+    this.showForm = true;
   }
 
   submit(): void {
