@@ -9,14 +9,14 @@ export class CategoryService {
   constructor(@Inject(API_URL) private api: string, private http: HttpClient) {}
 
   all(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.api}/categories`);
+    return this.http.get<Category[]>(`${this.api}/products/categories`);
   }
 
   create(value: any): Observable<Category> {
-    return this.http.post<Category>(`${this.api}/categories`, value);
+    return this.http.post<Category>(`${this.api}/products/categories`, value);
   }
 
   update(id: number, body: any): Observable<Category> {
-    return this.http.patch<Category>(`${this.api}/categories/${id}`, body);
+    return this.http.patch<Category>(`${this.api}/products/categories/${id}`, body);
   }
 }
