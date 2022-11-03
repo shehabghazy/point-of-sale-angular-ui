@@ -32,7 +32,7 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.product) {
       this.form.patchValue(this.product);
-      this.form.get('stock_type')?.patchValue(this.product.stock.type);
+      this.form.get('stock_type')?.patchValue(this.product.stock_type);
     }
     if (this.readonly) {
       this.form.disable();

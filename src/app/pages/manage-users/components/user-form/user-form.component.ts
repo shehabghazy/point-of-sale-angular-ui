@@ -53,8 +53,7 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     if (this.user) {
       this.form.patchValue(this.user);
-
-      this.form.get('shift')?.patchValue(this.user.user_shift?.shift_id);
+      this.form.get('shift')?.patchValue(this.user.shift?.id);
     }
     if (this.readonly) {
       this.form.disable();

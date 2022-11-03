@@ -18,7 +18,7 @@
     <ng-container matColumnDef="shift">
       <th *matHeaderCellDef mat-header-cell>Shift</th>
       <td *matCellDef="let element" mat-cell>
-        {{ element.user_shift?.shift.name }}
+        {{ element.shift?.name }}
       </td>
     </ng-container>
 
@@ -27,9 +27,6 @@
       <td *matCellDef="let element" mat-cell>{{ element.role }}</td>
     </ng-container>
     <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr
-      *matRowDef="let row; columns: displayedColumns"
-      [routerLink]="['details', row.id]"
-      mat-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns" [routerLink]="['details', row.id]" mat-row></tr>
   </table>
 </div>

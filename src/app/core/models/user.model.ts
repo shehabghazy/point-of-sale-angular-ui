@@ -5,14 +5,9 @@ export interface User {
   role: string;
   userId: number;
   photo: string | null;
-
-  user_shift: {
+  shift: {
     id: number;
-    user_id: number;
-    shift_id: number;
-    shift: {
-      id: number;
-      name: string;
-    };
-  } | null;
+    name: string;
+  };
 }
+ 

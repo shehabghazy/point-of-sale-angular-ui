@@ -6,7 +6,7 @@ export interface Product {
   barcode: string;
   low_stock: number;
   optimal_stock: number;
-  stock: number;
+  // stock: number;
   stock_type: string;
 }
 
@@ -17,10 +17,10 @@ export interface ProductDetails {
   low_stock: number;
   optimal_stock: number;
   barcode: string;
-  category_id: number;
   created_at?: any;
   updated_at?: any;
   stock: Stock;
+  stock_type: string;
   category: {
     id: number;
     name: string;
@@ -43,5 +43,5 @@ export interface SaveProductPayload {
   low_stock: number;
   optimal_stock: number;
   stock_type: string;
-  category_id: number;
+  category: number;
 }
